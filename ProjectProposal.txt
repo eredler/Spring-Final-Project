@@ -1,0 +1,38 @@
+Java Tutor (“A Byte of Java”?): an educational tool for beginners (no prior experience) to help learn Java
+by Emily Redler & Tiffany Ming
+
+Minimum Features
+-> has interactive lessons (~10?) where you click and drag methods into place and have drop-down, scroll-through, etc. menus for variables
+-> have helpful error catching and explain what’s wrong (without letting the program crash) and how to fix it (don’t just give them the answer)
+-> user input for variable names, choose the right operator, etc.
+
+Extra Features
+-> sandbox mode (free-for-all coding)
+-> achievements
+-> accounts (to track progress)
+-> mini-games (find the error, etc.)
+-> unlock new methods/projects
+
+Goal Map 
+1. create readable building blocks of language
+2. implement user input
+3. make building blocks draggable/droppable
+4. create interface
+5. plan lessons
+6. create lessons
+7. deal with error-catching
+8. make hints
+9. prettify
+10. create sandbox mode
+11. file creating/reading of user accounts to store info
+12. create achievements
+13. create mini-games
+14. make unlockable methods/projects
+15. prettify/finalize
+
+Difficult features
+-> creating our own “language” that reads the blocks the user uses, and translates that into Java code 
+-> possibly animating whatever “code” the user inputs
+
+
+

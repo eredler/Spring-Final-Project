@@ -1,0 +1,49 @@
+StuySMS: Student Management System (or “StuySOS: Stuyvesant Student Organization System”)
+By Emily Redler & Tiffany Ming 
+
+Team Name: “You Had Me At ‘Hello World’”
+
+Description: A way for educators to organize their classes and student info (or make up their own, in the case of bored students)
+
+Main/ Minimum Features:
+add students to a seating chart
+Implementation: 2D arrays
+x & y coordinates correspond with row and col of student in array
+can click and drag to rearrange
+take attendance
+variable to keep track of number of clicks on certain student (holding the key won’t change the color, but releasing it after holding it for a long time will change color once)
+numClicks%4 (or however many mode/colors there are) will tell studentBox (the box the student is in) what color to be
+read the date to mark the absence/lateness in a calendar
+click on a student and see info about them (grades, absences/lates, etc.)
+add grades for a student
+Implementation: add to an array of grades
+calculate student grades
+Implementation: Just average the grades (or weight certain areas more than other, i.e. tests can count more than homework)
+
+Goal Map:
+create main file (add setup(), draw(), keyPressed(), keyReleased() and other such functions)
+create Student class 
+variables: 
+String name
+int numLate, numAbsent
+ArrayList<Integer> gradesList
+maybe make a type “grade” to hold grade type, value, etc. and put those in gradesList
+methods:
+accessor and mutator methods
+calcGradeAv()
+calcHomeworkAv(), calcTestAv(), etc.
+addGrade(int g, String type)
+make seating chart 
+make it draggable/droppable
+prettify
+
+Extra Features:
+graphs (of student progress, of class attendance, etc)
+Maybe after certain amount of latenesses, cuts, or absences (excused or otherwise) extreme cut on grade or some sort of penalty
+Administrator account/login (you can’t look at other user’s students’ info)
+
+
+
+
+
+

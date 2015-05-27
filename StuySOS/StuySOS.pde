@@ -1,4 +1,5 @@
 Student[][] myStudents;
+Button[][] myButtons; //same as students
 
 void setup(){
   size(1000,750);

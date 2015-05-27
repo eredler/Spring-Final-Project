@@ -1,6 +1,5 @@
 Student[][] myStudents;
 
-
 void setup(){
   size(1000,750);
   background(102,178,255);

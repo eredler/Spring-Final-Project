@@ -3,7 +3,7 @@ public class Student {
   private String name;  
   private int numLate;
   private int numAbsent;
-  private ArrayList<grade> gradeList;
+  private ArrayList<Grade> gradeList;
   private int row;
   private int seat;
   public void setName(String n){

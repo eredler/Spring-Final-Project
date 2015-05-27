@@ -5,14 +5,14 @@ public class Grade {
   private int scoreTotal;
   private String name;
   
-  public grade(String t, String n, int se. int st){
+  public Grade(String t, String n, int se, int st){
       setType(t);
       setName(n);
       setScoreEarned(se);
       setScoreTotal(st);  
   }
   
-  public grade(String t, String n, int se){
+  public Grade(String t, String n, int se){
       setType(t);
       setName(n);
       setScoreEarned(se);
@@ -47,7 +47,8 @@ public class Grade {
      return scoreTotal; 
   }
   
-  public String getName(String n){
+  //public String getName(String n){
+    public String getName(){
      return name; 
   }
   

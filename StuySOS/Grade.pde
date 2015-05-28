@@ -19,6 +19,20 @@ public class Grade {
       setScoreTotal(100);  
   }
   
+  public Grade(String t, int se, int st){
+      setType(t);
+      setName("Untitled");
+      setScoreEarned(se);
+      setScoreTotal(st);  
+  }
+  
+  public Grade(String t, int se){
+      setType(t);
+      setName("Untitled");
+      setScoreEarned(se);
+      setScoreTotal(100);  
+  }
+  
   public void setType(String t){
      type = t; 
   }
@@ -47,8 +61,7 @@ public class Grade {
      return scoreTotal; 
   }
   
-  //public String getName(String n){
-    public String getName(){
+  public String getName(){
      return name; 
   }
   

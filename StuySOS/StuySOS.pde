@@ -28,15 +28,3 @@ void askNumStudents(){
   fill(255);
   text("word",width/2, height/2); 
 }
-
-
-//following code taken from my group's project from last semester
-void display(){
-  pushMatrix();
-  //translate(x,y);
-  stroke(0);
-  //fill(strokeColor);
-  fill(153);
-  rect(30, 20, 55, 55, 7);
-  popMatrix();
-}

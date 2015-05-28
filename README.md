@@ -3,6 +3,7 @@ Final project for the spring semester of APCS.
 
 by Emily Redler & Tiffany Ming (Pd 7)
 
+<b>To use StuySOS, controlP5 is required. Download from <a href="http://www.sojamo.de/libraries/controlP5/">here</a> and extract into libraries folder of sketchbook. See website for specific installation instructions.</b>
 
 *How to Branch: https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
 Don't know if this'll help: https://gun.io/blog/how-to-github-fork-branch-and-pull-request/

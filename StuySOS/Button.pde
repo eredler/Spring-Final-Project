@@ -6,7 +6,7 @@ public class Button{ //Should I make it abstract?
   
   //public Button
   
-  public void isOverMe(){
+  public void isMouseOverMe(){
      if (Math.abs(mouseX-buttonX)<5 && Math.abs(mouseX-buttonY)<5){
         currColor=highlightColor;       
      }else{

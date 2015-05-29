@@ -40,6 +40,35 @@ void askNumStudents(){
   //col = cp5.addSlider("Seats per row?").setPosition(width*2/3 , height/2).setRange(1,10);
 }
 
+int getNumStudents(){
+  int ans = 0;
+  for (int i = 0; i < myStudents.length; i++){
+    for (int c = 0; c < myStudents[].length; c++){
+       if (myStudents[i][c] != null){
+          ans++:
+       } 
+    }
+  }
+  return ans;
+}
+
+void askStudentInfo(int row, int seat, int num){
+  textSize(24);
+  fill(255)
+  text("Please input info for student " + num + ".");
+  // ADD INFO FIELDS
+}
+
+void fillClass(){
+  int num = 1;
+  for (int i = 0; i < getNumRows(); i++){
+     for (int c = 0; c < getNumCols(); c++){
+        askStudentInfo(i,c,num);
+        num++;
+     } 
+  }
+}
+
 //from cp5 site
 void customize(DropdownList ddl, int min, int max) { //added min,max; assume min<=max
   // a convenience function to customize a DropdownList

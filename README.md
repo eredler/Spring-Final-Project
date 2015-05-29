@@ -9,6 +9,8 @@ by Emily Redler & Tiffany Ming (Pd 7)
 Don't know if this'll help: https://gun.io/blog/how-to-github-fork-branch-and-pull-request/
 Hmm, maybe this: https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches
 
+*Temporary link to our project proposal: https://docs.google.com/document/d/17ByglHJLHBAoj3DL97m_u0XyDwzlYhNMD8CFSUc5mtM/edit?usp=sharing
+
 <h3>Daily Log</h3>
 
 <h5>May 26, 2015</h5>

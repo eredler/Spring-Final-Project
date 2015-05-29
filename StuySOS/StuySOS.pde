@@ -7,24 +7,30 @@ import java.lang.*;
 import controlP5.*;
 ControlP5 cp5;
 DropdownList dRow,dCol;
-Slider row,col;
+//Slider row,col;
 String currScreen;
 color buttonNotClicked, buttonClicked;
+ArrayList<Float> widths,heights; //for remembering button positions
+PImage chalkboard;
 
 void setup(){
-  size(1000,750);
+  size(1000,700);
   background(102,178,255);
   textAlign(CENTER,CENTER);
   cp5 = new ControlP5(this);
   //dRow = cp5.addDropdownList("numRows").setPosition(width/3 , height/2);
   //dCol = cp5.addDropdownList("numCols").setPosition(width*2/3 , height/2);
-  currScreen="titleScreen";
+  currScreen="titleScreen1";
   buttonNotClicked=color(51,255,153);
   buttonClicked=color(0,204,102);
+  widths=new ArrayList<Float>();
+  heights=new ArrayList<Float>();
+  chalkboard=loadImage("images/chalkboardPic.png");
+  chalkboard.resize(width,height);
 }
 
 void draw(){
-  if (currScreen=="titleScreen"){
+  if (currScreen=="titleScreen1" || currScreen=="titleScreen2"){
     titleScreen();
   }
 }
@@ -38,18 +44,26 @@ void keyReleased(){
 }
 
 void titleScreen(){
-  askNumRows();
-}
-
-void askNumRows(){
-  textSize(32);
+  background(chalkboard);
+  textSize(24);
   stroke(255,255,255);
-  text("How many rows of students are there?",width/2,height/2);
+  String message="Something is not working if this appears";
+  if (currScreen=="titleScreen1"){
+    message="How many rows of students are there?";
+  }else if (currScreen=="titleScreen2"){
+    message="How many seats per row?";
+  }
+  text(message,width/2,height/2-10);
   textSize(16);
   fill(buttonNotClicked);
   stroke(buttonNotClicked);
   for (int i=1;i<=8;i++){
-    rect( width/2 + (30*((i%4)-2.5)) - 10, height/2 + (30*((i+3)/4)) -10 ,20,20,10);
+    float w=width/2 + (30*((i%4)-2.5)) - 10;
+    float h=height/2 + (30*((i+3)/4)) -10;
+    widths.add(w);
+    heights.add(h);
+    rect(w,h,20,20,10);
+    //rect(width/2 + (30*((i%4)-2.5)) - 10,height/2 + (30*((i+3)/4)) -10,20,20,10);
   }
   for (int i=1;i<=8;i++){
     fill(255,255,255);
@@ -57,6 +71,33 @@ void askNumRows(){
   }
   noStroke();
   textSize(18);
+}
+
+void mouseClicked(){
+  
+  //TITLESCREEN1 = pick number of rows
+  if (currScreen=="titleScreen1"){
+    for (int i=1;i<=8;i++){
+      if (mouseX <= Math.abs(widths.get(i-1) - 10) && mouseY <= Math.abs(heights.get(i-1) - 10)){
+        numRows=i;
+        break; 
+      }
+    }
+    currScreen="titleScreen2";
+  } 
+  //TITLESCREEN2 = pick number of seats per row
+  else if (currScreen=="titleScreen2"){
+     for (int i=1;i<=8;i++){
+      if (mouseX <= Math.abs(widths.get(i-1) - 10) && mouseY <= Math.abs(heights.get(i-1) - 10)){
+        numCols=i;
+        break; 
+      }
+    } 
+    //assume that at this point, have some working/legit value for numRows and numCols
+    myStudents=new Student[numRows][numCols];
+    //currScreen
+  }
+  
 }
 
 

@@ -1,71 +1,87 @@
 Student[][] myStudents;
 Button[][] myButtons; //same as students
-int numRows,numCols;
+private int numRows, numCols;
 
 import java.util.*;
 import java.lang.*;
 import controlP5.*;
 ControlP5 cp5;
-DropdownList dRow,dCol;
-Slider row,col;
+ControllerGroup cg;
+DropdownList dRow, dCol;
+Slider row, col;
 
-void setup(){
-  size(1000,750);
-  background(102,178,255);
-  textAlign(CENTER,CENTER);
+void setup() {
+  size(1000, 750);
+  background(102, 178, 255);
+  textAlign(CENTER, CENTER);
   cp5 = new ControlP5(this);
   //dRow = cp5.addDropdownList("numRows").setPosition(width/3 , height/2);
   //dCol = cp5.addDropdownList("numCols").setPosition(width*2/3 , height/2);
 }
 
-void draw(){
+void draw() {
   askNumStudents();
 }
 
-void keyPressed(){
-  
+void keyPressed() {
 }
 
-void keyReleased(){
-  
+void keyReleased() {
 }
 
-void askNumStudents(){
+void setNumRows(int r) {
+  numRows = r;
+}
+
+void setNumCols(int c) {
+  numCols = c;
+}
+
+int getNumRows() {
+  return numRows;
+}
+
+int getNumCols() {
+  return numCols;
+}
+
+void askNumStudents() {
   textSize(32);
   fill(255);
-  text("StuySOS",width/2, height/4);
-  dRow = cp5.addDropdownList("How many rows?").setPosition(width/3 , height/2);
-  dCol = cp5.addDropdownList("How many seats per row?").setPosition(width*2/3 , height/2);
+  text("StuySOS", width/2, height/4);
+  dRow = cp5.addDropdownList("How many rows?").setPosition(width/3, height/2);
+  dCol = cp5.addDropdownList("How many seats per row?").setPosition(width*2/3, height/2);
   //row = cp5.addSlider("How many rows?").setPosition(width/3 , height/2).setRange(1,10);
   //col = cp5.addSlider("Seats per row?").setPosition(width*2/3 , height/2).setRange(1,10);
 }
 
-int getNumStudents(){
+int getNumStudents() {
   int ans = 0;
-  for (int i = 0; i < myStudents.length; i++){
-    for (int c = 0; c < myStudents[].length; c++){
-       if (myStudents[i][c] != null){
-          ans++:
-       } 
+  for (int i = 0; i < getNumRows (); i++) {
+    for (int c = 0; c < getNumCols (); c++) {
+      if (myStudents[i][c] != null) {
+        ans++;
+      }
     }
   }
   return ans;
 }
 
-void askStudentInfo(int row, int seat, int num){
+void askStudentInfo(int row, int seat, int num) {
   textSize(24);
-  fill(255)
-  text("Please input info for student " + num + ".");
-  // ADD INFO FIELDS
+  fill(255);
+  String s = "Please input info for student " + num + ".";
+  text(s,width/2,height/2);
+  Textfield studentName = new Textfield(cp5, cg, "studentName","No name",100,100,200,50);
 }
 
-void fillClass(){
+void fillClass() {
   int num = 1;
-  for (int i = 0; i < getNumRows(); i++){
-     for (int c = 0; c < getNumCols(); c++){
-        askStudentInfo(i,c,num);
-        num++;
-     } 
+  for (int i = 0; i < getNumRows (); i++) {
+    for (int c = 0; c < getNumCols (); c++) {
+      askStudentInfo(i, c, num);
+      num++;
+    }
   }
 }
 
@@ -79,10 +95,11 @@ void customize(DropdownList ddl, int min, int max) { //added min,max; assume min
   ddl.captionLabel().style().marginTop = 3;
   ddl.captionLabel().style().marginLeft = 3;
   ddl.valueLabel().style().marginTop = 3;
-  for (int i=min;i<=max;i++) {
+  for (int i=min; i<=max; i++) {
     ddl.addItem("item "+i, i);
   }
   //ddl.scroll(0);
   ddl.setColorBackground(color(60));
   ddl.setColorActive(color(255, 128));
 }
+

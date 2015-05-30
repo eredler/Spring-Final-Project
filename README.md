@@ -9,6 +9,13 @@ by Emily Redler & Tiffany Ming (Pd 7)
 Don't know if this'll help: https://gun.io/blog/how-to-github-fork-branch-and-pull-request/
 Hmm, maybe this: https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches
 
+Note for My Group:
+I got branching and merging to work by:
+-(commit changes)
+-git checkout [name of branch you want to merge with master]
+-git merge master
+(links above say to checkout to master then merge with branch, but that doesn't work for some reason :/)
+
 *Temporary link to our project proposal: https://docs.google.com/document/d/17ByglHJLHBAoj3DL97m_u0XyDwzlYhNMD8CFSUc5mtM/edit?usp=sharing
 
 <h3>Daily Log</h3>
@@ -25,3 +32,11 @@ Hmm, maybe this: https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch
 * added controlP5
 * added to Student and Button classes
 * started making physical buttons/dropdown lists/etc.
+
+<h5>May 29, 2015</h5>
+* worked on drop down list
+* added background chalkboard picture
+
+<h5>May 30, 2015</h5>
+* edited Student class to include constructor
+* added to StuySOS: introScreen, 2 title screens (asking for number of rows and columns for student seating chart), buttons to make everything look pretty, and a main button so that can restart within the interface/game/screen itself rather than having to press Play over and over on processing to test different scenarios

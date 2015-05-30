@@ -1,11 +1,12 @@
 Student[][] myStudents;
 Button[][] myButtons; //same as students
-int numRows,numCols;
+private int numRows, numCols;
 
 import java.util.*;
 import java.lang.*;
 import controlP5.*;
 ControlP5 cp5;
+<<<<<<< HEAD
 DropdownList dRow,dCol;
 //Slider row,col;
 String currScreen;
@@ -30,6 +31,16 @@ void setup(){
   mainButtonHeight=30;
   mainButtonColor=color(178,102,255);
   
+=======
+ControllerGroup cg;
+DropdownList dRow, dCol;
+Slider row, col;
+
+void setup() {
+  size(1000, 750);
+  background(102, 178, 255);
+  textAlign(CENTER, CENTER);
+>>>>>>> 3da2486678a99ea5393ca81b8aace1ad6bf08ba5
   cp5 = new ControlP5(this);
   //dRow = cp5.addDropdownList("numRows").setPosition(width/3 , height/2);
   //dCol = cp5.addDropdownList("numCols").setPosition(width*2/3 , height/2);
@@ -42,6 +53,7 @@ void setup(){
   chalkboard.resize(width,height);
 }
 
+<<<<<<< HEAD
 void draw(){
   //maybe add a main welcome page or something later
   if (currScreen=="introScreen"){
@@ -225,14 +237,79 @@ void askNumStudents(){
   customize(dRow,2,8,25,90);
   customize(dCol,2,8,25,130); //should row * col <= 40?
   
+=======
+void draw() {
+  askNumStudents();
+}
+
+void keyPressed() {
+}
+
+void keyReleased() {
+}
+
+void setNumRows(int r) {
+  numRows = r;
+}
+
+void setNumCols(int c) {
+  numCols = c;
+}
+
+int getNumRows() {
+  return numRows;
+}
+
+int getNumCols() {
+  return numCols;
+}
+
+void askNumStudents() {
+  textSize(32);
+  fill(255);
+  text("StuySOS", width/2, height/4);
+  dRow = cp5.addDropdownList("How many rows?").setPosition(width/3, height/2);
+  dCol = cp5.addDropdownList("How many seats per row?").setPosition(width*2/3, height/2);
+>>>>>>> 3da2486678a99ea5393ca81b8aace1ad6bf08ba5
   //row = cp5.addSlider("How many rows?").setPosition(width/3 , height/2).setRange(1,10);
   //col = cp5.addSlider("Seats per row?").setPosition(width*2/3 , height/2).setRange(1,10);
+}
+
+int getNumStudents() {
+  int ans = 0;
+  for (int i = 0; i < getNumRows (); i++) {
+    for (int c = 0; c < getNumCols (); c++) {
+      if (myStudents[i][c] != null) {
+        ans++;
+      }
+    }
+  }
+  return ans;
+}
+
+void askStudentInfo(int row, int seat, int num) {
+  textSize(24);
+  fill(255);
+  String s = "Please input info for student " + num + ".";
+  text(s,width/2,height/2);
+  Textfield studentName = new Textfield(cp5, cg, "studentName","No name",100,100,200,50);
+}
+
+void fillClass() {
+  int num = 1;
+  for (int i = 0; i < getNumRows (); i++) {
+    for (int c = 0; c < getNumCols (); c++) {
+      askStudentInfo(i, c, num);
+      num++;
+    }
+  }
 }
 
 //from cp5 site
 void customize(DropdownList ddl, int min, int max, int h, int w) { //added min,max; assume min<=max
   // a convenience function to customize a DropdownList
   ddl.setBackgroundColor(color(190));
+<<<<<<< HEAD
   ddl.setItemHeight(50);
   ddl.setBarHeight(h);
   ddl.setWidth(w);
@@ -243,6 +320,15 @@ void customize(DropdownList ddl, int min, int max, int h, int w) { //added min,m
   ddl.actAsPulldownMenu(true);
   ArrayList<Integer> temp=new ArrayList<Integer>();
   for (int i=min;i<=max;i++) {
+=======
+  ddl.setItemHeight(100);
+  ddl.setBarHeight(75);
+  ddl.captionLabel().set("dropdown");
+  ddl.captionLabel().style().marginTop = 3;
+  ddl.captionLabel().style().marginLeft = 3;
+  ddl.valueLabel().style().marginTop = 3;
+  for (int i=min; i<=max; i++) {
+>>>>>>> 3da2486678a99ea5393ca81b8aace1ad6bf08ba5
     ddl.addItem("item "+i, i);
      //temp.add(i);
   }
@@ -252,4 +338,8 @@ void customize(DropdownList ddl, int min, int max, int h, int w) { //added min,m
   ddl.setColorActive(color(255, 128));
   //ddl.showScrollbar();
 }
+<<<<<<< HEAD
 */
+=======
+
+>>>>>>> 3da2486678a99ea5393ca81b8aace1ad6bf08ba5

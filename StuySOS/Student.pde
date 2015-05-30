@@ -7,6 +7,20 @@ public class Student {
   private int row;
   private int seat;
   
+  public Student(String name){
+    this.name=name;
+    numLate=0;
+    numAbsent=0;
+    gradeList=new ArrayList<Grade>();
+    //set row and seats? 
+  }
+  public Student(){
+    name="";
+    numLate=0;
+    numAbsent=0;
+    gradeList=new ArrayList<Grade>();
+  } 
+  
   public void setName(String n){
       name = n; 
    }

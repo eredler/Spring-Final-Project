@@ -6,9 +6,7 @@ import java.util.*;
 import java.lang.*;
 import controlP5.*;
 ControlP5 cp5;
-<<<<<<< HEAD
 DropdownList dRow,dCol;
-//Slider row,col;
 String currScreen;
 color buttonNotClicked, buttonClicked;
 float mainButtonX,mainButtonY,mainButtonWidth,mainButtonHeight;
@@ -18,29 +16,13 @@ ArrayList<Float> studentBoxX,studentBoxY; //for remembering where students are o
 float studentBoxHeights,studentBoxWidths;
 PImage chalkboard;
 color beginButton=color(145,114,236);
-
-void setup(){
-  size(1000,700);
-  //background(102,178,255);
-  textAlign(CENTER,CENTER);
-  rectMode(CENTER);
-  
-  mainButtonX=width/12-30;
-  mainButtonY=height/12-35;
-  mainButtonWidth=75;
-  mainButtonHeight=30;
-  mainButtonColor=color(178,102,255);
-  
-=======
 ControllerGroup cg;
-DropdownList dRow, dCol;
 Slider row, col;
 
 void setup() {
   size(1000, 750);
   background(102, 178, 255);
   textAlign(CENTER, CENTER);
->>>>>>> 3da2486678a99ea5393ca81b8aace1ad6bf08ba5
   cp5 = new ControlP5(this);
   //dRow = cp5.addDropdownList("numRows").setPosition(width/3 , height/2);
   //dCol = cp5.addDropdownList("numCols").setPosition(width*2/3 , height/2);
@@ -53,7 +35,6 @@ void setup() {
   chalkboard.resize(width,height);
 }
 
-<<<<<<< HEAD
 void draw(){
   //maybe add a main welcome page or something later
   if (currScreen=="introScreen"){
@@ -236,8 +217,7 @@ void askNumStudents(){
   dCol = cp5.addDropdownList("How many seats per row?").setPosition(width*2/3 , height/2);
   customize(dRow,2,8,25,90);
   customize(dCol,2,8,25,130); //should row * col <= 40?
-  
-=======
+}
 void draw() {
   askNumStudents();
 }
@@ -270,7 +250,6 @@ void askNumStudents() {
   text("StuySOS", width/2, height/4);
   dRow = cp5.addDropdownList("How many rows?").setPosition(width/3, height/2);
   dCol = cp5.addDropdownList("How many seats per row?").setPosition(width*2/3, height/2);
->>>>>>> 3da2486678a99ea5393ca81b8aace1ad6bf08ba5
   //row = cp5.addSlider("How many rows?").setPosition(width/3 , height/2).setRange(1,10);
   //col = cp5.addSlider("Seats per row?").setPosition(width*2/3 , height/2).setRange(1,10);
 }
@@ -309,7 +288,6 @@ void fillClass() {
 void customize(DropdownList ddl, int min, int max, int h, int w) { //added min,max; assume min<=max
   // a convenience function to customize a DropdownList
   ddl.setBackgroundColor(color(190));
-<<<<<<< HEAD
   ddl.setItemHeight(50);
   ddl.setBarHeight(h);
   ddl.setWidth(w);
@@ -320,7 +298,6 @@ void customize(DropdownList ddl, int min, int max, int h, int w) { //added min,m
   ddl.actAsPulldownMenu(true);
   ArrayList<Integer> temp=new ArrayList<Integer>();
   for (int i=min;i<=max;i++) {
-=======
   ddl.setItemHeight(100);
   ddl.setBarHeight(75);
   ddl.captionLabel().set("dropdown");
@@ -328,7 +305,6 @@ void customize(DropdownList ddl, int min, int max, int h, int w) { //added min,m
   ddl.captionLabel().style().marginLeft = 3;
   ddl.valueLabel().style().marginTop = 3;
   for (int i=min; i<=max; i++) {
->>>>>>> 3da2486678a99ea5393ca81b8aace1ad6bf08ba5
     ddl.addItem("item "+i, i);
      //temp.add(i);
   }
@@ -338,8 +314,4 @@ void customize(DropdownList ddl, int min, int max, int h, int w) { //added min,m
   ddl.setColorActive(color(255, 128));
   //ddl.showScrollbar();
 }
-<<<<<<< HEAD
 */
-=======
-
->>>>>>> 3da2486678a99ea5393ca81b8aace1ad6bf08ba5

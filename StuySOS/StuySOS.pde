@@ -171,7 +171,7 @@ void classroomScreen(){
       //studentBoxX.add(x);
       //studentBoxY.add(y);
       fill(255);
-      rect(width*(c+1)/(numCols+1),height*(r+1)/(numRows+1),studentBoxWidths,studentBoxHeights,10);
+      rect((width*(c+1)/(numCols+1))-49,(height*(r+1)/(numRows+1))-33,studentBoxWidths,studentBoxHeights,10);
       fill(0);
       //textSize(200/(numRows*numCols));
       if (numRows*numCols <=15){

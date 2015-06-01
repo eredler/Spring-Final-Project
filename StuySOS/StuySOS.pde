@@ -5,6 +5,7 @@ private int numRows, numCols;
 import java.util.*;
 import java.lang.*;
 import controlP5.*;
+
 ControlP5 cp5;
 DropdownList dRow,dCol;
 String currScreen;
@@ -27,8 +28,8 @@ void setup() {
   //dRow = cp5.addDropdownList("numRows").setPosition(width/3 , height/2);
   //dCol = cp5.addDropdownList("numCols").setPosition(width*2/3 , height/2);
   currScreen="introScreen";
-  buttonNotClicked=color(51,255,153);
-  buttonClicked=color(0,204,102);
+  buttonNotClicked=color(0,128,255);
+  buttonClicked=color(0,102,204);
   widths=new ArrayList<Float>();
   heights=new ArrayList<Float>();
   chalkboard=loadImage("images/chalkboardPic.png");
@@ -104,7 +105,7 @@ void introScreen(){
   noStroke();
   //color beginButton=color(145,114,236);
   fill(beginButton);
-  rect(width/2, height/2+50,100,30,10);
+  rect(width/2-47, height/2+37,100,30,10);
   fill(255);
   textSize(20);
   text("Begin",width/2,height/2+48);
@@ -135,8 +136,8 @@ void titleScreen(){
     float x=width*i/9;
     //float h=height/2 + (30*((i+3)/4));
     float y=height/2+50;
-    widths.add(x);
-    heights.add(y);
+    widths.add(x+25);
+    heights.add(y+23);
     rect(x,y,50,50,10);
     //rect(width/2 + (30*((i%4)-2.5)) - 10,height/2 + (30*((i+3)/4)) -10,20,20,10);
   }

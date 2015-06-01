@@ -40,3 +40,7 @@ I got branching and merging to work by:
 <h5>May 30, 2015</h5>
 * edited Student class to include constructor
 * added to StuySOS: introScreen, 2 title screens (asking for number of rows and columns for student seating chart), buttons to make everything look pretty, and a main button so that can restart within the interface/game/screen itself rather than having to press Play over and over on processing to test different scenarios
+
+<h5>May 31, 2015</h5>
+* fixed merge conflicts
+* released v1.0 (pre-alpha)

@@ -93,7 +93,13 @@ void mouseClicked(){
     currScreen="myClassroom";
   }
   else if (currScreen=="myClassroom"){
-    //do something
+    for (int r=0;r<numRows;r++){
+      for (int c=0;c<numCols;c++){  
+        if (mouseX > (width*(c+1)/(numCols+1))-40 && mouseX < ((width*(c+1)/(numCols+1))-40+studentBoxWidths) && mouseY > (height*(r+1)/(numRows+1))-33 && mouseY < (height*(r+1)/(numRows+1))-33 + studentBoxHeights) {
+           askStudentInfo(r,c,r*c+c); 
+        }
+      }
+    }
   }
 }
 
@@ -171,7 +177,7 @@ void classroomScreen(){
       //studentBoxX.add(x);
       //studentBoxY.add(y);
       fill(255);
-      rect((width*(c+1)/(numCols+1))-49,(height*(r+1)/(numRows+1))-33,studentBoxWidths,studentBoxHeights,10);
+      rect((width*(c+1)/(numCols+1))-40,(height*(r+1)/(numRows+1))-33,studentBoxWidths,studentBoxHeights,10);
       fill(0);
       //textSize(200/(numRows*numCols));
       if (numRows*numCols <=15){
@@ -266,6 +272,7 @@ int getNumStudents() {
   }
   return ans;
 }
+*/
 
 void askStudentInfo(int row, int seat, int num) {
   textSize(24);
@@ -315,4 +322,4 @@ void customize(DropdownList ddl, int min, int max, int h, int w) { //added min,m
   ddl.setColorActive(color(255, 128));
   //ddl.showScrollbar();
 }
-*/
+

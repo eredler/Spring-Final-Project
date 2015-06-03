@@ -19,6 +19,7 @@ PImage chalkboard;
 color beginButton=color(145,114,236);
 ControllerGroup cg;
 Slider row, col;
+int currStudentRow,currStudentCol;
 
 void setup() {
   size(1000, 750);
@@ -49,6 +50,8 @@ void draw(){
   }
   else if (currScreen=="myClassroom"){
     classroomScreen(); 
+  } else if (currScreen=="fillStudentInfo"){
+     fillStudentInfoScreen(); 
   }
 }
 
@@ -96,7 +99,9 @@ void mouseClicked(){
     for (int r=0;r<numRows;r++){
       for (int c=0;c<numCols;c++){  
         if (mouseX > (width*(c+1)/(numCols+1))-40 && mouseX < ((width*(c+1)/(numCols+1))-40+studentBoxWidths) && mouseY > (height*(r+1)/(numRows+1))-33 && mouseY < (height*(r+1)/(numRows+1))-33 + studentBoxHeights) {
-           askStudentInfo(r,c,r*c+c); 
+           currScreen="fillStudentInfo";
+           currStudentRow=r;
+           currStudentCol=c; 
         }
       }
     }
@@ -191,6 +196,13 @@ void classroomScreen(){
   mainButton();
 }
 
+void fillStudentInfoScreen(int currR,int currC){
+  background(102,158,242);
+  
+  askStudentInfo(currR,currC,numCols*(currR-1)+currC);
+    
+}
+
 //===HELPFUL STUFF===//
 boolean mouseOverCircle(float x, float y, float diameter) {
   return (dist(mouseX, mouseY, x, y) < diameter*0.5);
@@ -215,64 +227,6 @@ void mainButton(){
     mainButtonColor=color(178,102,255);
   }  
 }
-/*
-void askNumStudents(){
-  textSize(32);
-  fill(255);
-  text("StuySOS",width/2, height/4);
-  dRow = cp5.addDropdownList("How many rows?").setPosition(width/3 , height/2);
-  dCol = cp5.addDropdownList("How many seats per row?").setPosition(width*2/3 , height/2);
-  customize(dRow,2,8,25,90);
-  customize(dCol,2,8,25,130); //should row * col <= 40?
-}
-void draw() {
-  askNumStudents();
-}
-
-void keyPressed() {
-}
-
-void keyReleased() {
-}
-
-void setNumRows(int r) {
-  numRows = r;
-}
-
-void setNumCols(int c) {
-  numCols = c;
-}
-
-int getNumRows() {
-  return numRows;
-}
-
-int getNumCols() {
-  return numCols;
-}
-
-void askNumStudents() {
-  textSize(32);
-  fill(255);
-  text("StuySOS", width/2, height/4);
-  dRow = cp5.addDropdownList("How many rows?").setPosition(width/3, height/2);
-  dCol = cp5.addDropdownList("How many seats per row?").setPosition(width*2/3, height/2);
-  //row = cp5.addSlider("How many rows?").setPosition(width/3 , height/2).setRange(1,10);
-  //col = cp5.addSlider("Seats per row?").setPosition(width*2/3 , height/2).setRange(1,10);
-}
-
-int getNumStudents() {
-  int ans = 0;
-  for (int i = 0; i < getNumRows (); i++) {
-    for (int c = 0; c < getNumCols (); c++) {
-      if (myStudents[i][c] != null) {
-        ans++;
-      }
-    }
-  }
-  return ans;
-}
-*/
 
 void askStudentInfo(int row, int seat, int num) {
   textSize(24);

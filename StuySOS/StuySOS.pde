@@ -7,19 +7,19 @@ import java.lang.*;
 import controlP5.*;
 
 ControlP5 cp5;
-DropdownList dRow,dCol;
+DropdownList dRow, dCol;
 String currScreen;
 color buttonNotClicked, buttonClicked;
-float mainButtonX,mainButtonY,mainButtonWidth,mainButtonHeight;
+float mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight;
 color mainButtonColor;
-ArrayList<Float> widths,heights; //for remembering titleScreen button positions
-ArrayList<Float> studentBoxX,studentBoxY; //for remembering where students are on main classroom Screen
-float studentBoxHeights,studentBoxWidths;
+ArrayList<Float> widths, heights; //for remembering titleScreen button positions
+ArrayList<Float> studentBoxX, studentBoxY; //for remembering where students are on main classroom Screen
+float studentBoxHeights, studentBoxWidths;
 PImage chalkboard;
-color beginButton=color(145,114,236);
+color beginButton=color(145, 114, 236);
 ControllerGroup cg;
 Slider row, col;
-int currStudentRow,currStudentCol;
+int currStudentRow, currStudentCol;
 
 void setup() {
   size(1000, 750);
@@ -29,151 +29,149 @@ void setup() {
   //dRow = cp5.addDropdownList("numRows").setPosition(width/3 , height/2);
   //dCol = cp5.addDropdownList("numCols").setPosition(width*2/3 , height/2);
   currScreen="introScreen";
-  buttonNotClicked=color(0,128,255);
-  buttonClicked=color(0,102,204);
+  buttonNotClicked=color(0, 128, 255);
+  buttonClicked=color(0, 102, 204);
   widths=new ArrayList<Float>();
   heights=new ArrayList<Float>();
   chalkboard=loadImage("images/chalkboardPic.png");
-  chalkboard.resize(width,height);
+  chalkboard.resize(width, height); 
 }
 
-void draw(){
+void draw() {
   //maybe add a main welcome page or something later
-  if (currScreen=="introScreen"){
-    introScreen(); 
-  }
-  else if (currScreen=="titleScreen1" || currScreen=="titleScreen2"){
+  if (currScreen=="introScreen") {
+    introScreen();
+  } else if (currScreen=="titleScreen1" || currScreen=="titleScreen2") {
     titleScreen();
     textSize(32);
-    text("NumRows: "+numRows,100,100);
-    text("NumCols: "+numCols,500,100);
-  }
-  else if (currScreen=="myClassroom"){
-    classroomScreen(); 
-  } else if (currScreen=="fillStudentInfo"){
-     fillStudentInfoScreen(); 
+    text("NumRows: "+numRows, 100, 100);
+    text("NumCols: "+numCols, 500, 100);
+  } else if (currScreen=="myClassroom") {
+    classroomScreen();
+  } else if (currScreen=="fillStudentInfo") {
+    fillStudentInfoScreen(currStudentRow,currStudentCol);
+    cp5 = new ControlP5(this);
+    cp5.addTextfield("studentName").setPosition(100, 100).setSize(200, 50).setAutoClear(false);
+    cp5.addBang("Submit").setPosition(240, 170).setSize(80, 40);  
   }
 }
 
-void mouseClicked(){
-  if (mouseOverRect(mainButtonX,mainButtonY,mainButtonWidth,mainButtonHeight)){
-      currScreen="introScreen";  
-  }
-  else if (currScreen=="introScreen"){
-    if (mouseOverRect(width/2,height/2+50,100,30)){
+void mouseClicked() {
+  if (mouseOverRect(mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight)) {
+    currScreen="introScreen";
+  } else if (currScreen=="introScreen") {
+    if (mouseOverRect(width/2, height/2+50, 100, 30)) {
       //beginButton=color(158,123,255);
       currScreen="titleScreen1";
-    }else{
-      beginButton=color(148,114,236);
+    } else {
+      beginButton=color(148, 114, 236);
     }
   }
   //TITLESCREEN1 = pick number of rows
-  else if (currScreen=="titleScreen1"){
-    for (int i=1;i<=8;i++){
-      if (30 >= Math.abs(widths.get(i-1) - mouseX) && 30 >= Math.abs(heights.get(i-1) - mouseY)){
+  else if (currScreen=="titleScreen1") {
+    for (int i=1; i<=8; i++) {
+      if (30 >= Math.abs(widths.get(i-1) - mouseX) && 30 >= Math.abs(heights.get(i-1) - mouseY)) {
         numRows=i;
-        break; 
+        break;
       }
     }
     currScreen="titleScreen2";
   } 
   //TITLESCREEN2 = pick number of seats per row
-  else if (currScreen=="titleScreen2"){
-     for (int i=1;i<=8;i++){
-      if (30 >= Math.abs(widths.get(i-1) - mouseX) && 30 >= Math.abs(heights.get(i-1) - mouseY)){
+  else if (currScreen=="titleScreen2") {
+    for (int i=1; i<=8; i++) {
+      if (30 >= Math.abs(widths.get(i-1) - mouseX) && 30 >= Math.abs(heights.get(i-1) - mouseY)) {
         numCols=i;
-        break; 
+        break;
       }
     } 
     //assume that at this point, have some working/legit value for numRows and numCols
     myStudents=new Student[numRows][numCols];
-    for (Student[] studentGroup:myStudents){
-      for (Student s: studentGroup){
+    for (Student[] studentGroup : myStudents) {
+      for (Student s : studentGroup) {
         //s.setName("");
         s=new Student();
       }
     }
     currScreen="myClassroom";
-  }
-  else if (currScreen=="myClassroom"){
-    for (int r=0;r<numRows;r++){
-      for (int c=0;c<numCols;c++){  
+  } else if (currScreen=="myClassroom") {
+    for (int r=0; r<numRows; r++) {
+      for (int c=0; c<numCols; c++) {  
         if (mouseX > (width*(c+1)/(numCols+1))-40 && mouseX < ((width*(c+1)/(numCols+1))-40+studentBoxWidths) && mouseY > (height*(r+1)/(numRows+1))-33 && mouseY < (height*(r+1)/(numRows+1))-33 + studentBoxHeights) {
-           currScreen="fillStudentInfo";
-           currStudentRow=r;
-           currStudentCol=c; 
+          currScreen="fillStudentInfo";
+          currStudentRow=r;
+          currStudentCol=c;
         }
       }
     }
   }
 }
 
-void introScreen(){
+void introScreen() {
   background(chalkboard);
   fill(255);
   textSize(48);
-  text("Welcome to StuySOS!",width/2,height/2);
+  text("Welcome to StuySOS!", width/2, height/2);
   noStroke();
   //color beginButton=color(145,114,236);
   fill(beginButton);
-  rect(width/2-47, height/2+37,100,30,10);
+  rect(width/2-47, height/2+37, 100, 30, 10);
   fill(255);
   textSize(20);
-  text("Begin",width/2,height/2+48);
-  
-  if (mouseOverRect(width/2,height/2+50,100,30)){
-    beginButton=color(158,123,255);
-  }else{
-    beginButton=color(148,114,236);
-  }
+  text("Begin", width/2, height/2+48);
 
+  if (mouseOverRect(width/2, height/2+50, 100, 30)) {
+    beginButton=color(158, 123, 255);
+  } else {
+    beginButton=color(148, 114, 236);
+  }
 }
 
-void titleScreen(){
+void titleScreen() {
   background(chalkboard);
   textSize(24);
-  stroke(255,255,255);
+  stroke(255, 255, 255);
   String message="Something is not working if this appears";
-  if (currScreen=="titleScreen1"){
+  if (currScreen=="titleScreen1") {
     message="How many rows of students are there?";
-  }else if (currScreen=="titleScreen2"){
+  } else if (currScreen=="titleScreen2") {
     message="How many seats per row?";
   }
-  text(message,width/2,height/2-10);
+  text(message, width/2, height/2-10);
   textSize(16);
   fill(buttonNotClicked);
   stroke(buttonNotClicked);
-  for (int i=1;i<=8;i++){
+  for (int i=1; i<=8; i++) {
     float x=width*i/9;
     //float h=height/2 + (30*((i+3)/4));
     float y=height/2+50;
     widths.add(x+25);
     heights.add(y+23);
-    rect(x,y,50,50,10);
+    rect(x, y, 50, 50, 10);
     //rect(width/2 + (30*((i%4)-2.5)) - 10,height/2 + (30*((i+3)/4)) -10,20,20,10);
   }
-  for (int i=1;i<=8;i++){
-    fill(255,255,255);
+  for (int i=1; i<=8; i++) {
+    fill(255, 255, 255);
     //text(""+i,width/2 + (30*(((i-1)%4)-2.5)), height/2 + (30*((i+3)/4)) );
-    text(""+i,widths.get(i-1),heights.get(i-1));
+    text(""+i, widths.get(i-1), heights.get(i-1));
   }
   noStroke();
   textSize(18);
   mainButton();
 }
 
-void classroomScreen(){
-  background(102,158,242);
+void classroomScreen() {
+  background(102, 158, 242);
   studentBoxHeights=(height-50)/(numRows+5);
   studentBoxWidths=(width-50)/(numCols+5);
-  for (int r=0;r<numRows;r++){
-    for (int c=0;c<numCols;c++){
+  for (int r=0; r<numRows; r++) {
+    for (int c=0; c<numCols; c++) {
       String studentName="EMPTY";
       //if (myStudents[r][c].getName()==null){
-        //studentName="EMPTY";
+      //studentName="EMPTY";
       //}else{
       //if (myStudents[r][c].getName()!=""){
-      if(myStudents[r][c]==null){
+      if (myStudents[r][c]==null) {
         myStudents[r][c]=new Student();
         studentName=myStudents[r][c].getName();
       }
@@ -182,68 +180,62 @@ void classroomScreen(){
       //studentBoxX.add(x);
       //studentBoxY.add(y);
       fill(255);
-      rect((width*(c+1)/(numCols+1))-40,(height*(r+1)/(numRows+1))-33,studentBoxWidths,studentBoxHeights,10);
+      rect((width*(c+1)/(numCols+1))-40, (height*(r+1)/(numRows+1))-33, studentBoxWidths, studentBoxHeights, 10);
       fill(0);
       //textSize(200/(numRows*numCols));
-      if (numRows*numCols <=15){
-        textSize(24); 
-      }else{
+      if (numRows*numCols <=15) {
+        textSize(24);
+      } else {
         textSize(16);
       }
-      text(studentName,width*(c+1)/(numCols+1),height*(r+1)/(numRows+1)); 
+      text(studentName, width*(c+1)/(numCols+1), height*(r+1)/(numRows+1));
     }
   }
   mainButton();
 }
 
-void fillStudentInfoScreen(int currR,int currC){
-  background(102,158,242);
-  
-  askStudentInfo(currR,currC,numCols*(currR-1)+currC);
-    
+void fillStudentInfoScreen(int currR, int currC) {
+  background(102, 158, 242);
+
+  askStudentInfo(currR, currC, numCols*(currR-1)+currC);
 }
 
 //===HELPFUL STUFF===//
 boolean mouseOverCircle(float x, float y, float diameter) {
   return (dist(mouseX, mouseY, x, y) < diameter*0.5);
 }
- 
+
 boolean mouseOverRect(float x, float y, float w, float h) {
   return (mouseX >= x-(w/2) && mouseX <= x+(w/2) && mouseY >= y-(h/2) && mouseY <= y+(h/2));
 }
 
-void mainButton(){
+void mainButton() {
   noStroke();
   textSize(18);
   fill(mainButtonColor);
-  rect(mainButtonX,mainButtonY,mainButtonWidth,mainButtonHeight,12);
-  fill(255,255,255);
-  text("MAIN",mainButtonX,mainButtonY-3);
-  
-  if (mouseOverRect(mainButtonX,mainButtonY,mainButtonWidth,mainButtonHeight)){
-    mainButtonColor=color(153,51,255);
+  rect(mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight, 12);
+  fill(255, 255, 255);
+  text("MAIN", mainButtonX, mainButtonY-3);
+
+  if (mouseOverRect(mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight)) {
+    mainButtonColor=color(153, 51, 255);
+  } else {
+    mainButtonColor=color(178, 102, 255);
   }
-  else{
-    mainButtonColor=color(178,102,255);
-  }  
 }
 
 void askStudentInfo(int row, int seat, int num) {
   textSize(24);
   fill(255);
   String s = "Please input info for student " + num + ".";
-  text(s,width/2,height/2);
-  Textfield studentName = new Textfield(cp5, cg, "studentName","No name",100,100,200,50);
+  text(s, width/2, height/2);
 }
 
-void fillClass() {
-  int num = 1;
-  for (int i = 0; i < getNumRows (); i++) {
-    for (int c = 0; c < getNumCols (); c++) {
-      askStudentInfo(i, c, num);
-      num++;
-    }
-  }
+void Submit() {
+  print("the following text was submitted :");
+  String url1 = cp5.get(Textfield.class,"studentName").getText();
+  print("studentName = " + url1);
+  println();
 }
 
 //from cp5 site
@@ -259,21 +251,22 @@ void customize(DropdownList ddl, int min, int max, int h, int w) { //added min,m
   //ddl.valueLabel().style().marginTop = 3;
   ddl.actAsPulldownMenu(true);
   ArrayList<Integer> temp=new ArrayList<Integer>();
-  for (int i=min;i<=max;i++) {
-  ddl.setItemHeight(100);
-  ddl.setBarHeight(75);
-  ddl.captionLabel().set("dropdown");
-  ddl.captionLabel().style().marginTop = 3;
-  ddl.captionLabel().style().marginLeft = 3;
-  ddl.valueLabel().style().marginTop = 3;
   for (int i=min; i<=max; i++) {
-    ddl.addItem("item "+i, i);
-     //temp.add(i);
+    ddl.setItemHeight(100);
+    ddl.setBarHeight(75);
+    ddl.captionLabel().set("dropdown");
+    ddl.captionLabel().style().marginTop = 3;
+    ddl.captionLabel().style().marginLeft = 3;
+    ddl.valueLabel().style().marginTop = 3;
+    for (int y=min; y<=max; y++) {
+      ddl.addItem("item "+y, y);
+      //temp.add(i);
+    }
+    //ddl.addItems(temp);
+    //ddl.scroll(0);
+    ddl.setColorBackground(color(60));
+    ddl.setColorActive(color(255, 128));
+    //ddl.showScrollbar();
   }
-  //ddl.addItems(temp);
-  //ddl.scroll(0);
-  ddl.setColorBackground(color(60));
-  ddl.setColorActive(color(255, 128));
-  //ddl.showScrollbar();
 }
 

@@ -233,8 +233,8 @@ void askStudentInfo(int row, int seat, int num) {
 
 void Submit() {
   print("the following text was submitted :");
-  String url1 = cp5.get(Textfield.class,"studentName").getText();
-  print("studentName = " + url1);
+  String blah = cp5.get(Textfield.class,"studentName").getText();
+  print("studentName = " + blah);
   println();
 }
 

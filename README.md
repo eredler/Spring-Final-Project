@@ -44,3 +44,9 @@ I got branching and merging to work by:
 <h5>May 31, 2015</h5>
 * fixed merge conflicts
 * released v1.0 (pre-alpha)
+
+<h5>June 1, 2015</h5>
+* started work on fillStudentInfo screen
+
+<h5>June 2,2015</h5>
+* tried to get textInput to work for student name (not working yet, but it's close)

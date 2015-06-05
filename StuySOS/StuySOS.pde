@@ -183,9 +183,11 @@ void classroomScreen() {
       float y= (height*(r+1)/(numRows+1));
       studentBoxX.add(x);
       studentBoxY.add(y);
-      fill(255);
+      stroke(230,15,10);
+      fill(242,158,102);
       //rect((width*(c+1)/(numCols+1)), (height*(r+1)/(numRows+1)), studentBoxWidths, studentBoxHeights, 10);
       rect(x,y,studentBoxWidths,studentBoxHeights,10);
+      noStroke();
       fill(0);
       if (numRows*numCols <=15) {
         textSize(24);
@@ -202,6 +204,12 @@ void fillStudentInfoScreen(int currR, int currC) {
   background(102, 158, 242);
 
   askStudentInfo(currR, currC, numCols*(currR-1)+currC);
+  
+  //Just to check that right student was being clicked on
+  //text("Row: "+currStudentRow,width/2,height/2+50);
+  //text("Col: "+currStudentCol,width/2,height/2 +70);
+  
+  mainButton();
 }
 
 //===HELPFUL STUFF===//

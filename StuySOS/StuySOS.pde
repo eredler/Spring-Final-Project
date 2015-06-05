@@ -60,7 +60,7 @@ void draw() {
     fillStudentInfoScreen(currStudentRow,currStudentCol);
     cp5 = new ControlP5(this);
     cp5.addTextfield("studentName").setPosition(100, 100).setSize(200, 50).setAutoClear(false);
-    cp5.addBang("Submit").setPosition(240, 170).setSize(80, 40);  
+    cp5.addBang("Submit").setPosition(240, 170).setSize(80, 40);     
   }
 }
 
@@ -78,17 +78,19 @@ void mouseClicked() {
   //TITLESCREEN1 = pick number of rows
   else if (currScreen=="titleScreen1") {
     for (int i=1; i<=8; i++) {
-      if (30 >= Math.abs(widths.get(i-1) - mouseX) && 30 >= Math.abs(heights.get(i-1) - mouseY)) {
+      if (25 >= Math.abs(widths.get(i-1) - mouseX) && 25 >= Math.abs(heights.get(i-1) - mouseY)) {
         numRows=i;
         break;
       }
     }
-    currScreen="titleScreen2";
+    if (numRows!=0){
+      currScreen="titleScreen2";
+    }
   } 
   //TITLESCREEN2 = pick number of seats per row
   else if (currScreen=="titleScreen2") {
     for (int i=1; i<=8; i++) {
-      if (30 >= Math.abs(widths.get(i-1) - mouseX) && 30 >= Math.abs(heights.get(i-1) - mouseY)) {
+      if (25 >= Math.abs(widths.get(i-1) - mouseX) && 25 >= Math.abs(heights.get(i-1) - mouseY)) {
         numCols=i;
         break;
       }
@@ -101,11 +103,13 @@ void mouseClicked() {
         s=new Student();
       }
     }
-    currScreen="myClassroom";
+    if (numCols!=0){
+      currScreen="myClassroom";
+    }
   } else if (currScreen=="myClassroom") {
     for (int r=0; r<numRows; r++) {
       for (int c=0; c<numCols; c++) {  
-        if (mouseX > (width*(c+1)/(numCols+1))-40 && mouseX < ((width*(c+1)/(numCols+1))-40+studentBoxWidths) && mouseY > (height*(r+1)/(numRows+1))-33 && mouseY < (height*(r+1)/(numRows+1))-33 + studentBoxHeights) {
+        if (mouseX > (width*(c+1)/(numCols+1)) && mouseX < ((width*(c+1)/(numCols+1))+studentBoxWidths) && mouseY > (height*(r+1)/(numRows+1))-33 && mouseY < (height*(r+1)/(numRows+1))-33 + studentBoxHeights) {
           currScreen="fillStudentInfo";
           currStudentRow=r;
           currStudentCol=c;
@@ -203,7 +207,7 @@ void classroomScreen() {
 void fillStudentInfoScreen(int currR, int currC) {
   background(102, 158, 242);
 
-  askStudentInfo(currR, currC, numCols*(currR-1)+currC);
+  askStudentInfo(currR, currC, numCols*(currR)+currC+1);
   
   //Just to check that right student was being clicked on
   //text("Row: "+currStudentRow,width/2,height/2+50);

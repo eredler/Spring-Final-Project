@@ -25,6 +25,7 @@ void setup() {
   size(1000, 750);
   background(102, 178, 255);
   textAlign(CENTER, CENTER);
+  rectMode(CENTER);
   cp5 = new ControlP5(this);
   //dRow = cp5.addDropdownList("numRows").setPosition(width/3 , height/2);
   //dCol = cp5.addDropdownList("numCols").setPosition(width*2/3 , height/2);
@@ -33,8 +34,15 @@ void setup() {
   buttonClicked=color(0, 102, 204);
   widths=new ArrayList<Float>();
   heights=new ArrayList<Float>();
+  studentBoxX=new ArrayList<Float>();
+  studentBoxY=new ArrayList<Float>();
   chalkboard=loadImage("images/chalkboardPic.png");
   chalkboard.resize(width, height); 
+  mainButtonX=width/12-30;
+  mainButtonY=height/12-35;
+  mainButtonWidth=75;
+  mainButtonHeight=30;
+  mainButtonColor=color(178,102,255);
 }
 
 void draw() {
@@ -115,7 +123,7 @@ void introScreen() {
   noStroke();
   //color beginButton=color(145,114,236);
   fill(beginButton);
-  rect(width/2-47, height/2+37, 100, 30, 10);
+  rect(width/2, height/2+50, 100, 30, 10);//-47, height/2+37, 100, 30, 10);
   fill(255);
   textSize(20);
   text("Begin", width/2, height/2+48);
@@ -145,8 +153,8 @@ void titleScreen() {
     float x=width*i/9;
     //float h=height/2 + (30*((i+3)/4));
     float y=height/2+50;
-    widths.add(x+25);
-    heights.add(y+23);
+    widths.add(x);//+25);
+    heights.add(y);//+23);
     rect(x, y, 50, 50, 10);
     //rect(width/2 + (30*((i%4)-2.5)) - 10,height/2 + (30*((i+3)/4)) -10,20,20,10);
   }
@@ -167,22 +175,18 @@ void classroomScreen() {
   for (int r=0; r<numRows; r++) {
     for (int c=0; c<numCols; c++) {
       String studentName="EMPTY";
-      //if (myStudents[r][c].getName()==null){
-      //studentName="EMPTY";
-      //}else{
-      //if (myStudents[r][c].getName()!=""){
       if (myStudents[r][c]==null) {
         myStudents[r][c]=new Student();
         studentName=myStudents[r][c].getName();
       }
-      //float x= width*c/numCols;
-      //float y= height*r/numRows+20;
-      //studentBoxX.add(x);
-      //studentBoxY.add(y);
+      float x= (width*(c+1)/(numCols+1));
+      float y= (height*(r+1)/(numRows+1));
+      studentBoxX.add(x);
+      studentBoxY.add(y);
       fill(255);
-      rect((width*(c+1)/(numCols+1))-40, (height*(r+1)/(numRows+1))-33, studentBoxWidths, studentBoxHeights, 10);
+      //rect((width*(c+1)/(numCols+1)), (height*(r+1)/(numRows+1)), studentBoxWidths, studentBoxHeights, 10);
+      rect(x,y,studentBoxWidths,studentBoxHeights,10);
       fill(0);
-      //textSize(200/(numRows*numCols));
       if (numRows*numCols <=15) {
         textSize(24);
       } else {
@@ -215,7 +219,7 @@ void mainButton() {
   fill(mainButtonColor);
   rect(mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight, 12);
   fill(255, 255, 255);
-  text("MAIN", mainButtonX, mainButtonY-3);
+  text("MAIN", mainButtonX, mainButtonY);
 
   if (mouseOverRect(mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight)) {
     mainButtonColor=color(153, 51, 255);

@@ -109,7 +109,8 @@ void mouseClicked() {
   } else if (currScreen=="myClassroom") {
     for (int r=0; r<numRows; r++) {
       for (int c=0; c<numCols; c++) {  
-        if (mouseX > (width*(c+1)/(numCols+1)) && mouseX < ((width*(c+1)/(numCols+1))+studentBoxWidths) && mouseY > (height*(r+1)/(numRows+1))-33 && mouseY < (height*(r+1)/(numRows+1))-33 + studentBoxHeights) {
+        if (mouseX > (width*(c+1)/(numCols+1)) && mouseX < ((width*(c+1)/(numCols+1))+studentBoxWidths) && 
+          mouseY > (height*(r+1)/(numRows+1))-33 && mouseY < (height*(r+1)/(numRows+1))-33 + studentBoxHeights) {
           currScreen="fillStudentInfo";
           currStudentRow=r;
           currStudentCol=c;

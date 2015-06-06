@@ -57,10 +57,11 @@ void draw() {
   } else if (currScreen=="myClassroom") {
     classroomScreen();
   } else if (currScreen=="fillStudentInfo") {
-    fillStudentInfoScreen(currStudentRow,currStudentCol);
-    cp5 = new ControlP5(this);
-    cp5.addTextfield("studentName").setPosition(100, 100).setSize(200, 50).setAutoClear(false);
-    cp5.addBang("Submit").setPosition(240, 170).setSize(80, 40);     
+    studentInfoScreen(currStudentRow,currStudentCol);
+    //fillStudentInfoScreen(currStudentRow,currStudentCol);
+    //cp5 = new ControlP5(this);
+    //cp5.addTextfield("studentName").setPosition(100, 100).setSize(200, 50).setAutoClear(false);
+    //cp5.addBang("Submit").setPosition(240, 170).setSize(80, 40);     
   }
 }
 
@@ -108,9 +109,8 @@ void mouseClicked() {
     }
   } else if (currScreen=="myClassroom") {
     for (int r=0; r<numRows; r++) {
-      for (int c=0; c<numCols; c++) {  
-        if (mouseX > (width*(c+1)/(numCols+1)) && mouseX < ((width*(c+1)/(numCols+1))+studentBoxWidths) && 
-          mouseY > (height*(r+1)/(numRows+1))-33 && mouseY < (height*(r+1)/(numRows+1))-33 + studentBoxHeights) {
+      for (int c=0; c<numCols; c++) {
+        if (studentBoxWidths >= Math.abs(width*(c+1)/(numCols+1) - mouseX) && studentBoxHeights >= Math.abs(width*(r+1)/(numRows+1) - mouseY)){
           currScreen="fillStudentInfo";
           currStudentRow=r;
           currStudentCol=c;

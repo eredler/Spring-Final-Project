@@ -15,7 +15,6 @@ I got branching and merging to work by:
 -git checkout [name of branch you want to merge with master]
 -git merge master
 (links above say to checkout to master then merge with branch, but that doesn't work for some reason :/)
--DON'T FORGET TO PUSH CHANGES!!!
 
 *Temporary link to our project proposal: https://docs.google.com/document/d/17ByglHJLHBAoj3DL97m_u0XyDwzlYhNMD8CFSUc5mtM/edit?usp=sharing
 

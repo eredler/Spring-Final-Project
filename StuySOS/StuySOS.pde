@@ -122,11 +122,14 @@ void mouseClicked() {
     }
   }else if (currScreen=="fillStudentInfo"){
     boolean action=false;
+    //if (myStudents[currStudentRow][currStudentCol].getName().equals("")){
+        //typing="";
+    //}
     if (mouseOverRect(width/2, height/2+100, 75, 30)){ //SUBMIT
       if (typing.length()<1){
         errorMessage=true;
       }else{
-        myStudents[currStudentRow-1][currStudentCol-1].setName(typing);
+        myStudents[currStudentRow+1][currStudentCol].setName(typing);
         action=true;
       }
     }else if (mouseOverRect(width/2, height/2+150, 75, 30)){ //CLEAR

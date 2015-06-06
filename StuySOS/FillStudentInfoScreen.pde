@@ -3,7 +3,8 @@ boolean errorMessage;
 
 void studentInfoScreen(int currR, int currC) {
   background(102, 158, 242);
-
+  //textCheck();
+  
   stroke(0);
   fill(255);
   rect(width/2, height/2, 150, 35, 10); //textbox
@@ -48,6 +49,11 @@ void studentInfoScreen(int currR, int currC) {
 
 //HELP FROM: http://www.learningprocessing.com/examples/chapter-18/example-18-1/
 String typing = "";// Variable to store text currently being typed
+//void textCheck(){
+//  if (myStudents[currStudentRow][currStudentCol] != null){
+//    typing=myStudents[currStudentRow][currStudentCol].getName();
+//  }
+//}
 
 void keyPressed() {
   if (currScreen=="fillStudentInfo") {

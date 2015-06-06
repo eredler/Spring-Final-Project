@@ -43,6 +43,8 @@ void setup() {
   mainButtonWidth=75;
   mainButtonHeight=30;
   mainButtonColor=color(178,102,255);
+  submitButtonColor=color(255,255,255);
+  submitTextColor=color(30,205,151);
 }
 
 void draw() {

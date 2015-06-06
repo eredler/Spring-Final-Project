@@ -8,7 +8,7 @@ import controlP5.*;
 
 ControlP5 cp5;
 DropdownList dRow, dCol;
-String currScreen;
+String currScreen, studentInfoMode;
 color buttonNotClicked, buttonClicked;
 float mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight;
 color mainButtonColor;
@@ -30,6 +30,7 @@ void setup() {
   //dRow = cp5.addDropdownList("numRows").setPosition(width/3 , height/2);
   //dCol = cp5.addDropdownList("numCols").setPosition(width*2/3 , height/2);
   currScreen="introScreen";
+  studentInfoMode="";
   buttonNotClicked=color(0, 128, 255);
   buttonClicked=color(0, 102, 204);
   widths=new ArrayList<Float>();
@@ -60,7 +61,11 @@ void draw() {
   } else if (currScreen=="myClassroom") {
     classroomScreen();
   } else if (currScreen=="fillStudentInfo") {
-    studentInfoScreen(currStudentRow,currStudentCol);
+    if (studentInfoMode=="newStudent"){
+      studentInfoScreen(currStudentRow,currStudentCol);
+    }else if (studentInfoMode=="currentStudent"){
+       loadStudentInfo(currStudentRow,currStudentCol);
+    }
     //fillStudentInfoScreen(currStudentRow,currStudentCol);
     //cp5 = new ControlP5(this);
     //cp5.addTextfield("studentName").setPosition(100, 100).setSize(200, 50).setAutoClear(false);
@@ -118,6 +123,11 @@ void mouseClicked() {
           currScreen="fillStudentInfo";
           currStudentRow=r;
           currStudentCol=c;
+          if (myStudents[currStudentRow][currStudentCol].getName().equals("")){
+            studentInfoMode="newStudent";  
+          }else{
+            studentInfoMode="currentStudent"; 
+          }
         }
       }
     }

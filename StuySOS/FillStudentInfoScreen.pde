@@ -46,6 +46,20 @@ void studentInfoScreen(int currR, int currC) {
   }
 }
 
+void loadStudentInfo(int currR, int currC) {
+  background(0);
+  
+  fill(255);
+  textSize(18);
+  text("Student Information",width/2,30);
+  
+  textAlign(LEFT,CENTER);
+  textSize(14);
+  text(myStudents[currR][currC].getName()+"'s Info:", 50 ,100);
+  textAlign(CENTER,CENTER);
+  
+  mainButton();
+}
 
 //HELP FROM: http://www.learningprocessing.com/examples/chapter-18/example-18-1/
 String typing = "";// Variable to store text currently being typed

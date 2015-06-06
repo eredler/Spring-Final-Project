@@ -50,11 +50,16 @@ void loadStudentInfo(int currR, int currC) {
   background(0);
   
   fill(255);
-  textSize(18);
+  textSize(40);
   text("Student Information",width/2,30);
+  textSize(16);
+  rect(width*3/4, 250, 150, 30, 20); //Return to Classroom button
+  fill(0);
+  text("Return to Classroom", width*3/4, 200);
   
   textAlign(LEFT,CENTER);
-  textSize(14);
+  fill(255);
+  textSize(18);
   text(myStudents[currR][currC].getName()+"'s Info:", 50 ,100);
   textAlign(CENTER,CENTER);
   

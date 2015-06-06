@@ -113,7 +113,8 @@ void mouseClicked() {
   }else if (currScreen=="myClassroom") {
     for (int r=0; r<numRows; r++) {
       for (int c=0; c<numCols; c++) {
-        if (studentBoxWidths >= Math.abs(width*(c+1)/(numCols+1) - mouseX) && studentBoxHeights >= Math.abs(width*(r+1)/(numRows+1) - mouseY)){
+        if (studentBoxWidths >= Math.abs(studentBoxX.get(numCols*(r)+c)-mouseX) && studentBoxHeights >= Math.abs(studentBoxY.get(numCols*(r)+c)-mouseY)){
+        //Math.abs(width*(c+1)/(numCols+1) - mouseX) && studentBoxHeights >= Math.abs(width*(r+1)/(numRows+1) - mouseY)){
           currScreen="fillStudentInfo";
           currStudentRow=r;
           currStudentCol=c;
@@ -129,20 +130,22 @@ void mouseClicked() {
       if (typing.length()<1){
         errorMessage=true;
       }else{
-        myStudents[currStudentRow+1][currStudentCol].setName(typing);
+        myStudents[currStudentRow][currStudentCol].setName(typing);
         action=true;
       }
-    }else if (mouseOverRect(width/2, height/2+150, 75, 30)){ //CLEAR
+    }else if (mouseOverRect(width/2, height/2+150, 75, 30)){ //&& myStudents[currStudentRow][currStudentCol].getName().equals("")){ //CLEAR
       typing="";
       errorMessage=false;
+      action=false; //JUST TO MAKE SURE
     }else if (mouseOverRect(width/2, height/2+200, 75, 30)){ //GO BACK
       typing="";
       errorMessage=false;
-      currScreen="myClassroom";
+      //currScreen="myClassroom";
+      action=true;
     }
     if(action){
       //currScreen= "WHATEVER NAME OF NEXT SCREEN IS";
-     currScreen="myClassroom"; //maybe next step of studentInfo? 
+      currScreen="myClassroom"; //maybe next step of studentInfo? 
     }
   }
 }
@@ -228,7 +231,8 @@ void classroomScreen() {
       } else {
         textSize(16);
       }
-      text(studentName, width*(c+1)/(numCols+1), height*(r+1)/(numRows+1));
+      //text(studentName, width*(c+1)/(numCols+1), height*(r+1)/(numRows+1));
+      text(studentName,x,y);
     }
   }
   mainButton();

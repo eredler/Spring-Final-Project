@@ -1,4 +1,5 @@
 color submitButtonColor, submitTextColor; //initialized in setup
+boolean errorMessage;
 
 void studentInfoScreen(int currR, int currC) {
   background(102, 158, 242);
@@ -8,10 +9,10 @@ void studentInfoScreen(int currR, int currC) {
   rect(width/2, height/2, 150, 35, 10); //textbox
   stroke(30, 205, 151);
   fill(submitButtonColor);
-  rect(width/2, height/2+100, 75, 30, 10); //Submit button
+  rect(width/2, height/2+100, 75, 30, 20); //Submit button
   fill(30, 205, 151);
-  rect(width/2, height/2+150, 75, 30, 10); //Clear button
-  rect(width/2, height/2+200, 75, 30, 10); //Go Back button
+  rect(width/2, height/2+150, 75, 30, 20); //Clear button
+  rect(width/2, height/2+200, 75, 30, 20); //Go Back button
   noStroke();
 
   int studentNum=numCols*(currR)+currC+1;
@@ -27,6 +28,11 @@ void studentInfoScreen(int currR, int currC) {
   fill(0);
   text("Clear", width/2, height/2+150);
   text("Go Back", width/2, height/2+200);
+  
+  if(errorMessage){
+    printErrorMessage("ERROR: Please enter a name.",width/2,height*5/12,color(255,0,0));
+  }
+  
   if (myStudents[currStudentRow][currStudentCol].getName().equals("")) {
     mainButton(); //remove later; only for testing and debuggin purposes
   }
@@ -54,3 +60,7 @@ void keyPressed() {
   }
 }
 
+void printErrorMessage(String message, int x, int y, color c){
+  fill(c);
+  text(message,x,y);  
+}

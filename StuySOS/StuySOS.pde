@@ -45,6 +45,7 @@ void setup() {
   mainButtonColor=color(178,102,255);
   submitButtonColor=color(255,255,255);
   submitTextColor=color(30,205,151);
+  errorMessage=false;
 }
 
 void draw() {
@@ -109,7 +110,7 @@ void mouseClicked() {
     if (numCols!=0){
       currScreen="myClassroom";
     }
-  } else if (currScreen=="myClassroom") {
+  }else if (currScreen=="myClassroom") {
     for (int r=0; r<numRows; r++) {
       for (int c=0; c<numCols; c++) {
         if (studentBoxWidths >= Math.abs(width*(c+1)/(numCols+1) - mouseX) && studentBoxHeights >= Math.abs(width*(r+1)/(numRows+1) - mouseY)){
@@ -118,6 +119,27 @@ void mouseClicked() {
           currStudentCol=c;
         }
       }
+    }
+  }else if (currScreen=="fillStudentInfo"){
+    boolean action=false;
+    if (mouseOverRect(width/2, height/2+100, 75, 30)){ //SUBMIT
+      if (typing.length()<1){
+        errorMessage=true;
+      }else{
+        myStudents[currStudentRow-1][currStudentCol-1].setName(typing);
+        action=true;
+      }
+    }else if (mouseOverRect(width/2, height/2+150, 75, 30)){ //CLEAR
+      typing="";
+      errorMessage=false;
+    }else if (mouseOverRect(width/2, height/2+200, 75, 30)){ //GO BACK
+      typing="";
+      errorMessage=false;
+      currScreen="myClassroom";
+    }
+    if(action){
+      //currScreen= "WHATEVER NAME OF NEXT SCREEN IS";
+     currScreen="myClassroom"; //maybe next step of studentInfo? 
     }
   }
 }
@@ -185,6 +207,8 @@ void classroomScreen() {
       if (myStudents[r][c]==null) {
         myStudents[r][c]=new Student();
         studentName=myStudents[r][c].getName();
+      }else if (!myStudents[r][c].getName().equals("")){
+        studentName=myStudents[r][c].getName();  
       }
       float x= (width*(c+1)/(numCols+1));
       float y= (height*(r+1)/(numRows+1));

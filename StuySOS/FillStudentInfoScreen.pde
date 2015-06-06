@@ -28,6 +28,8 @@ String typing = "";// Variable to store text currently being typed
 
 void keyPressed(){
   if (currScreen=="fillStudentInfo"){
+    if (typing.length()<12){
       typing+=key;
+    }
   } 
 }

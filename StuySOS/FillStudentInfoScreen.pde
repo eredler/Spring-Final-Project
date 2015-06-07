@@ -36,7 +36,8 @@ void fillStudentInfoScreen(int currR, int currC) {
   }
 
   if (myStudents[currStudentRow][currStudentCol].getName().equals("")) {
-    mainButton(); //remove later; only for testing and debuggin purposes
+    mainButton(); //DO NOT DELETE -- CONTAINS MOUSEOVER BUTTON COLOR CHANGING FUNCTIONALITY
+
   }
   if (mouseOverRect(width/2, height/2+100, 75, 30)) {
     submitButtonColor=color(30, 205, 151);

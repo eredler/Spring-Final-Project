@@ -189,18 +189,30 @@ void mouseClicked() {
       }
       if (mouseOverRect(mainButtonX, mainButtonY+100, mainButtonWidth, mainButtonHeight)) {
         if (numStudentsSwitched == 2){
-          
+          int holdR1 = 0;
+          int holdR2 = 0;
+          int holdC1= 0;
+          int holdC2= 0;
         for (int r=0; r<numRows; r++) {
           for (int c=0; c<numCols; c++) {
             if (myStudents[r][c].switchMe == true){
-            if (r != currStudentRow && c != currStudentCol){
-              Student hold = myStudents[currStudentRow][currStudentCol];
-              myStudents[currStudentRow][currStudentCol] = myStudents[r][r];
-              myStudents[r][c] = hold;        
-            }
+              if (numStudentsSwitched ==2){
+                 holdR1 = r;
+                 holdC1 = c; 
+                 numStudentsSwitched--;
+                 myStudents[r][c].switchMe = false;
+              }
+              if (numStudentsSwitched==1){
+                 holdR2 = r;
+                 holdC2 = c; 
+                 myStudents[r][c].switchMe = false;
+              }
           }
           }
         }
+        Student hold1 = myStudents[holdR1][holdC1];
+        myStudents[holdR1][holdC1] = myStudents[holdR2][holdC2];
+        myStudents[holdR2][holdC2] = hold1;
         switchSeats=false;
       }
     }
@@ -292,19 +304,13 @@ boolean mouseOverRect(float x, float y, float w, float h) {
   return (mouseX >= x-(w/2) && mouseX <= x+(w/2) && mouseY >= y-(h/2) && mouseY <= y+(h/2));
 }
 
-public void switchSeats(int firstR, int firstC, int secondR, int secondC){
-  Student hold = myStudents[firstR][firstC];
-      myStudents[firstR][firstC] = myStudents[secondR][secondC];
-      myStudents[secondR][secondC] = hold;
-   }
-
 void mainButton() {
   noStroke();
   textSize(18);
   fill(mainButtonColor);
-  rect(mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight, 12);
+ // rect(mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight, 12);
   fill(255, 255, 255);
-  text("Exit", mainButtonX, mainButtonY);
+ // text("Exit", mainButtonX, mainButtonY);
 
   if (mouseOverRect(mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight)) {
     mainButtonColor=color(153, 51, 255);
@@ -335,6 +341,10 @@ void mainButton() {
       backColor=color(178, 102, 255);
     }
   }
+}
+
+public void test(){
+ System.out.println(myStudents.toString()); 
 }
 
 //from cp5 site

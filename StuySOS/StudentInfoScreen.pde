@@ -12,14 +12,19 @@ void studentInfoScreen(int currR, int currC, Student[][] myStudents) {
   String numLate = "Latenesses: " + s.getNumLate();
   String numAbs = "Absences: " + s.getNumAbsent();
   String grades = s.getGrades();
-  text(name, width/2, height/3);
   if (name != ""){
+  text(name, width/2, height/3);
+  } else {
+    text("Seat " + ((currR*numCols+currC)+1), width/2, height/3);
+  }
+  if (name!= ""){
     text(numLate, width/2, height/3+50);
     text(numAbs, width/2, height/3+70);
     if (grades.length() > 0){
     //  text(grades, width/2, height/3+100);
     }
   }
+  
   
   stroke(30, 205, 151);
   fill(0);

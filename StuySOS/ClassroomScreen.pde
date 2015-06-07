@@ -4,7 +4,7 @@ void classroomScreen() {
   studentBoxWidths=(width-50)/(numCols+5);
   for (int r=0; r<numRows; r++) {
     for (int c=0; c<numCols; c++) {
-      String studentName="EMPTY";
+      String studentName="";
       if (myStudents[r][c]==null) {
         myStudents[r][c]=new Student();
         studentName=myStudents[r][c].getName();
@@ -37,16 +37,24 @@ void classroomScreen() {
            text("absent",x,y+20); 
         }
       }
+      if (switchSeats){
+        if (myStudents[r][c].switchMe == true){
+         text("ME",x,y+20);
+        } 
+      }
     }
   }
   mainButton();
   fill(AttButtonColor);
-  rect(mainButtonX+60, mainButtonY+50, mainButtonWidth+120, mainButtonHeight, 12);
+  rect(mainButtonX+60, mainButtonY+50, mainButtonWidth+120, mainButtonHeight, 12); //attendance button
+  fill(switchColor);
+  rect(mainButtonX+250, mainButtonY+50, mainButtonWidth+80, mainButtonHeight, 12); //switch seats button
   fill(255);
   text("Take Attendance",mainButtonX+60, mainButtonY+50);
-  if (attendance){
+  text("Switch Seats",mainButtonX+250,mainButtonY+50);
+  if (attendance || switchSeats){
     fill(AttSubButtonColor);
-    rect(mainButtonX, mainButtonY+100, mainButtonWidth, mainButtonHeight, 12);
+    rect(mainButtonX, mainButtonY+100, mainButtonWidth, mainButtonHeight, 12); //submit attendance
     fill(255);
     text("Submit",mainButtonX, mainButtonY+100);
   }

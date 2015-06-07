@@ -7,6 +7,7 @@ public class Student {
   private int row;
   private int seat;
   int numClicks;
+  boolean switchMe;
   
   public Student(String name){
     this.name=name;
@@ -67,12 +68,7 @@ public class Student {
      setSeat(s);
    }
    
-   public void switchSeats(Student other){
-      int s = this.getSeat();
-      int r = this.getRow();
-      this.setSpot(other.getRow(),other.getSeat());
-      other.setSpot(r,s); 
-   }
+   
    
    private void addGrade(String type, String name, int scoreEarned, int scoreTotal){
       gradeList.add(new Grade(type,name,scoreEarned,scoreTotal));

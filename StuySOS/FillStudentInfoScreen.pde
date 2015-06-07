@@ -19,7 +19,7 @@ void fillStudentInfoScreen(int currR, int currC) {
   int studentNum=numCols*(currR)+currC+1;
   textSize(24);
   fill(255);
-  String s = "Please input info for student " + studentNum + ".";
+  String s = "Please input info for student in seat " + studentNum + ".";
   text(s, width/2, height/3);
   textSize(16);
   text("Name: ", width/2-100, height/2);

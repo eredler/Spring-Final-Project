@@ -11,7 +11,7 @@ DropdownList dRow, dCol;
 String currScreen;
 color buttonNotClicked, buttonClicked;
 float mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight;
-color mainButtonColor;
+color mainButtonColor, AttButtonColor;
 ArrayList<Float> widths, heights; //for remembering titleScreen button positions
 ArrayList<Float> studentBoxX, studentBoxY; //for remembering where students are on main classroom Screen
 float studentBoxHeights, studentBoxWidths;
@@ -20,6 +20,7 @@ color beginButton=color(145, 114, 236);
 ControllerGroup cg;
 Slider row, col;
 int currStudentRow, currStudentCol;
+boolean attendance;
 
 
 
@@ -123,7 +124,11 @@ void mouseClicked() {
       currScreen="myClassroom";
     }
   } else if (currScreen=="myClassroom") {
-    for (int r=0; r<numRows; r++) {
+    if (attendance == false){
+      if (mouseOverRect(mainButtonX+60, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)){
+      attendance=true; 
+      }
+      for (int r=0; r<numRows; r++) {
       for (int c=0; c<numCols; c++) {
         if (studentBoxWidths >= Math.abs(studentBoxX.get(numCols*(r)+c)-mouseX) && studentBoxHeights >= Math.abs(studentBoxY.get(numCols*(r)+c)-mouseY)) {
           //Math.abs(width*(c+1)/(numCols+1) - mouseX) && studentBoxHeights >= Math.abs(width*(r+1)/(numRows+1) - mouseY)){
@@ -132,11 +137,23 @@ void mouseClicked() {
           currStudentCol=c;
         }
       }
+      }
+    } else if (attendance){
+      for (int r=0; r<numRows; r++) {
+      for (int c=0; c<numCols; c++) {
+        if (studentBoxWidths >= Math.abs(studentBoxX.get(numCols*(r)+c)-mouseX) && studentBoxHeights >= Math.abs(studentBoxY.get(numCols*(r)+c)-mouseY)) {
+          //Math.abs(width*(c+1)/(numCols+1) - mouseX) && studentBoxHeights >= Math.abs(width*(r+1)/(numRows+1) - mouseY)){
+          myStudents[r][c].numClicks++;
+          currStudentRow=r;
+          currStudentCol=c;
+        }
+      }
     }
+    
   } else if (currScreen=="studentInfo") {
     if (mouseOverRect(width/2, height/2+100, 75, 30)) { //EDIT INFO
       currScreen = "fillStudentInfo";
-    } else if (mouseOverRect(width/2, height/2+150, 150, 30)) { //add homework
+    } /*else if (mouseOverRect(width/2, height/2+150, 150, 30)) { //add homework
       currScreen = "addGradeHW";
     } else if (mouseOverRect(width/2, height/2+200, 150, 30)) { //add test
       currScreen = "addGradeTest";
@@ -145,7 +162,7 @@ void mouseClicked() {
     } else if (mouseOverRect(width/2, height/2+300, 150, 30)) { //add other grade
       currScreen = "addGradeOther";
     }
-/*  } else if (currScreen=="addGradeHW") {
+  } else if (currScreen=="addGradeHW") {
     boolean action=false;
     //if (myStudents[currStudentRow][currStudentCol].getName().equals("")){
     //typing="";
@@ -228,6 +245,11 @@ void mainButton() {
     mainButtonColor=color(153, 51, 255);
   } else {
     mainButtonColor=color(178, 102, 255);
+  }
+  if (mouseOverRect(mainButtonX+60, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) {
+    AttButtonColor=color(153, 51, 255);
+  } else {
+    AttButtonColor=color(178, 102, 255);
   }
 }
 

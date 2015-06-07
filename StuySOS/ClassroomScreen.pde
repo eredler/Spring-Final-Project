@@ -31,4 +31,8 @@ void classroomScreen() {
     }
   }
   mainButton();
+  fill(AttButtonColor);
+  rect(mainButtonX+60, mainButtonY+50, mainButtonWidth+120, mainButtonHeight, 12);
+  fill(255);
+  text("Take Attendance",mainButtonX+60, mainButtonY+50);
 }

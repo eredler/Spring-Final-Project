@@ -1,7 +1,7 @@
 color submitButtonColor, submitTextColor, goBackColor, goBackTextColor, clearColor, clearTextColor; //initialized in setup
 boolean errorMessage;
 
-void studentInfoScreen(int currR, int currC) {
+void fillStudentInfoScreen(int currR, int currC) {
   background(0, 102, 0);
   //textCheck();
 
@@ -79,6 +79,16 @@ void keyPressed() {
   if (key == BACKSPACE) {
     typing = typing.substring(0, typing.length()-2);
   }
+ /* if (currScreen=="addGrade") {
+    if (title.length()<23) {
+      if (key >= 96 && key <= 105) {
+        gradeV+=key;
+      } else {
+        title+=key;
+      }
+    }
+  }*/
+  
 }
 
 

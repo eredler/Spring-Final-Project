@@ -21,6 +21,8 @@ ControllerGroup cg;
 Slider row, col;
 int currStudentRow, currStudentCol;
 
+
+
 void setup() {
   size(1000, 750);
   background(102, 178, 255);
@@ -44,7 +46,11 @@ void setup() {
   mainButtonHeight=30;
   mainButtonColor=color(178,102,255);
   submitButtonColor=color(255,255,255);
-  submitTextColor=color(30,205,151);
+  submitTextColor=color(30,205,15);
+  goBackColor=color(255,255,255);
+  goBackTextColor=color(30,205,15);
+  clearColor=color(255,255,255);
+  clearTextColor=color(30,205,15);
   errorMessage=false;
 }
 
@@ -55,8 +61,8 @@ void draw() {
   } else if (currScreen=="titleScreen1" || currScreen=="titleScreen2") {
     titleScreen();
     textSize(32);
-    text("NumRows: "+numRows, 100, 100);
-    text("NumCols: "+numCols, 500, 100);
+   // text("NumRows: "+numRows, 100, 100);
+  //  text("NumCols: "+numCols, 500, 100);
   } else if (currScreen=="myClassroom") {
     classroomScreen();
   } else if (currScreen=="fillStudentInfo") {
@@ -72,7 +78,7 @@ void mouseClicked() {
   if (mouseOverRect(mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight)) {
     currScreen="introScreen";
   } else if (currScreen=="introScreen") {
-    if (mouseOverRect(width/2, height/2+50, 100, 30)) {
+    if (mouseOverRect(width/2, height/2+70, 100, 30)) {
       //beginButton=color(158,123,255);
       currScreen="titleScreen1";
     } else {
@@ -134,6 +140,7 @@ void mouseClicked() {
         action=true;
       }
     }else if (mouseOverRect(width/2, height/2+150, 75, 30)){ //&& myStudents[currStudentRow][currStudentCol].getName().equals("")){ //CLEAR
+      // CLEAR
       typing="";
       errorMessage=false;
       action=false; //JUST TO MAKE SURE
@@ -154,16 +161,19 @@ void introScreen() {
   background(chalkboard);
   fill(255);
   textSize(48);
+  PFont chalkFont;
+  chalkFont = loadFont("Chalkduster-48.vlw");
+  textFont(chalkFont);
   text("Welcome to StuySOS!", width/2, height/2);
   noStroke();
   //color beginButton=color(145,114,236);
   fill(beginButton);
-  rect(width/2, height/2+50, 100, 30, 10);//-47, height/2+37, 100, 30, 10);
+  rect(width/2, height/2+70, 100, 30, 10);//-47, height/2+37, 100, 30, 10);
   fill(255);
   textSize(20);
-  text("Begin", width/2, height/2+48);
+  text("Begin", width/2, height/2+66);
 
-  if (mouseOverRect(width/2, height/2+50, 100, 30)) {
+  if (mouseOverRect(width/2, height/2+70, 100, 30)) {
     beginButton=color(158, 123, 255);
   } else {
     beginButton=color(148, 114, 236);
@@ -204,7 +214,7 @@ void titleScreen() {
 }
 
 void classroomScreen() {
-  background(102, 158, 242);
+  background(0, 102, 0);
   studentBoxHeights=(height-50)/(numRows+5);
   studentBoxWidths=(width-50)/(numCols+5);
   for (int r=0; r<numRows; r++) {
@@ -239,7 +249,7 @@ void classroomScreen() {
 }
 
 void fillStudentInfoScreen(int currR, int currC) {
-  background(102, 158, 242);
+  background(0,102,0);
 
   askStudentInfo(currR, currC, numCols*(currR)+currC+1);
   

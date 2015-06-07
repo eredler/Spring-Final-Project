@@ -11,11 +11,11 @@ Hmm, maybe this: https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch
 
 Note for My Group:
 I got branching and merging to work by:
--(commit changes)
--git checkout [name of branch you want to merge with master]
--git merge master
+*(commit changes)
+*git checkout [name of branch you want to merge with master]
+*git merge master
 (links above say to checkout to master then merge with branch, but that doesn't work for some reason :/)
--DON'T FORGET TO PUSH CHANGES!!!
+*DON'T FORGET TO PUSH CHANGES!!!
 
 *Temporary link to our project proposal: https://docs.google.com/document/d/17ByglHJLHBAoj3DL97m_u0XyDwzlYhNMD8CFSUc5mtM/edit?usp=sharing
 
@@ -51,3 +51,15 @@ I got branching and merging to work by:
 
 <h5>June 2,2015</h5>
 * tried to get textInput to work for student name (not working yet, but it's close)
+
+<h5>June 4,2015</h5>
+* still working on textInput
+
+<h5>June 5, 2015</h5>
+* got textInput to work (kinda -- it's not cp5, but it works)
+
+<h5>June 6, 2015</h5>
+* prettified
+* tried to get addGrade to work (didn't work)
+* takeAttendance works
+* tried to get switchSeats to work (didn't work)

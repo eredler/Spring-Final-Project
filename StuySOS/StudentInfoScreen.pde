@@ -13,7 +13,9 @@ void studentInfoScreen(int currR, int currC, Student[][] myStudents) {
   String numAbs = "Absences: " + s.getNumAbsent();
   String grades = s.getGrades();
   if (name != ""){
-  text(name, width/2, height/3);
+    textSize(30);
+    text(name, width/2, height/3);
+    textSize(20);
   } else {
     text("Seat " + ((currR*numCols+currC)+1), width/2, height/3);
   }

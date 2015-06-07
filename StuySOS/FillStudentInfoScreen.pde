@@ -7,7 +7,7 @@ void fillStudentInfoScreen(int currR, int currC) {
 
   stroke(0);
   fill(255);
-  rect(width/2, height/2, 150, 35, 10); //textbox
+  rect(width/2, height/2, 200, 35, 10); //textbox
   stroke(30, 205, 151);
   fill(submitButtonColor);
   rect(width/2, height/2+100, 75, 30, 20); //Submit button
@@ -22,7 +22,7 @@ void fillStudentInfoScreen(int currR, int currC) {
   String s = "Please input info for student in seat " + studentNum + ".";
   text(s, width/2, height/3);
   textSize(16);
-  text("Name: ", width/2-100, height/2);
+  text("Name: ", width/2-150, height/2);
   fill(0);
   text(typing, width/2, height/2);
   fill(255);

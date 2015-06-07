@@ -61,4 +61,5 @@ I got branching and merging to work by:
 <h5>June 6, 2015</h5>
 * prettified
 * tried to get addGrade to work (didn't work)
-* started marking students absent, etc
+* takeAttendance works
+* tried to get switchSeats to work (didn't work)

@@ -6,6 +6,7 @@ public class Student {
   private ArrayList<Grade> gradeList;
   private int row;
   private int seat;
+  int numClicks;
   
   public Student(String name){
     this.name=name;

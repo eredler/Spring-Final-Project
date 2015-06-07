@@ -1,7 +1,7 @@
 color submitButtonColor, submitTextColor, goBackColor, goBackTextColor, clearColor, clearTextColor; //initialized in setup
 boolean errorMessage;
 
-void studentInfoScreen(int currR, int currC) {
+void fillStudentInfoScreen(int currR, int currC) {
   background(0, 102, 0);
   //textCheck();
 

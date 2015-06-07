@@ -80,6 +80,10 @@ public class Student {
    private void addGrade(String type, String name, int scoreEarned){
       gradeList.add(new Grade(type,name,scoreEarned));
    }
+   
+   private String getGrades(){
+      return gradeList.toString(); 
+   }
     
 }
 

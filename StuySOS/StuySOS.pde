@@ -145,7 +145,7 @@ void mouseClicked() {
     } else if (mouseOverRect(width/2, height/2+300, 150, 30)) { //add other grade
       currScreen = "addGradeOther";
     }
-  } else if (currScreen=="addGradeHW") {
+/*  } else if (currScreen=="addGradeHW") {
     boolean action=false;
     //if (myStudents[currStudentRow][currStudentCol].getName().equals("")){
     //typing="";
@@ -153,7 +153,7 @@ void mouseClicked() {
     if (mouseOverRect(width/2, height/2+100, 75, 30)) { //SUBMIT
       /* if (name.length()<1) {
        errorMessage=true;
-       } else {*/
+       } else {
       myStudents[currStudentRow][currStudentCol].addGrade("Homework", title, Integer.parseInt(gradeV));
       action=true;
       //   }
@@ -176,7 +176,7 @@ void mouseClicked() {
     }
   } else if (currScreen=="addGradeTest") {
   } else if (currScreen=="addGradeParticipation") {
-  } else if (currScreen=="addGradeOther") {
+  } else if (currScreen=="addGradeOther") {*/
   } else if (currScreen=="fillStudentInfo") {
     boolean action=false;
     //if (myStudents[currStudentRow][currStudentCol].getName().equals("")){

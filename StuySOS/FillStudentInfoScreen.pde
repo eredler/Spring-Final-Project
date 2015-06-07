@@ -79,6 +79,16 @@ void keyPressed() {
   if (key == BACKSPACE) {
     typing = typing.substring(0, typing.length()-2);
   }
+ /* if (currScreen=="addGrade") {
+    if (title.length()<23) {
+      if (key >= 96 && key <= 105) {
+        gradeV+=key;
+      } else {
+        title+=key;
+      }
+    }
+  }*/
+  
 }
 
 

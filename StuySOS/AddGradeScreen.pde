@@ -19,8 +19,8 @@ void addGradeScreen(String type) {
   text("Grade (out of 100): ", width/2-175, height/2);
   text(type + " name: ", width/2-175, height/2+50);
   fill(0);
-  text(gradeV, width/2, height/2);
-  text(title, width/2, height/2+50);
+ // text(gradeV, width/2, height/2);
+ // text(title, width/2, height/2+50);
   fill(255);
   text("Submit", width/2, height/2+100);
 
@@ -36,6 +36,7 @@ void addGradeScreen(String type) {
   String title="";
   String gradeV="";
 }
+/*
 void keyReleased() {
   if (currScreen=="addGrade") {
     if (title.length()<23) {
@@ -50,5 +51,5 @@ void keyReleased() {
   if (key == BACKSPACE) {
     title = title.substring(0, title.length()-2);
   }
-}
+}*/
 

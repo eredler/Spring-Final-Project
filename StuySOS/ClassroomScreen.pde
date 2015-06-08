@@ -44,7 +44,7 @@ void classroomScreen() {
       }
     }
   }
-  mainButton();
+  
   fill(AttButtonColor);
   rect(mainButtonX+60, mainButtonY+50, mainButtonWidth+120, mainButtonHeight, 12); //attendance button
   fill(switchColor);
@@ -58,4 +58,6 @@ void classroomScreen() {
     fill(255);
     text("Submit",mainButtonX, mainButtonY+100);
   }
+  
+  mainButton();
 }

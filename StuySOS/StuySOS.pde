@@ -69,19 +69,12 @@ void draw() {
   } else if (currScreen=="myClassroom") {
     classroomScreen();
   } else if (currScreen=="fillStudentInfo") {
-<<<<<<< HEAD
     if (studentInfoMode=="newStudent"){
-      studentInfoScreen(currStudentRow,currStudentCol);
+      studentInfoScreen(currStudentRow,currStudentCol,myStudents);
     }else if (studentInfoMode=="currentStudent"){
        loadStudentInfo(currStudentRow,currStudentCol);
     }
-=======
     fillStudentInfoScreen(currStudentRow, currStudentCol);
->>>>>>> 8cd2fa9c9b1bbe8f74e4505dbb792738e63afdb0
-    //fillStudentInfoScreen(currStudentRow,currStudentCol);
-    //cp5 = new ControlP5(this);
-    //cp5.addTextfield("studentName").setPosition(100, 100).setSize(200, 50).setAutoClear(false);
-    //cp5.addBang("Submit").setPosition(240, 170).setSize(80, 40);
   } else if (currScreen=="studentInfo") {
     studentInfoScreen(currStudentRow, currStudentCol, myStudents);
   } /*else if (currScreen=="addGradeHW") {
@@ -100,7 +93,6 @@ void mouseClicked() {
     currScreen="introScreen";
   } else if (currScreen=="introScreen") {
     if (mouseOverRect(width/2, height/2+70, 100, 30)) {
-      //beginButton=color(158,123,255);
       currScreen="titleScreen1";
     } else {
       beginButton=color(148, 114, 236);
@@ -137,7 +129,6 @@ void mouseClicked() {
     if (numCols!=0) {
       currScreen="myClassroom";
     }
-<<<<<<< HEAD
   }else if (currScreen=="myClassroom") {
     for (int r=0; r<numRows; r++) {
       for (int c=0; c<numCols; c++) {
@@ -150,8 +141,11 @@ void mouseClicked() {
             studentInfoMode="newStudent";  
           }else{
             studentInfoMode="currentStudent"; 
-=======
-  } else if (currScreen=="myClassroom") {
+          }
+        }
+      }
+    }
+  //} else if (currScreen=="myClassroom") {
     if (attendance == false && switchSeats==false) {
       if (mouseOverRect(mainButtonX+60, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) {
         attendance=true;
@@ -191,7 +185,6 @@ void mouseClicked() {
               myStudents[r][c].setNumAbsent(myStudents[r][c].getNumAbsent()+1);
               myStudents[r][c].numClicks=0;
             }
->>>>>>> 8cd2fa9c9b1bbe8f74e4505dbb792738e63afdb0
           }
         }
         attendance=false;
@@ -290,9 +283,6 @@ void mouseClicked() {
      } else if (currScreen=="addGradeOther") {*/
   } else if (currScreen=="fillStudentInfo") {
     boolean action=false;
-    //if (myStudents[currStudentRow][currStudentCol].getName().equals("")){
-    //typing="";
-    //}
     if (mouseOverRect(width/2, height/2+100, 75, 30)) { //SUBMIT
       if (typing.length()<1) {
         errorMessage=true;
@@ -329,12 +319,7 @@ boolean mouseOverRect(float x, float y, float w, float h) {
 }
 
 void mainButton() {
-  noStroke();
-  textSize(18);
-  fill(mainButtonColor);
- // rect(mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight, 12);
-  fill(255, 255, 255);
- // text("Exit", mainButtonX, mainButtonY);
+  
 
   if (mouseOverRect(mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight)) {
     mainButtonColor=color(153, 51, 255);
@@ -365,6 +350,12 @@ void mainButton() {
       backColor=color(178, 102, 255);
     }
   }
+  noStroke();
+  textSize(18);
+  fill(mainButtonColor);
+ // rect(mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight, 12);
+  fill(255, 255, 255);
+ // text("Exit", mainButtonX, mainButtonY);
 }
 
 public void test(){

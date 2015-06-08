@@ -4,10 +4,7 @@ private int numRows, numCols;
 
 import java.util.*;
 import java.lang.*;
-import controlP5.*;
 
-ControlP5 cp5;
-DropdownList dRow, dCol;
 String currScreen, studentInfoMode;
 color buttonNotClicked, buttonClicked;
 float mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight;
@@ -17,8 +14,6 @@ ArrayList<Float> studentBoxX, studentBoxY; //for remembering where students are 
 float studentBoxHeights, studentBoxWidths;
 PImage chalkboard;
 color beginButton=color(145, 114, 236);
-ControllerGroup cg;
-Slider row, col;
 int currStudentRow, currStudentCol, numStudentsSwitched;
 boolean attendance, switchSeats;
 
@@ -29,9 +24,7 @@ void setup() {
   background(102, 178, 255);
   textAlign(CENTER, CENTER);
   rectMode(CENTER);
-  cp5 = new ControlP5(this);
-  //dRow = cp5.addDropdownList("numRows").setPosition(width/3 , height/2);
-  //dCol = cp5.addDropdownList("numCols").setPosition(width*2/3 , height/2);
+
   currScreen="introScreen";
   studentInfoMode="";
   buttonNotClicked=color(0, 128, 255);
@@ -69,10 +62,10 @@ void draw() {
   } else if (currScreen=="myClassroom") {
     classroomScreen();
   } else if (currScreen=="fillStudentInfo") {
-    if (studentInfoMode=="newStudent"){
-      studentInfoScreen(currStudentRow,currStudentCol,myStudents);
-    }else if (studentInfoMode=="currentStudent"){
-       loadStudentInfo(currStudentRow,currStudentCol);
+    if (studentInfoMode=="newStudent") {
+      studentInfoScreen(currStudentRow, currStudentCol, myStudents);
+    } else if (studentInfoMode=="currentStudent") {
+      loadStudentInfo(currStudentRow, currStudentCol);
     }
     fillStudentInfoScreen(currStudentRow, currStudentCol);
   } else if (currScreen=="studentInfo") {
@@ -129,23 +122,23 @@ void mouseClicked() {
     if (numCols!=0) {
       currScreen="myClassroom";
     }
-  }else if (currScreen=="myClassroom") {
+  } else if (currScreen=="myClassroom") {
     for (int r=0; r<numRows; r++) {
       for (int c=0; c<numCols; c++) {
-        if (studentBoxWidths >= Math.abs(studentBoxX.get(numCols*(r)+c)-mouseX) && studentBoxHeights >= Math.abs(studentBoxY.get(numCols*(r)+c)-mouseY)){
-        //Math.abs(width*(c+1)/(numCols+1) - mouseX) && studentBoxHeights >= Math.abs(width*(r+1)/(numRows+1) - mouseY)){
+        if (studentBoxWidths >= Math.abs(studentBoxX.get(numCols*(r)+c)-mouseX) && studentBoxHeights >= Math.abs(studentBoxY.get(numCols*(r)+c)-mouseY)) {
+          //Math.abs(width*(c+1)/(numCols+1) - mouseX) && studentBoxHeights >= Math.abs(width*(r+1)/(numRows+1) - mouseY)){
           currScreen="fillStudentInfo";
           currStudentRow=r;
           currStudentCol=c;
-          if (myStudents[currStudentRow][currStudentCol].getName().equals("")){
-            studentInfoMode="newStudent";  
-          }else{
-            studentInfoMode="currentStudent"; 
+          if (myStudents[currStudentRow][currStudentCol].getName().equals("")) {
+            studentInfoMode="newStudent";
+          } else {
+            studentInfoMode="currentStudent";
           }
         }
       }
     }
-  //} else if (currScreen=="myClassroom") {
+    //} else if (currScreen=="myClassroom") {
     if (attendance == false && switchSeats==false) {
       if (mouseOverRect(mainButtonX+60, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) {
         attendance=true;
@@ -156,16 +149,16 @@ void mouseClicked() {
       }
       /*
       for (int r=0; r<numRows; r++) {
-        for (int c=0; c<numCols; c++) {
-          if (studentBoxWidths >= Math.abs(studentBoxX.get(numCols*(r)+c)-mouseX) && studentBoxHeights >= Math.abs(studentBoxY.get(numCols*(r)+c)-mouseY)) {
-            //Math.abs(width*(c+1)/(numCols+1) - mouseX) && studentBoxHeights >= Math.abs(width*(r+1)/(numRows+1) - mouseY)){
-            currScreen="studentInfo";
-            currStudentRow=r;
-            currStudentCol=c;
-          }
-        }
-      }
-      */
+       for (int c=0; c<numCols; c++) {
+       if (studentBoxWidths >= Math.abs(studentBoxX.get(numCols*(r)+c)-mouseX) && studentBoxHeights >= Math.abs(studentBoxY.get(numCols*(r)+c)-mouseY)) {
+       //Math.abs(width*(c+1)/(numCols+1) - mouseX) && studentBoxHeights >= Math.abs(width*(r+1)/(numRows+1) - mouseY)){
+       currScreen="studentInfo";
+       currStudentRow=r;
+       currStudentCol=c;
+       }
+       }
+       }
+       */
     } else if (attendance) {
       for (int r=0; r<numRows; r++) {
         for (int c=0; c<numCols; c++) {
@@ -207,35 +200,35 @@ void mouseClicked() {
         }
       }
       if (mouseOverRect(mainButtonX, mainButtonY+100, mainButtonWidth, mainButtonHeight)) {
-        if (numStudentsSwitched == 2){
+        if (numStudentsSwitched == 2) {
           int holdR1 = 0;
           int holdR2 = 0;
           int holdC1= 0;
           int holdC2= 0;
-        for (int r=0; r<numRows; r++) {
-          for (int c=0; c<numCols; c++) {
-            if (myStudents[r][c].switchMe == true){
-              if (numStudentsSwitched ==2){
-                 holdR1 = r;
-                 holdC1 = c; 
-                 numStudentsSwitched--;
-                 myStudents[r][c].switchMe = false;
+          for (int r=0; r<numRows; r++) {
+            for (int c=0; c<numCols; c++) {
+              if (myStudents[r][c].switchMe == true) {
+                if (numStudentsSwitched ==2) {
+                  holdR1 = r;
+                  holdC1 = c; 
+                  numStudentsSwitched--;
+                  myStudents[r][c].switchMe = false;
+                }
+                if (numStudentsSwitched==1) {
+                  holdR2 = r;
+                  holdC2 = c; 
+                  myStudents[r][c].switchMe = false;
+                }
               }
-              if (numStudentsSwitched==1){
-                 holdR2 = r;
-                 holdC2 = c; 
-                 myStudents[r][c].switchMe = false;
-              }
+            }
           }
-          }
+          Student hold1 = myStudents[holdR1][holdC1];
+          myStudents[holdR1][holdC1] = myStudents[holdR2][holdC2];
+          myStudents[holdR2][holdC2] = hold1;
+          switchSeats=false;
         }
-        Student hold1 = myStudents[holdR1][holdC1];
-        myStudents[holdR1][holdC1] = myStudents[holdR2][holdC2];
-        myStudents[holdR2][holdC2] = hold1;
-        switchSeats=false;
       }
     }
-  }
   } else if (currScreen=="studentInfo") {
     if (mouseOverRect(width/2, height/2+100, 75, 30)) { //EDIT INFO
       currScreen = "fillStudentInfo";
@@ -334,64 +327,33 @@ void mainButton() {
     mainButtonColor=color(178, 102, 255);
   }/*
   if (currScreen == "myClassroom") {
-    if (mouseOverRect(mainButtonX+60, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) {
-      AttButtonColor=color(153, 51, 255);
-    } else {
-      AttButtonColor=color(178, 102, 255);
-    }
-    if (mouseOverRect(mainButtonX, mainButtonY+100, mainButtonWidth, mainButtonHeight)) {
-      AttSubButtonColor=color(153, 51, 255);
-    } else {
-      AttSubButtonColor=color(178, 102, 255);
-    }
-    if (mouseOverRect(mainButtonX+250, mainButtonY+50, mainButtonWidth+80, mainButtonHeight)) {
-      switchColor=color(153, 51, 255);
-    } else {
-      switchColor=color(178, 102, 255);
-    }
-  }
-  if (currScreen=="studentInfo") {
-    if (mouseOverRect(mainButtonX, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) {
-      backColor=color(153, 51, 255);
-    } else {
-      backColor=color(178, 102, 255);
-    }
-  }*/
+   if (mouseOverRect(mainButtonX+60, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) {
+   AttButtonColor=color(153, 51, 255);
+   } else {
+   AttButtonColor=color(178, 102, 255);
+   }
+   if (mouseOverRect(mainButtonX, mainButtonY+100, mainButtonWidth, mainButtonHeight)) {
+   AttSubButtonColor=color(153, 51, 255);
+   } else {
+   AttSubButtonColor=color(178, 102, 255);
+   }
+   if (mouseOverRect(mainButtonX+250, mainButtonY+50, mainButtonWidth+80, mainButtonHeight)) {
+   switchColor=color(153, 51, 255);
+   } else {
+   switchColor=color(178, 102, 255);
+   }
+   }
+   if (currScreen=="studentInfo") {
+   if (mouseOverRect(mainButtonX, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) {
+   backColor=color(153, 51, 255);
+   } else {
+   backColor=color(178, 102, 255);
+   }
+   }*/
 }
 
-public void test(){
- System.out.println(myStudents.toString()); 
+public void test() {
+  System.out.println(myStudents.toString());
 }
 
-//from cp5 site
-void customize(DropdownList ddl, int min, int max, int h, int w) { //added min,max; assume min<=max
-  // a convenience function to customize a DropdownList
-  ddl.setBackgroundColor(color(190));
-  ddl.setItemHeight(50);
-  ddl.setBarHeight(h);
-  ddl.setWidth(w);
-  //ddl.captionLabel().set("dropdown");
-  ddl.captionLabel().style().marginTop = 8;
-  //ddl.captionLabel().style().marginLeft = 3;
-  //ddl.valueLabel().style().marginTop = 3;
-  ddl.actAsPulldownMenu(true);
-  ArrayList<Integer> temp=new ArrayList<Integer>();
-  for (int i=min; i<=max; i++) {
-    ddl.setItemHeight(100);
-    ddl.setBarHeight(75);
-    ddl.captionLabel().set("dropdown");
-    ddl.captionLabel().style().marginTop = 3;
-    ddl.captionLabel().style().marginLeft = 3;
-    ddl.valueLabel().style().marginTop = 3;
-    for (int y=min; y<=max; y++) {
-      ddl.addItem("item "+y, y);
-      //temp.add(i);
-    }
-    //ddl.addItems(temp);
-    //ddl.scroll(0);
-    ddl.setColorBackground(color(60));
-    ddl.setColorActive(color(255, 128));
-    //ddl.showScrollbar();
-  }
-}
 

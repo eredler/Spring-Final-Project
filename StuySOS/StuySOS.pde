@@ -154,6 +154,7 @@ void mouseClicked() {
         switchSeats=true;
         numStudentsSwitched = 0;
       }
+      /*
       for (int r=0; r<numRows; r++) {
         for (int c=0; c<numCols; c++) {
           if (studentBoxWidths >= Math.abs(studentBoxX.get(numCols*(r)+c)-mouseX) && studentBoxHeights >= Math.abs(studentBoxY.get(numCols*(r)+c)-mouseY)) {
@@ -164,6 +165,7 @@ void mouseClicked() {
           }
         }
       }
+      */
     } else if (attendance) {
       for (int r=0; r<numRows; r++) {
         for (int c=0; c<numCols; c++) {

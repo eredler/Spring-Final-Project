@@ -45,6 +45,7 @@ void classroomScreen() {
     }
   }
   
+  textSize(18);
   fill(AttButtonColor);
   rect(mainButtonX+60, mainButtonY+50, mainButtonWidth+120, mainButtonHeight, 12); //attendance button
   fill(switchColor);
@@ -64,11 +65,11 @@ void classroomScreen() {
     } else {
       AttButtonColor=color(178, 102, 255);
     }
-    if (mouseOverRect(mainButtonX, mainButtonY+100, mainButtonWidth, mainButtonHeight)) {
-      AttSubButtonColor=color(153, 51, 255);
-    } else {
-      AttSubButtonColor=color(178, 102, 255);
-    }
+    //if (mouseOverRect(mainButtonX, mainButtonY+100, mainButtonWidth, mainButtonHeight)) {
+    //  AttSubButtonColor=color(153, 51, 255);
+    //} else {
+    //  AttSubButtonColor=color(178, 102, 255);
+    //}
     if (mouseOverRect(mainButtonX+250, mainButtonY+50, mainButtonWidth+80, mainButtonHeight)) {
       switchColor=color(153, 51, 255);
     } else {

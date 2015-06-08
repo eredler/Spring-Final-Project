@@ -355,5 +355,17 @@ void mainButton() {
 public void test() {
   System.out.println(myStudents.toString());
 }
-
-
+/*
+void currStudentLocation(boolean screenChange, String newScreen){
+  for (int r=0; r<numRows; r++) {
+    for (int c=0; c<numCols; c++) {
+      if (studentBoxWidths >= Math.abs(studentBoxX.get(numCols*(r)+c)-mouseX) && studentBoxHeights >= Math.abs(studentBoxY.get(numCols*(r)+c)-mouseY)) {
+        if (screenChange){
+          currScreen=newScreen;  
+        }
+        currStudentRow=r;
+        currStudentCol=c;
+      }
+    }
+}
+*/

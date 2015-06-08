@@ -139,17 +139,6 @@ void mouseClicked() {
             myStudents[r][c].numClicks++;
             currStudentRow=r;
             currStudentCol=c;
-            //to change color of box
-            stroke(0, 102, 204);
-            if (myStudents[r][c].numClicks%3==1) {
-              fill(255, 216, 1);
-            } else if (myStudents[r][c].numClicks%3==2) {
-              fill(247, 13, 26);
-            }
-            rect(studentBoxX.get(numCols*(r)+c), studentBoxY.get(numCols*(r)+c), studentBoxWidths, studentBoxHeights);
-            noStroke();
-            fill(255);//WHITE TEXT
-            text(myStudents[r][c].getName(), studentBoxX.get(numCols*(r)+c), studentBoxY.get(numCols*(r)+c));
           }
         }
       }

@@ -17,8 +17,6 @@ color beginButton=color(145, 114, 236);
 int currStudentRow, currStudentCol, numStudentsSwitched;
 boolean attendance, switchSeats;
 
-
-
 void setup() {
   size(1000, 750);
   background(102, 178, 255);
@@ -283,6 +281,7 @@ void mouseClicked() {
         errorMessage=true;
       } else {
         myStudents[currStudentRow][currStudentCol].setName(typing);
+        typing="";
         action=true;
       }
     } else if (mouseOverRect(width/2, height/2+150, 75, 30)) { //&& myStudents[currStudentRow][currStudentCol].getName().equals("")){ //CLEAR

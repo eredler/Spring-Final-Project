@@ -121,43 +121,17 @@ void mouseClicked() {
       currScreen="myClassroom";
     }
   } else if (currScreen=="myClassroom") {
-    for (int r=0; r<numRows; r++) {
-      for (int c=0; c<numCols; c++) {
-        if (studentBoxWidths >= Math.abs(studentBoxX.get(numCols*(r)+c)-mouseX) && studentBoxHeights >= Math.abs(studentBoxY.get(numCols*(r)+c)-mouseY)) {
-          //Math.abs(width*(c+1)/(numCols+1) - mouseX) && studentBoxHeights >= Math.abs(width*(r+1)/(numRows+1) - mouseY)){
-          currScreen="fillStudentInfo";
-          currStudentRow=r;
-          currStudentCol=c;
-          if (myStudents[currStudentRow][currStudentCol].getName().equals("")) {
-            studentInfoMode="newStudent";
-          } else {
-            studentInfoMode="currentStudent";
-          }
-        }
-      }
-    }
-    //} else if (currScreen=="myClassroom") {
     if (attendance == false && switchSeats==false) {
       if (mouseOverRect(mainButtonX+60, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) {
         attendance=true;
-      }
-      if (mouseOverRect(mainButtonX+250, mainButtonY+50, mainButtonWidth+100, mainButtonHeight)) {
+      } else if (mouseOverRect(mainButtonX+250, mainButtonY+50, mainButtonWidth+100, mainButtonHeight)) {
         switchSeats=true;
         numStudentsSwitched = 0;
       }
-      /*
-      for (int r=0; r<numRows; r++) {
-       for (int c=0; c<numCols; c++) {
-       if (studentBoxWidths >= Math.abs(studentBoxX.get(numCols*(r)+c)-mouseX) && studentBoxHeights >= Math.abs(studentBoxY.get(numCols*(r)+c)-mouseY)) {
-       //Math.abs(width*(c+1)/(numCols+1) - mouseX) && studentBoxHeights >= Math.abs(width*(r+1)/(numRows+1) - mouseY)){
-       currScreen="studentInfo";
-       currStudentRow=r;
-       currStudentCol=c;
-       }
-       }
-       }
-       */
-    } else if (attendance) {
+    }
+
+    //TAKING ATTENDANCE
+    if (attendance) {
       for (int r=0; r<numRows; r++) {
         for (int c=0; c<numCols; c++) {
           if (studentBoxWidths >= Math.abs(studentBoxX.get(numCols*(r)+c)-mouseX) && studentBoxHeights >= Math.abs(studentBoxY.get(numCols*(r)+c)-mouseY)) {
@@ -165,10 +139,21 @@ void mouseClicked() {
             myStudents[r][c].numClicks++;
             currStudentRow=r;
             currStudentCol=c;
+            //to change color of box
+            stroke(0, 102, 204);
+            if (myStudents[r][c].numClicks%3==1) {
+              fill(255, 216, 1);
+            } else if (myStudents[r][c].numClicks%3==2) {
+              fill(247, 13, 26);
+            }
+            rect(studentBoxX.get(numCols*(r)+c), studentBoxY.get(numCols*(r)+c), studentBoxWidths, studentBoxHeights);
+            noStroke();
+            fill(255);//WHITE TEXT
+            text(myStudents[r][c].getName(), studentBoxX.get(numCols*(r)+c), studentBoxY.get(numCols*(r)+c));
           }
         }
       }
-      if (mouseOverRect(mainButtonX, mainButtonY+100, mainButtonWidth, mainButtonHeight)) {
+      if (mouseOverRect(mainButtonX, mainButtonY+100, mainButtonWidth, mainButtonHeight)) { //mouse is over SUBMIT attendance button
         for (int r=0; r<numRows; r++) {
           for (int c=0; c<numCols; c++) {
             if (myStudents[r][c].numClicks%3==1) {
@@ -183,6 +168,8 @@ void mouseClicked() {
         attendance=false;
       }
     }
+
+    //SWITCHING SEATS
     if (switchSeats) {
       if (numStudentsSwitched < 2) {
         for (int r=0; r<numRows; r++) {
@@ -227,7 +214,38 @@ void mouseClicked() {
         }
       }
     }
-  } else if (currScreen=="studentInfo") {
+    //IF JUST ENTERING NEW STUDENT OR LOOKING AT A CURRENT STUDENT'S INFO
+    else if (!attendance && !switchSeats) {
+      for (int r=0; r<numRows; r++) {
+        for (int c=0; c<numCols; c++) {
+          if (studentBoxWidths >= Math.abs(studentBoxX.get(numCols*(r)+c)-mouseX) && studentBoxHeights >= Math.abs(studentBoxY.get(numCols*(r)+c)-mouseY)) {
+            currScreen="fillStudentInfo";
+            currStudentRow=r;
+            currStudentCol=c;
+            if (myStudents[currStudentRow][currStudentCol].getName().equals("")) {
+              studentInfoMode="newStudent";
+            } else {
+              studentInfoMode="currentStudent";
+            }
+          }
+        }
+      }
+    }
+  }  
+  /*
+      for (int r=0; r<numRows; r++) {
+   for (int c=0; c<numCols; c++) {
+   if (studentBoxWidths >= Math.abs(studentBoxX.get(numCols*(r)+c)-mouseX) && studentBoxHeights >= Math.abs(studentBoxY.get(numCols*(r)+c)-mouseY)) {
+   //Math.abs(width*(c+1)/(numCols+1) - mouseX) && studentBoxHeights >= Math.abs(width*(r+1)/(numRows+1) - mouseY)){
+   currScreen="studentInfo";
+   currStudentRow=r;
+   currStudentCol=c;
+   }
+   }
+   }
+   */
+
+  else if (currScreen=="studentInfo") {
     if (mouseOverRect(width/2, height/2+100, 75, 30)) { //EDIT INFO
       currScreen = "fillStudentInfo";
     }
@@ -298,6 +316,7 @@ void mouseClicked() {
     if (action) {
       //currScreen= "WHATEVER NAME OF NEXT SCREEN IS";
       currScreen="myClassroom"; //maybe next step of studentInfo?
+      errorMessage=false;
     }
   }
 }
@@ -356,15 +375,15 @@ public void test() {
 }
 /*
 void currStudentLocation(boolean screenChange, String newScreen){
-  for (int r=0; r<numRows; r++) {
-    for (int c=0; c<numCols; c++) {
-      if (studentBoxWidths >= Math.abs(studentBoxX.get(numCols*(r)+c)-mouseX) && studentBoxHeights >= Math.abs(studentBoxY.get(numCols*(r)+c)-mouseY)) {
-        if (screenChange){
-          currScreen=newScreen;  
-        }
-        currStudentRow=r;
-        currStudentCol=c;
-      }
-    }
-}
-*/
+ for (int r=0; r<numRows; r++) {
+ for (int c=0; c<numCols; c++) {
+ if (studentBoxWidths >= Math.abs(studentBoxX.get(numCols*(r)+c)-mouseX) && studentBoxHeights >= Math.abs(studentBoxY.get(numCols*(r)+c)-mouseY)) {
+ if (screenChange){
+ currScreen=newScreen;  
+ }
+ currStudentRow=r;
+ currStudentCol=c;
+ }
+ }
+ }
+ */

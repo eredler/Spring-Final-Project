@@ -29,12 +29,14 @@ void classroomScreen() {
       //text(studentName, width*(c+1)/(numCols+1), height*(r+1)/(numRows+1));
       text(studentName, x, y);
       if (attendance){
-        if (myStudents[r][c].numClicks%3==0){
-       //  text("present",x,y+20);
-        } else if (myStudents[r][c].numClicks%3==1){
-          text("late",x,y+20); 
-        } else {
-           text("absent",x,y+20); 
+        if (!myStudents[r][c].getName().equals("")){
+          if (myStudents[r][c].numClicks%3==0){
+         //  text("present",x,y+20);
+          } else if (myStudents[r][c].numClicks%3==1){
+            text("late",x,y+20); 
+          } else {
+            text("absent",x,y+20); 
+          }
         }
       }
       if (switchSeats){

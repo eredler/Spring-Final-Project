@@ -59,5 +59,21 @@ void classroomScreen() {
     text("Submit",mainButtonX, mainButtonY+100);
   }
   
+  if (mouseOverRect(mainButtonX+60, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) {
+      AttButtonColor=color(153, 51, 255);
+    } else {
+      AttButtonColor=color(178, 102, 255);
+    }
+    if (mouseOverRect(mainButtonX, mainButtonY+100, mainButtonWidth, mainButtonHeight)) {
+      AttSubButtonColor=color(153, 51, 255);
+    } else {
+      AttSubButtonColor=color(178, 102, 255);
+    }
+    if (mouseOverRect(mainButtonX+250, mainButtonY+50, mainButtonWidth+80, mainButtonHeight)) {
+      switchColor=color(153, 51, 255);
+    } else {
+      switchColor=color(178, 102, 255);
+    }
+  
   mainButton();
 }

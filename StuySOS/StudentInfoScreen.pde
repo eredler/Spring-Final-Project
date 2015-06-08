@@ -44,4 +44,10 @@ void studentInfoScreen(int currR, int currC, Student[][] myStudents) {
   text("Add Other Grade", width/2, height/2+300);
   */
   
+  if (mouseOverRect(mainButtonX, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) {
+      backColor=color(153, 51, 255);
+    } else {
+      backColor=color(178, 102, 255);
+    }
+
 }

@@ -319,13 +319,18 @@ boolean mouseOverRect(float x, float y, float w, float h) {
 }
 
 void mainButton() {
-  
+  noStroke();
+  textSize(18);
+  fill(mainButtonColor);
+  rect(mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight, 12);
+  fill(255, 255, 255);
+  text("Exit", mainButtonX, mainButtonY);
 
   if (mouseOverRect(mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight)) {
     mainButtonColor=color(153, 51, 255);
   } else {
     mainButtonColor=color(178, 102, 255);
-  }
+  }/*
   if (currScreen == "myClassroom") {
     if (mouseOverRect(mainButtonX+60, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) {
       AttButtonColor=color(153, 51, 255);
@@ -349,13 +354,7 @@ void mainButton() {
     } else {
       backColor=color(178, 102, 255);
     }
-  }
-  noStroke();
-  textSize(18);
-  fill(mainButtonColor);
- // rect(mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight, 12);
-  fill(255, 255, 255);
- // text("Exit", mainButtonX, mainButtonY);
+  }*/
 }
 
 public void test(){

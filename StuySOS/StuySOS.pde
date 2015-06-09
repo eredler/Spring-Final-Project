@@ -5,7 +5,7 @@ private int numRows, numCols;
 import java.util.*;
 import java.lang.*;
 
-String currScreen, studentInfoMode;
+String currScreen; //, studentInfoMode;
 color buttonNotClicked, buttonClicked;
 float mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight;
 color mainButtonColor, AttButtonColor, AttSubButtonColor, backColor, switchColor, switchSubColor;
@@ -60,11 +60,11 @@ void draw() {
   } else if (currScreen=="myClassroom") {
     classroomScreen();
   } else if (currScreen=="fillStudentInfo") {
-    if (studentInfoMode=="newStudent") {
-      studentInfoScreen(currStudentRow, currStudentCol, myStudents);
-    } else if (studentInfoMode=="currentStudent") {
-      loadStudentInfo(currStudentRow, currStudentCol);
-    }
+    //if (studentInfoMode=="newStudent") {
+    //  studentInfoScreen(currStudentRow, currStudentCol, myStudents);
+    //} else if (studentInfoMode=="currentStudent") {
+    //  loadStudentInfo(currStudentRow, currStudentCol);
+    // }
     fillStudentInfoScreen(currStudentRow, currStudentCol);
   } else if (currScreen=="studentInfo") {
     studentInfoScreen(currStudentRow, currStudentCol, myStudents);
@@ -208,13 +208,15 @@ void mouseClicked() {
       for (int r=0; r<numRows; r++) {
         for (int c=0; c<numCols; c++) {
           if (studentBoxWidths >= Math.abs(studentBoxX.get(numCols*(r)+c)-mouseX) && studentBoxHeights >= Math.abs(studentBoxY.get(numCols*(r)+c)-mouseY)) {
-            currScreen="fillStudentInfo";
+            //currScreen="fillStudentInfo";
             currStudentRow=r;
             currStudentCol=c;
             if (myStudents[currStudentRow][currStudentCol].getName().equals("")) {
-              studentInfoMode="newStudent";
+              currScreen="fillStudentInfo";
+            //  studentInfoMode="newStudent";
             } else {
-              studentInfoMode="currentStudent";
+              currScreen="studentInfo";
+            //  studentInfoMode="currentStudent";
             }
           }
         }

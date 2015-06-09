@@ -17,6 +17,8 @@ PImage chalkboard;
 color beginButton=color(145, 114, 236);
 int currStudentRow, currStudentCol, numStudentsSwitched;
 boolean attendance, switchSeats;
+String gradeType; //for addGrade screens
+float currTextX,currTextY; //for the addGrade screens, where you have two input boxes to deal with
 
 void setup() {
   size(1000, 750);
@@ -67,12 +69,16 @@ void draw() {
   } else if (currScreen=="studentInfo") {
     studentInfoScreen(currStudentRow, currStudentCol, myStudents);
   } else if (currScreen=="addGradeHW") {
+    gradeType="hw";
     addGradeScreen("Homework");
   } else if (currScreen=="addGradeParticipation") {
+    gradeType="participation";
     addGradeScreen("Participation");
   } else if (currScreen=="addGradeTest") {
+    gradeType="test";
     addGradeScreen("Test");
   } else if (currScreen=="addGradeOther") {
+    gradeType="other";
     addGradeScreen("Other");
   }
 }
@@ -313,6 +319,27 @@ void mouseClicked() {
       errorMessage=false;
     }
   }
+}
+
+void keyPressed() {
+  if (currScreen=="fillStudentInfo") {
+    if (typing.length()<20) {
+      typing+=key;
+    }
+  }
+  if (key == BACKSPACE) {
+    typing = typing.substring(0, typing.length()-2);
+  }
+ /* if (currScreen=="addGrade") {
+    if (title.length()<23) {
+      if (key >= 96 && key <= 105) {
+        gradeV+=key;
+      } else {
+        title+=key;
+      }
+    }
+  }*/
+  
 }
 
 

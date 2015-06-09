@@ -1,4 +1,4 @@
-void addGradeScreen(String type) {
+void addGradeScreen(String type) { //type = HW,PARTICIPATION,TEST,OTHER
   background(0, 102, 0);
 
   stroke(0);
@@ -27,10 +27,13 @@ void addGradeScreen(String type) {
   text("Clear", width/2, height/2+150);
   text("Go Back", width/2, height/2+200);
 
+  
+
   if (mouseOverRect(width/2, height/2+100, 75, 30)) {
     submitButtonColor=color(30, 205, 151);
     submitTextColor=color(255, 255, 255);
   } 
+
 
 
   String title="";

@@ -5,7 +5,7 @@ private int numRows, numCols;
 import java.util.*;
 import java.lang.*;
 
-String currScreen; //, studentInfoMode;
+String currScreen;
 color buttonNotClicked, buttonClicked;
 float mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight;
 color mainButtonColor, AttButtonColor, AttSubButtonColor, backColor, switchColor, switchSubColor;
@@ -55,16 +55,9 @@ void draw() {
   } else if (currScreen=="titleScreen1" || currScreen=="titleScreen2") {
     titleScreen();
     textSize(32);
-    // text("NumRows: "+numRows, 100, 100);
-    //  text("NumCols: "+numCols, 500, 100);
   } else if (currScreen=="myClassroom") {
     classroomScreen();
   } else if (currScreen=="fillStudentInfo") {
-    //if (studentInfoMode=="newStudent") {
-    //  studentInfoScreen(currStudentRow, currStudentCol, myStudents);
-    //} else if (studentInfoMode=="currentStudent") {
-    //  loadStudentInfo(currStudentRow, currStudentCol);
-    // }
     fillStudentInfoScreen(currStudentRow, currStudentCol);
   } else if (currScreen=="studentInfo") {
     studentInfoScreen(currStudentRow, currStudentCol, myStudents);
@@ -293,11 +286,10 @@ void mouseClicked() {
         typing="";
         action=true;
       }
-    } else if (mouseOverRect(width/2, height/2+150, 75, 30)) { //&& myStudents[currStudentRow][currStudentCol].getName().equals("")){ //CLEAR
-      // CLEAR
+    } else if (mouseOverRect(width/2, height/2+150, 75, 30)) { //CLEAR
       typing="";
       errorMessage=false;
-      action=false; //JUST TO MAKE SURE
+      action=false;
     } else if (mouseOverRect(width/2, height/2+200, 75, 30)) { //GO BACK
       typing="";
       errorMessage=false;
@@ -305,7 +297,6 @@ void mouseClicked() {
       action=true;
     }
     if (action) {
-      //currScreen= "WHATEVER NAME OF NEXT SCREEN IS";
       currScreen="myClassroom"; //maybe next step of studentInfo?
       errorMessage=false;
     }

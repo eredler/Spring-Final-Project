@@ -5,6 +5,7 @@ private int numRows, numCols;
 import java.util.*;
 import java.lang.*;
 
+PImage cursorImage;
 String currScreen;
 color buttonNotClicked, buttonClicked;
 float mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight;
@@ -24,7 +25,9 @@ void setup() {
   background(102, 178, 255);
   textAlign(CENTER, CENTER);
   rectMode(CENTER);
-  cursor(CROSS); //COOL FEATURE: not necessary, but looks like a cool target practice thing with the mouse :)
+  //cursor(CROSS); //COOL FEATURE: not necessary, but looks like a cool target practice thing with the mouse :)
+  cursorImage=loadImage("images/pencil-animated.gif");
+  cursor(cursorImage);
 
   currScreen="introScreen";
   buttonNotClicked=color(0, 128, 255);

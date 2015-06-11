@@ -30,9 +30,9 @@ void setup() {
   background(102, 178, 255);
   textAlign(CENTER, CENTER);
   rectMode(CENTER);
-  //cursor(CROSS); //COOL FEATURE: not necessary, but looks like a cool target practice thing with the mouse :)
+  cursor(CROSS); //COOL FEATURE: not necessary, but looks like a cool target practice thing with the mouse :)
   cursorImage=loadImage("images/pencil-animated.gif");
-  cursor(cursorImage);
+  //cursor(cursorImage);
 
   currScreen="introScreen";
   buttonNotClicked=color(0, 128, 255);

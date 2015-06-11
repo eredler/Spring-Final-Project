@@ -19,6 +19,7 @@ public class Button{ //Should I make it abstract?
     setMainColor(myMainColor);
     setHighlightColor(highlightColor);
     setRadius(10);
+    currColor=myMainColor;
   }
   
   public Button(float buttonX, float buttonY, float buttonWidth, float buttonHeight, String currScreen, String nextScreen){
@@ -30,6 +31,7 @@ public class Button{ //Should I make it abstract?
     setCurrScreen(currScreen);
     setNextScreen(nextScreen);
     setRadius(10);
+    currColor=myMainColor;
   }
   
   public Button(float buttonX, float buttonY, float buttonWidth, float buttonHeight){
@@ -40,7 +42,8 @@ public class Button{ //Should I make it abstract?
     setName("EMPTY"); //change to "" later; for now, "EMPTY" used for debugging purposes
     setCurrScreen("");
     setNextScreen("");
-    setRadius(10);    
+    setRadius(10); 
+    currColor=myMainColor;   
   }
   
   //LEGIT NECESSARY/HELPFUL METHODS

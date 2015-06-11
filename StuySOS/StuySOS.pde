@@ -144,7 +144,8 @@ void mouseClicked() {
   //TITLESCREEN1 = pick number of rows
   else if (currScreen=="titleScreen1") {
     for (int i=1; i<=8; i++) {
-      if (25 >= Math.abs(widths.get(i-1) - mouseX) && 25 >= Math.abs(heights.get(i-1) - mouseY)) {
+      //if (25 >= Math.abs(widths.get(i-1) - mouseX) && 25 >= Math.abs(heights.get(i-1) - mouseY)) {
+        if (mouseOverRect(widths.get(i-1),heights.get(i-1),50,50)){
         numRows=i;
         break;
       }
@@ -393,7 +394,8 @@ boolean mouseOverCircle(float x, float y, float diameter) {
 }
 
 boolean mouseOverRect(float x, float y, float w, float h) {
-  return (mouseX >= x-(w/2) && mouseX <= x+(w/2) && mouseY >= y-(h/2) && mouseY <= y+(h/2));
+  //return (mouseX >= x-(w/2) && mouseX <= x+(w/2) && mouseY >= y-(h/2) && mouseY <= y+(h/2));
+  return (w/2>=Math.abs(x-mouseX) && h/2>=Math.abs(y-mouseY));
 }
 
 void mainButton() {

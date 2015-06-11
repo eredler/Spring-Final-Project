@@ -1,6 +1,5 @@
 Student[][] myStudents;
-//Button[][] myButtons; //same as students
-ArrayList<Button> myButtons=new ArrayList<Button>();
+Button[][] myButtons; //same as students
 private int numRows, numCols;
 
 import java.util.*;
@@ -16,7 +15,7 @@ ArrayList<Float> widths, heights; //for remembering titleScreen button positions
 ArrayList<Float> studentBoxX, studentBoxY; //for remembering where students are on main classroom Screen
 float studentBoxHeights, studentBoxWidths;
 PImage chalkboard;
-color beginButton=color(145, 114, 236);
+color beginButton=color(145, 114, 236), loadButton=color(145,114,236);
 int currStudentRow, currStudentCol, numStudentsSwitched;
 boolean attendance, switchSeats;
 String gradeType; //for addGrade screens
@@ -56,12 +55,14 @@ void setup() {
   submitButtonColor=color(255, 255, 255);
   submitTextColor=color(30, 205, 15);
   errorMessage=false;
-  PrintWriter output;
+}
 
+void loadInfo(){
   try {
     Scanner info = new Scanner(new File("studentInfo.txt"));
     while (info.hasNextLine ()) {
       String line = info.nextLine();
+      System.out.println(line);
       String[] rowInfo = line.split("|"); //split rows
       for (int g = 0; g < rowInfo.length; g++) {
         String[] indivStudents = rowInfo[g].split(";"); // split individul students in form "name, latenesses, absences"
@@ -74,9 +75,8 @@ void setup() {
         }
       }
     }
-  } 
-  catch (FileNotFoundException e) {
-    output = createWriter("studentInfo.txt");
+  } catch (FileNotFoundException e) {
+    PrintWriter output = createWriter("studentInfo.txt");
   }
 }
 
@@ -84,13 +84,13 @@ void setup() {
 void save() {
   PrintWriter output;
   try {
-    output = new PrintWriter(new File("studentInfo.txt"));
-  } 
-  catch (FileNotFoundException e) {
-    output = createWriter("studentInfo.txt");
+  output = new PrintWriter(new BufferedWriter(new FileWriter(new File("studentInfo.txt"),true)));
+  } catch (Exception e){
+   output = createWriter("studentInfo.txt"); 
   }
   String thisRow = "";
-  for (int i = 0; i < myStudents.length; i++) {
+  try{
+  for (int i = 0; i < myStudents.length; i++){
     thisRow = myStudents[i][0].getName() + "," + myStudents[i][0].getNumLate() + "," + myStudents[i][0].getNumAbsent();
     for (int c = 1; c < myStudents[0].length; c++) {
       thisRow += ";" + myStudents[i][c].getName() + "," + myStudents[i][c].getNumLate() + "," + myStudents[i][c].getNumAbsent();
@@ -98,6 +98,8 @@ void save() {
     thisRow+="|";
   }
   output.println(thisRow);
+  } catch (NullPointerException e){}
+  catch (ArrayIndexOutOfBoundsException e){}
 }
 */
 
@@ -135,10 +137,16 @@ void mouseClicked() {
     //save();
     System.exit(0);
   } else if (currScreen=="introScreen") {
-    if (mouseOverRect(width/2, height/2+85, 100, 30)) {
+    if (mouseOverRect(width/2, height/2+92, 100, 30)) { //BEGIN
       currScreen="titleScreen1";
     } else {
       beginButton=color(148, 114, 236);
+    }
+    if (mouseOverRect(width/2,height/2+143,100,30)) { //LOAD
+    currScreen="myClassroom";
+ //   loadInfo();
+    } else {
+     loadButton=color(148,114,236); 
     }
   }
   //TITLESCREEN1 = pick number of rows
@@ -406,12 +414,35 @@ void mainButton() {
   fill(255, 255, 255);
   text("Exit", mainButtonX, mainButtonY);
 
-
   if (mouseOverRect(mainButtonX, mainButtonY+15, mainButtonWidth, mainButtonHeight)) {
     mainButtonColor=color(153, 51, 255);
   } else {
     mainButtonColor=color(178, 102, 255);
-  }
+  }/*
+  if (currScreen == "myClassroom") {
+   if (mouseOverRect(mainButtonX+60, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) {
+   AttButtonColor=color(153, 51, 255);
+   } else {
+   AttButtonColor=color(178, 102, 255);
+   }
+   if (mouseOverRect(mainButtonX, mainButtonY+100, mainButtonWidth, mainButtonHeight)) {
+   AttSubButtonColor=color(153, 51, 255);
+   } else {
+   AttSubButtonColor=color(178, 102, 255);
+   }
+   if (mouseOverRect(mainButtonX+250, mainButtonY+50, mainButtonWidth+80, mainButtonHeight)) {
+   switchColor=color(153, 51, 255);
+   } else {
+   switchColor=color(178, 102, 255);
+   }
+   }
+   if (currScreen=="studentInfo") {
+   if (mouseOverRect(mainButtonX, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) {
+   backColor=color(153, 51, 255);
+   } else {
+   backColor=color(178, 102, 255);
+   }
+   }*/
 }
 
 public void test() {

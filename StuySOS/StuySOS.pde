@@ -74,28 +74,32 @@ void setup() {
         }
       }
     }
-  } catch (FileNotFoundException e) {
+  } 
+  catch (FileNotFoundException e) {
     output = createWriter("studentInfo.txt");
   }
 }
 
-void save(){
+/*
+void save() {
   PrintWriter output;
   try {
-  output = new PrintWriter(new File("studentInfo.txt"));
-  } catch (FileNotFoundException e){
-   output = createWriter("studentInfo.txt"); 
+    output = new PrintWriter(new File("studentInfo.txt"));
+  } 
+  catch (FileNotFoundException e) {
+    output = createWriter("studentInfo.txt");
   }
   String thisRow = "";
-  for (int i = 0; i < myStudents.length; i++){
+  for (int i = 0; i < myStudents.length; i++) {
     thisRow = myStudents[i][0].getName() + "," + myStudents[i][0].getNumLate() + "," + myStudents[i][0].getNumAbsent();
-   for (int c = 1; c < myStudents[0].length; c++){
-     thisRow += ";" + myStudents[i][c].getName() + "," + myStudents[i][c].getNumLate() + "," + myStudents[i][c].getNumAbsent();
-   }
-   thisRow+="|";
+    for (int c = 1; c < myStudents[0].length; c++) {
+      thisRow += ";" + myStudents[i][c].getName() + "," + myStudents[i][c].getNumLate() + "," + myStudents[i][c].getNumAbsent();
+    }
+    thisRow+="|";
   }
   output.println(thisRow);
 }
+*/
 
 void draw() {
   //maybe add a main welcome page or something later
@@ -123,13 +127,12 @@ void draw() {
     gradeType="other";
     addGradeScreen("Other");
   }
-
 }
 
 void mouseClicked() {
   //WELCOME Screen
-  if (mouseOverRect(mainButtonX, mainButtonY+15, mainButtonWidth, mainButtonHeight)) {
-    save();
+  if (mouseOverRect(mainButtonX, mainButtonY+15, mainButtonWidth, mainButtonHeight) && currScreen!="introScreen") {
+    //save();
     System.exit(0);
   } else if (currScreen=="introScreen") {
     if (mouseOverRect(width/2, height/2+85, 100, 30)) {
@@ -140,10 +143,6 @@ void mouseClicked() {
   }
   //TITLESCREEN1 = pick number of rows
   else if (currScreen=="titleScreen1") {
-    if (mouseOverRect(mainButtonX, mainButtonY+15, mainButtonWidth, mainButtonHeight)) {
-    save();
-    System.exit(0);
-  }
     for (int i=1; i<=8; i++) {
       if (25 >= Math.abs(widths.get(i-1) - mouseX) && 25 >= Math.abs(heights.get(i-1) - mouseY)) {
         numRows=i;
@@ -156,10 +155,6 @@ void mouseClicked() {
   } 
   //TITLESCREEN2 = pick number of seats per row
   else if (currScreen=="titleScreen2") {
-    if (mouseOverRect(mainButtonX, mainButtonY+15, mainButtonWidth, mainButtonHeight)) {
-    save();
-    System.exit(0);
-  }
     for (int i=1; i<=8; i++) {
       if (25 >= Math.abs(widths.get(i-1) - mouseX) && 25 >= Math.abs(heights.get(i-1) - mouseY)) {
         numCols=i;
@@ -180,10 +175,6 @@ void mouseClicked() {
   } 
   //CLASSROOM Screen = shows all students currently enrolled in your class
   else if (currScreen=="myClassroom") {
-    if (mouseOverRect(mainButtonX, mainButtonY+15, mainButtonWidth, mainButtonHeight)) {
-    save();
-    System.exit(0);
-  }
     if (attendance == false && switchSeats==false) {
       if (mouseOverRect(mainButtonX+60, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) {
         attendance=true;
@@ -301,10 +292,6 @@ void mouseClicked() {
 
   //STUDENT INFORMATION Screen = looking at/editing a selected student's information 
   else if (currScreen=="studentInfo") {
-    if (mouseOverRect(mainButtonX, mainButtonY+15, mainButtonWidth, mainButtonHeight)) {
-    save();
-    System.exit(0);
-  }
     if (mouseOverRect(width/2, height/2+100, 75, 30)) { //EDIT INFO
       currScreen = "fillStudentInfo";
     }
@@ -320,10 +307,6 @@ void mouseClicked() {
       currScreen = "addGradeOther";
     }
   } else if (currScreen=="addGradeHW") {
-    if (mouseOverRect(mainButtonX, mainButtonY+15, mainButtonWidth, mainButtonHeight)) {
-    save();
-    System.exit(0);
-  }
     boolean action=false;
 
     //if (myStudents[currStudentRow][currStudentCol].getName().equals("")){
@@ -357,10 +340,6 @@ void mouseClicked() {
      } else if (currScreen=="addGradeParticipation") {
      } else if (currScreen=="addGradeOther") {*/
   } else if (currScreen=="fillStudentInfo") {
-    if (mouseOverRect(mainButtonX, mainButtonY+15, mainButtonWidth, mainButtonHeight)) {
-    save();
-    System.exit(0);
-  }
     boolean action=false;
     if (mouseOverRect(width/2, height/2+100, 75, 30)) { //SUBMIT
       if (typing.length()<1) {

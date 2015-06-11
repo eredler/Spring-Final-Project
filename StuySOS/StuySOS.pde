@@ -4,10 +4,8 @@ private int numRows, numCols;
 
 import java.util.*;
 import java.lang.*;
-import controlP5.*;
 
-ControlP5 cp5;
-DropdownList dRow, dCol;
+PImage cursorImage;
 String currScreen;
 color buttonNotClicked, buttonClicked;
 float mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight;
@@ -17,21 +15,22 @@ ArrayList<Float> studentBoxX, studentBoxY; //for remembering where students are 
 float studentBoxHeights, studentBoxWidths;
 PImage chalkboard;
 color beginButton=color(145, 114, 236);
-ControllerGroup cg;
-Slider row, col;
 int currStudentRow, currStudentCol, numStudentsSwitched;
 boolean attendance, switchSeats;
-
-
+String gradeType; //for addGrade screens
+float currTextX,currTextY; //for the addGrade screens, where you have two input boxes to deal with
 
 void setup() {
   size(1000, 750);
+  //size(displayWidth,displayHeight); //COOL FEATURE: resizes to screen size of computer program is running on :D
+  //check sketchFullScreen() method in processing wiki if automatically want to start full screen
   background(102, 178, 255);
   textAlign(CENTER, CENTER);
   rectMode(CENTER);
-  cp5 = new ControlP5(this);
-  //dRow = cp5.addDropdownList("numRows").setPosition(width/3 , height/2);
-  //dCol = cp5.addDropdownList("numCols").setPosition(width*2/3 , height/2);
+  //cursor(CROSS); //COOL FEATURE: not necessary, but looks like a cool target practice thing with the mouse :)
+  cursorImage=loadImage("images/pencil-animated.gif");
+  cursor(cursorImage);
+
   currScreen="introScreen";
   buttonNotClicked=color(0, 128, 255);
   buttonClicked=color(0, 102, 204);
@@ -63,35 +62,33 @@ void draw() {
   } else if (currScreen=="titleScreen1" || currScreen=="titleScreen2") {
     titleScreen();
     textSize(32);
-    // text("NumRows: "+numRows, 100, 100);
-    //  text("NumCols: "+numCols, 500, 100);
   } else if (currScreen=="myClassroom") {
     classroomScreen();
   } else if (currScreen=="fillStudentInfo") {
     fillStudentInfoScreen(currStudentRow, currStudentCol);
-    //fillStudentInfoScreen(currStudentRow,currStudentCol);
-    //cp5 = new ControlP5(this);
-    //cp5.addTextfield("studentName").setPosition(100, 100).setSize(200, 50).setAutoClear(false);
-    //cp5.addBang("Submit").setPosition(240, 170).setSize(80, 40);
   } else if (currScreen=="studentInfo") {
     studentInfoScreen(currStudentRow, currStudentCol, myStudents);
-  } /*else if (currScreen=="addGradeHW") {
-   addGradeScreen("Homework");
-   } else if (currScreen=="addGradeParticipation") {
-   addGradeScreen("Participation");
-   } else if (currScreen=="addGradeTest") {
-   addGradeScreen("Test");
-   } else if (currScreen=="addGradeOther") {
-   addGradeScreen("Other");
-   }*/
+  } else if (currScreen=="addGradeHW") {
+    gradeType="hw";
+    addGradeScreen("Homework");
+  } else if (currScreen=="addGradeParticipation") {
+    gradeType="participation";
+    addGradeScreen("Participation");
+  } else if (currScreen=="addGradeTest") {
+    gradeType="test";
+    addGradeScreen("Test");
+  } else if (currScreen=="addGradeOther") {
+    gradeType="other";
+    addGradeScreen("Other");
+  }
 }
 
 void mouseClicked() {
+  //WELCOME Screen
   if (mouseOverRect(mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight)) {
     currScreen="introScreen";
   } else if (currScreen=="introScreen") {
     if (mouseOverRect(width/2, height/2+70, 100, 30)) {
-      //beginButton=color(158,123,255);
       currScreen="titleScreen1";
     } else {
       beginButton=color(148, 114, 236);
@@ -128,26 +125,20 @@ void mouseClicked() {
     if (numCols!=0) {
       currScreen="myClassroom";
     }
-  } else if (currScreen=="myClassroom") {
+  } 
+  //CLASSROOM Screen = shows all students currently enrolled in your class
+  else if (currScreen=="myClassroom") {
     if (attendance == false && switchSeats==false) {
       if (mouseOverRect(mainButtonX+60, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) {
         attendance=true;
-      }
-      if (mouseOverRect(mainButtonX+250, mainButtonY+50, mainButtonWidth+100, mainButtonHeight)) {
+      } else if (mouseOverRect(mainButtonX+250, mainButtonY+50, mainButtonWidth+100, mainButtonHeight)) {
         switchSeats=true;
         numStudentsSwitched = 0;
       }
-      for (int r=0; r<numRows; r++) {
-        for (int c=0; c<numCols; c++) {
-          if (studentBoxWidths >= Math.abs(studentBoxX.get(numCols*(r)+c)-mouseX) && studentBoxHeights >= Math.abs(studentBoxY.get(numCols*(r)+c)-mouseY)) {
-            //Math.abs(width*(c+1)/(numCols+1) - mouseX) && studentBoxHeights >= Math.abs(width*(r+1)/(numRows+1) - mouseY)){
-            currScreen="studentInfo";
-            currStudentRow=r;
-            currStudentCol=c;
-          }
-        }
-      }
-    } else if (attendance) {
+    }
+
+    //TAKING ATTENDANCE
+    if (attendance) {
       for (int r=0; r<numRows; r++) {
         for (int c=0; c<numCols; c++) {
           if (studentBoxWidths >= Math.abs(studentBoxX.get(numCols*(r)+c)-mouseX) && studentBoxHeights >= Math.abs(studentBoxY.get(numCols*(r)+c)-mouseY)) {
@@ -158,7 +149,7 @@ void mouseClicked() {
           }
         }
       }
-      if (mouseOverRect(mainButtonX, mainButtonY+100, mainButtonWidth, mainButtonHeight)) {
+      if (mouseOverRect(mainButtonX, mainButtonY+100, mainButtonWidth, mainButtonHeight)) { //mouse is over SUBMIT attendance button
         for (int r=0; r<numRows; r++) {
           for (int c=0; c<numCols; c++) {
             if (myStudents[r][c].numClicks%3==1) {
@@ -173,6 +164,8 @@ void mouseClicked() {
         attendance=false;
       }
     }
+
+    //SWITCHING SEATS
     if (switchSeats) {
       if (numStudentsSwitched < 2) {
         for (int r=0; r<numRows; r++) {
@@ -188,56 +181,93 @@ void mouseClicked() {
         }
       }
       if (mouseOverRect(mainButtonX, mainButtonY+100, mainButtonWidth, mainButtonHeight)) {
-        if (numStudentsSwitched == 2){
+        if (numStudentsSwitched == 2) {
           int holdR1 = 0;
           int holdR2 = 0;
           int holdC1= 0;
           int holdC2= 0;
-        for (int r=0; r<numRows; r++) {
-          for (int c=0; c<numCols; c++) {
-            if (myStudents[r][c].switchMe == true){
-              if (numStudentsSwitched ==2){
-                 holdR1 = r;
-                 holdC1 = c; 
-                 numStudentsSwitched--;
-                 myStudents[r][c].switchMe = false;
+          for (int r=0; r<numRows; r++) {
+            for (int c=0; c<numCols; c++) {
+              if (myStudents[r][c].switchMe == true) {
+                if (numStudentsSwitched ==2) {
+                  holdR1 = r;
+                  holdC1 = c; 
+                  numStudentsSwitched--;
+                  myStudents[r][c].switchMe = false;
+                }
+                if (numStudentsSwitched==1) {
+                  holdR2 = r;
+                  holdC2 = c; 
+                  myStudents[r][c].switchMe = false;
+                }
               }
-              if (numStudentsSwitched==1){
-                 holdR2 = r;
-                 holdC2 = c; 
-                 myStudents[r][c].switchMe = false;
-              }
+            }
           }
-          }
+          Student hold1 = myStudents[holdR1][holdC1];
+          myStudents[holdR1][holdC1] = myStudents[holdR2][holdC2];
+          myStudents[holdR2][holdC2] = hold1;
+          switchSeats=false;
         }
-        Student hold1 = myStudents[holdR1][holdC1];
-        myStudents[holdR1][holdC1] = myStudents[holdR2][holdC2];
-        myStudents[holdR2][holdC2] = hold1;
-        switchSeats=false;
       }
     }
-  }
-  } else if (currScreen=="studentInfo") {
+    //IF JUST ENTERING NEW STUDENT OR LOOKING AT A CURRENT STUDENT'S INFO
+    else if (!attendance && !switchSeats) {
+      for (int r=0; r<numRows; r++) {
+        for (int c=0; c<numCols; c++) {
+          if (studentBoxWidths >= Math.abs(studentBoxX.get(numCols*(r)+c)-mouseX) && studentBoxHeights >= Math.abs(studentBoxY.get(numCols*(r)+c)-mouseY)) {
+            //currScreen="fillStudentInfo";
+            currStudentRow=r;
+            currStudentCol=c;
+            if (myStudents[currStudentRow][currStudentCol].getName().equals("")) {
+              currScreen="fillStudentInfo";
+            //  studentInfoMode="newStudent";
+            } else {
+              currScreen="studentInfo";
+            //  studentInfoMode="currentStudent";
+            }
+          }
+        }
+      }
+    }
+  }  
+  /*
+      for (int r=0; r<numRows; r++) {
+   for (int c=0; c<numCols; c++) {
+   if (studentBoxWidths >= Math.abs(studentBoxX.get(numCols*(r)+c)-mouseX) && studentBoxHeights >= Math.abs(studentBoxY.get(numCols*(r)+c)-mouseY)) {
+   //Math.abs(width*(c+1)/(numCols+1) - mouseX) && studentBoxHeights >= Math.abs(width*(r+1)/(numRows+1) - mouseY)){
+   currScreen="studentInfo";
+   currStudentRow=r;
+   currStudentCol=c;
+   }
+   }
+   }
+   */
+
+  //STUDENT INFORMATION Screen = looking at/editing a selected student's information 
+  else if (currScreen=="studentInfo") {
     if (mouseOverRect(width/2, height/2+100, 75, 30)) { //EDIT INFO
       currScreen = "fillStudentInfo";
     }
     if (mouseOverRect(mainButtonX, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) {
       currScreen="myClassroom";
-    } /*else if (mouseOverRect(width/2, height/2+150, 150, 30)) { //add homework
-     currScreen = "addGradeHW";
-     } else if (mouseOverRect(width/2, height/2+200, 150, 30)) { //add test
-     currScreen = "addGradeTest";
-     } else if (mouseOverRect(width/2, height/2+250, 150, 30)) { //add participation
-     currScreen = "addGradeParticipation";
-     } else if (mouseOverRect(width/2, height/2+300, 150, 30)) { //add other grade
-     currScreen = "addGradeOther";
-     }
-     } else if (currScreen=="addGradeHW") {
+    }else if (mouseOverRect(width/2, height/2+150, 150, 30)) { //add homework
+      currScreen = "addGradeHW";
+    } else if (mouseOverRect(width/2, height/2+200, 150, 30)) { //add test
+      currScreen = "addGradeTest";
+    } else if (mouseOverRect(width/2, height/2+250, 150, 30)) { //add participation
+      currScreen = "addGradeParticipation";
+    } else if (mouseOverRect(width/2, height/2+300, 150, 30)) { //add other grade
+      currScreen = "addGradeOther";
+    }
+  } 
+  
+  else if (currScreen=="addGradeHW") {
      boolean action=false;
+     
      //if (myStudents[currStudentRow][currStudentCol].getName().equals("")){
      //typing="";
      //}
-     if (mouseOverRect(width/2, height/2+100, 75, 30)) { //SUBMIT
+     //if (mouseOverRect(width/2, height/2+100, 75, 30)) { //SUBMIT
     /* if (name.length()<1) {
      errorMessage=true;
      } else {
@@ -266,21 +296,18 @@ void mouseClicked() {
      } else if (currScreen=="addGradeOther") {*/
   } else if (currScreen=="fillStudentInfo") {
     boolean action=false;
-    //if (myStudents[currStudentRow][currStudentCol].getName().equals("")){
-    //typing="";
-    //}
     if (mouseOverRect(width/2, height/2+100, 75, 30)) { //SUBMIT
       if (typing.length()<1) {
         errorMessage=true;
       } else {
         myStudents[currStudentRow][currStudentCol].setName(typing);
+        typing="";
         action=true;
       }
-    } else if (mouseOverRect(width/2, height/2+150, 75, 30)) { //&& myStudents[currStudentRow][currStudentCol].getName().equals("")){ //CLEAR
-      // CLEAR
+    } else if (mouseOverRect(width/2, height/2+150, 75, 30)) { //CLEAR
       typing="";
       errorMessage=false;
-      action=false; //JUST TO MAKE SURE
+      action=false;
     } else if (mouseOverRect(width/2, height/2+200, 75, 30)) { //GO BACK
       typing="";
       errorMessage=false;
@@ -288,10 +315,31 @@ void mouseClicked() {
       action=true;
     }
     if (action) {
-      //currScreen= "WHATEVER NAME OF NEXT SCREEN IS";
       currScreen="myClassroom"; //maybe next step of studentInfo?
+      errorMessage=false;
     }
   }
+}
+
+void keyPressed() {
+  if (currScreen=="fillStudentInfo") {
+    if (typing.length()<20) {
+      typing+=key;
+    }
+  }
+  if (key == BACKSPACE) {
+    typing = typing.substring(0, typing.length()-2);
+  }
+ /* if (currScreen=="addGrade") {
+    if (title.length()<23) {
+      if (key >= 96 && key <= 105) {
+        gradeV+=key;
+      } else {
+        title+=key;
+      }
+    }
+  }*/
+  
 }
 
 
@@ -308,74 +356,55 @@ void mainButton() {
   noStroke();
   textSize(18);
   fill(mainButtonColor);
- // rect(mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight, 12);
+  rect(mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight, 12);
   fill(255, 255, 255);
- // text("Exit", mainButtonX, mainButtonY);
+  text("Exit", mainButtonX, mainButtonY);
 
   if (mouseOverRect(mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight)) {
     mainButtonColor=color(153, 51, 255);
   } else {
     mainButtonColor=color(178, 102, 255);
-  }
+  }/*
   if (currScreen == "myClassroom") {
-    if (mouseOverRect(mainButtonX+60, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) {
-      AttButtonColor=color(153, 51, 255);
-    } else {
-      AttButtonColor=color(178, 102, 255);
-    }
-    if (mouseOverRect(mainButtonX, mainButtonY+100, mainButtonWidth, mainButtonHeight)) {
-      AttSubButtonColor=color(153, 51, 255);
-    } else {
-      AttSubButtonColor=color(178, 102, 255);
-    }
-    if (mouseOverRect(mainButtonX+250, mainButtonY+50, mainButtonWidth+80, mainButtonHeight)) {
-      switchColor=color(153, 51, 255);
-    } else {
-      switchColor=color(178, 102, 255);
-    }
-  }
-  if (currScreen=="studentInfo") {
-    if (mouseOverRect(mainButtonX, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) {
-      backColor=color(153, 51, 255);
-    } else {
-      backColor=color(178, 102, 255);
-    }
-  }
+   if (mouseOverRect(mainButtonX+60, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) {
+   AttButtonColor=color(153, 51, 255);
+   } else {
+   AttButtonColor=color(178, 102, 255);
+   }
+   if (mouseOverRect(mainButtonX, mainButtonY+100, mainButtonWidth, mainButtonHeight)) {
+   AttSubButtonColor=color(153, 51, 255);
+   } else {
+   AttSubButtonColor=color(178, 102, 255);
+   }
+   if (mouseOverRect(mainButtonX+250, mainButtonY+50, mainButtonWidth+80, mainButtonHeight)) {
+   switchColor=color(153, 51, 255);
+   } else {
+   switchColor=color(178, 102, 255);
+   }
+   }
+   if (currScreen=="studentInfo") {
+   if (mouseOverRect(mainButtonX, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) {
+   backColor=color(153, 51, 255);
+   } else {
+   backColor=color(178, 102, 255);
+   }
+   }*/
 }
 
-public void test(){
- System.out.println(myStudents.toString()); 
+public void test() {
+  System.out.println(myStudents.toString());
 }
-
-//from cp5 site
-void customize(DropdownList ddl, int min, int max, int h, int w) { //added min,max; assume min<=max
-  // a convenience function to customize a DropdownList
-  ddl.setBackgroundColor(color(190));
-  ddl.setItemHeight(50);
-  ddl.setBarHeight(h);
-  ddl.setWidth(w);
-  //ddl.captionLabel().set("dropdown");
-  ddl.captionLabel().style().marginTop = 8;
-  //ddl.captionLabel().style().marginLeft = 3;
-  //ddl.valueLabel().style().marginTop = 3;
-  ddl.actAsPulldownMenu(true);
-  ArrayList<Integer> temp=new ArrayList<Integer>();
-  for (int i=min; i<=max; i++) {
-    ddl.setItemHeight(100);
-    ddl.setBarHeight(75);
-    ddl.captionLabel().set("dropdown");
-    ddl.captionLabel().style().marginTop = 3;
-    ddl.captionLabel().style().marginLeft = 3;
-    ddl.valueLabel().style().marginTop = 3;
-    for (int y=min; y<=max; y++) {
-      ddl.addItem("item "+y, y);
-      //temp.add(i);
-    }
-    //ddl.addItems(temp);
-    //ddl.scroll(0);
-    ddl.setColorBackground(color(60));
-    ddl.setColorActive(color(255, 128));
-    //ddl.showScrollbar();
-  }
-}
-
+/*
+void currStudentLocation(boolean screenChange, String newScreen){
+ for (int r=0; r<numRows; r++) {
+ for (int c=0; c<numCols; c++) {
+ if (studentBoxWidths >= Math.abs(studentBoxX.get(numCols*(r)+c)-mouseX) && studentBoxHeights >= Math.abs(studentBoxY.get(numCols*(r)+c)-mouseY)) {
+ if (screenChange){
+ currScreen=newScreen;  
+ }
+ currStudentRow=r;
+ currStudentCol=c;
+ }
+ }
+ }
+ */

@@ -62,6 +62,25 @@ void fillStudentInfoScreen(int currR, int currC) {
   }
 }
 
+void loadStudentInfo(int currR, int currC) {
+  background(0);
+  
+  fill(255);
+  textSize(40);
+  text("Student Information",width/2,30);
+  textSize(16);
+  rect(width*3/4, 250, 150, 30, 20); //Return to Classroom button
+  fill(0);
+  text("Return to Classroom", width*3/4, 200);
+  
+  textAlign(LEFT,CENTER);
+  fill(255);
+  textSize(18);
+  text(myStudents[currR][currC].getName()+"'s Info:", 50 ,100);
+  textAlign(CENTER,CENTER);
+  
+  mainButton();
+}
 
 //HELP FROM: http://www.learningprocessing.com/examples/chapter-18/example-18-1/
 String typing = "";// Variable to store text currently being typed
@@ -70,28 +89,6 @@ String typing = "";// Variable to store text currently being typed
 //    typing=myStudents[currStudentRow][currStudentCol].getName();
 //  }
 //}
-
-void keyPressed() {
-  if (currScreen=="fillStudentInfo") {
-    if (typing.length()<20) {
-      typing+=key;
-    }
-  }
-  if (key == BACKSPACE) {
-    typing = typing.substring(0, typing.length()-2);
-  }
- /* if (currScreen=="addGrade") {
-    if (title.length()<23) {
-      if (key >= 96 && key <= 105) {
-        gradeV+=key;
-      } else {
-        title+=key;
-      }
-    }
-  }*/
-  
-}
-
 
 void printErrorMessage(String message, int x, int y, color c) {
   fill(c);

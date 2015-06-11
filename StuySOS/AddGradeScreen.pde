@@ -1,10 +1,10 @@
-void addGradeScreen(String type) {
+void addGradeScreen(String type) { //type = HW,PARTICIPATION,TEST,OTHER
   background(0, 102, 0);
 
   stroke(0);
   fill(255);
-  rect(width/2, height/2, 150, 35, 10); //textbox
-  rect(width/2, height/2+50, 150, 35, 10); //textbox
+  rect(width/2, height/2, 150, 35, 10); //Grade textbox
+  rect(width/2, height/2+50, 150, 35, 10); //Grade type (name of assignment/test) textbox
   stroke(30, 205, 151);
   fill(submitButtonColor);
   rect(width/2, height/2+100, 75, 30, 20); //Submit button
@@ -25,13 +25,12 @@ void addGradeScreen(String type) {
   text("Submit", width/2, height/2+100);
 
   text("Clear", width/2, height/2+150);
-  text("Go Back", width/2, height/2+200);
+  text("Go Back", width/2, height/2+200);  
 
   if (mouseOverRect(width/2, height/2+100, 75, 30)) {
     submitButtonColor=color(30, 205, 151);
     submitTextColor=color(255, 255, 255);
   } 
-
 
   String title="";
   String gradeV="";

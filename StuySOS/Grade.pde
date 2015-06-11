@@ -5,7 +5,7 @@ public class Grade {
   private int scoreTotal;
   private String name;
   
-  public Grade(String t, String n, int se, int st){
+  public Grade(String t, String n, int se, int st){ //se = score earned; //st = score total (most amount of points you can get);
       setType(t);
       setName(n);
       setScoreEarned(se);

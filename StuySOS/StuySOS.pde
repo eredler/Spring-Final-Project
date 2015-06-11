@@ -15,7 +15,7 @@ ArrayList<Float> widths, heights; //for remembering titleScreen button positions
 ArrayList<Float> studentBoxX, studentBoxY; //for remembering where students are on main classroom Screen
 float studentBoxHeights, studentBoxWidths;
 PImage chalkboard;
-color beginButton=color(145, 114, 236);
+color beginButton=color(145, 114, 236), loadButton=color(145,114,236);
 int currStudentRow, currStudentCol, numStudentsSwitched;
 boolean attendance, switchSeats;
 String gradeType; //for addGrade screens
@@ -86,6 +86,7 @@ void save(){
    output = createWriter("studentInfo.txt"); 
   }
   String thisRow = "";
+  try{
   for (int i = 0; i < myStudents.length; i++){
     thisRow = myStudents[i][0].getName() + "," + myStudents[i][0].getNumLate() + "," + myStudents[i][0].getNumAbsent();
    for (int c = 1; c < myStudents[0].length; c++){
@@ -94,6 +95,7 @@ void save(){
    thisRow+="|";
   }
   output.println(thisRow);
+  } catch (NullPointerException e){}
 }
 
 void draw() {
@@ -130,10 +132,16 @@ void mouseClicked() {
     save();
     System.exit(0);
   } else if (currScreen=="introScreen") {
-    if (mouseOverRect(width/2, height/2+85, 100, 30)) {
+    if (mouseOverRect(width/2, height/2+92, 100, 30)) { //BEGIN
       currScreen="titleScreen1";
     } else {
       beginButton=color(148, 114, 236);
+    }
+    if (mouseOverRect(width/2,height/2+143,100,30)) { //LOAD
+    currScreen="myClassroom";
+ //   loadInfo();
+    } else {
+     loadButton=color(148,114,236); 
     }
   }
   //TITLESCREEN1 = pick number of rows

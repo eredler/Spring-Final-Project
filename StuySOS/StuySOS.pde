@@ -1,5 +1,6 @@
 Student[][] myStudents;
-Button[][] myButtons; //same as students
+//Button[][] myButtons; //same as students
+ArrayList<Button> myButtons=new ArrayList<Button>();
 private int numRows, numCols;
 
 import java.util.*;
@@ -124,6 +125,7 @@ void draw() {
     gradeType="other";
     addGradeScreen("Other");
   }
+
 }
 
 void mouseClicked() {
@@ -431,35 +433,12 @@ void mainButton() {
   fill(255, 255, 255);
   text("Exit", mainButtonX, mainButtonY);
 
+
   if (mouseOverRect(mainButtonX, mainButtonY+15, mainButtonWidth, mainButtonHeight)) {
     mainButtonColor=color(153, 51, 255);
   } else {
     mainButtonColor=color(178, 102, 255);
-  }/*
-  if (currScreen == "myClassroom") {
-   if (mouseOverRect(mainButtonX+60, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) {
-   AttButtonColor=color(153, 51, 255);
-   } else {
-   AttButtonColor=color(178, 102, 255);
-   }
-   if (mouseOverRect(mainButtonX, mainButtonY+100, mainButtonWidth, mainButtonHeight)) {
-   AttSubButtonColor=color(153, 51, 255);
-   } else {
-   AttSubButtonColor=color(178, 102, 255);
-   }
-   if (mouseOverRect(mainButtonX+250, mainButtonY+50, mainButtonWidth+80, mainButtonHeight)) {
-   switchColor=color(153, 51, 255);
-   } else {
-   switchColor=color(178, 102, 255);
-   }
-   }
-   if (currScreen=="studentInfo") {
-   if (mouseOverRect(mainButtonX, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) {
-   backColor=color(153, 51, 255);
-   } else {
-   backColor=color(178, 102, 255);
-   }
-   }*/
+  }
 }
 
 public void test() {

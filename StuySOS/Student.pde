@@ -68,8 +68,6 @@ public class Student {
      setSeat(s);
    }
    
-   
-   
    private void addGrade(String type, String name, int scoreEarned, int scoreTotal){
       gradeList.add(new Grade(type,name,scoreEarned,scoreTotal));
    }

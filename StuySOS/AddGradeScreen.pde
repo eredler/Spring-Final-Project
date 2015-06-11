@@ -1,6 +1,11 @@
+String title=""; //name of grade type
+String gradeV=""; //value of grade
+
 void addGradeScreen(String type) { //type = HW,PARTICIPATION,TEST,OTHER
   background(0, 102, 0);
-
+  fill(255);
+  text("Click on the box you want to type in./nThen type a grade value or name in the respective box",width/2,height/2-100);
+  
   stroke(0);
   fill(255);
   rect(width/2, height/2, 150, 35, 10); //Grade textbox
@@ -31,9 +36,7 @@ void addGradeScreen(String type) { //type = HW,PARTICIPATION,TEST,OTHER
     submitButtonColor=color(30, 205, 151);
     submitTextColor=color(255, 255, 255);
   } 
-
-  String title="";
-  String gradeV="";
+  
 }
 /*
 void keyReleased() {

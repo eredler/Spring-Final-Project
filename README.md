@@ -63,3 +63,10 @@ I got branching and merging to work by:
 * tried to get addGrade to work (didn't work)
 * takeAttendance works
 * tried to get switchSeats to work (didn't work)
+
+<h5>June 7, 2015</h5>
+* switchSeats works!
+* minor changes
+
+<h5>June 10, 2015</h5>
+* tried to get it to write/read a file (so info can stay between sessions) (doesn't work yet)

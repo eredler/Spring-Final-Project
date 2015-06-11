@@ -12,9 +12,9 @@ void introScreen() {
   rect(width/2, height/2+70, 100, 30, 10);//-47, height/2+37, 100, 30, 10);
   fill(255);
   textSize(20);
-  text("Begin", width/2, height/2+66);
+  text("Begin", width/2, height/2+70);
 
-  if (mouseOverRect(width/2, height/2+70, 100, 30)) {
+  if (mouseOverRect(width/2, height/2+85, 100, 30)) {
     beginButton=color(158, 123, 255);
   } else {
     beginButton=color(148, 114, 236);

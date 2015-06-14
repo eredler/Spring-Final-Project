@@ -70,7 +70,3 @@ I got branching and merging to work by:
 
 <h5>June 10, 2015</h5>
 * tried to get it to write/read a file (so info can stay between sessions) (doesn't work yet)
-
-<h5>June 14, 2015</h5>
-* fixed bugs and cleaned up code a little
-* can now view a student's grades and their overall GPA

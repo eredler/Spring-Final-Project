@@ -319,7 +319,7 @@ void mouseClicked() {
         errorMessage=true;
       } else {
         errorMessage=false;
-        myStudents[currStudentRow][currStudentCol].addGrade("Homework", title, Integer.parseInt(gradeV));
+        myStudents[currStudentRow][currStudentCol].addGrade("Grade", title, Integer.parseInt(gradeV));
         title="";
         gradeV="";
         currScreen="studentInfo";

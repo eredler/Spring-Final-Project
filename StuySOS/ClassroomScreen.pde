@@ -29,7 +29,6 @@ void classroomScreen() {
       if (attendance){
         if (!myStudents[r][c].getName().equals("")){
           if (myStudents[r][c].numClicks%3==0){
-         //  text("present",x,y+20);
           } else if (myStudents[r][c].numClicks%3==1){
             text("late",x,y+20); 
           } else {

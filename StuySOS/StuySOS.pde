@@ -367,7 +367,7 @@ void keyPressed() {
         }
       }
     }else if(currTextMode=="title"){
-      if (title.length()<4){
+      if (title.length()<11){
         title+=key;
       }
     }
@@ -379,7 +379,7 @@ void keyPressed() {
        }  
      }else if (currTextMode=="title"){
        if (title.length()>0){
-         title=title.substring(0,title.length()-1);
+         title=title.substring(0,title.length()-2);
        }
      }else if (currTextMode=="gradeV"){
        if (gradeV.length()>0){

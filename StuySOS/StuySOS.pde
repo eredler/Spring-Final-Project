@@ -308,10 +308,14 @@ void mouseClicked() {
     } if(mouseOverRect(width/2, height/2+50, 150, 35)){ //Grade type/name box
       currTextMode="title";
     } else if (mouseOverRect(width/2, height/2+100, 75, 30)) { //SUBMIT
-      if (title.length()<1 || gradeV.length()<1) { //will have to assume user inputs a numerical value for the grade
+      if (title.length()<1 || gradeV.length()<1 || Integer.parseInt(gradeV)>100) {
         errorMessage=true;
       } else {
+        errorMessage=false;
         myStudents[currStudentRow][currStudentCol].addGrade("Homework", title, Integer.parseInt(gradeV));
+        title="";
+        gradeV="";
+        currScreen="studentInfo";
       } 
     } else if (mouseOverRect(width/2, height/2+150, 75, 30)) { //CLEAR
       title="";

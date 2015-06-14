@@ -33,6 +33,14 @@ void addGradeScreen(String type) { //type = HW,PARTICIPATION,TEST,OTHER
   text("Clear", width/2, height/2+150);
   text("Go Back", width/2, height/2+200);  
 
+  if (errorMessage) {
+    if (title.length()<1){
+      printErrorMessage("ERROR: Please enter a name.", width/2, height*5/12, color(255, 0, 0));
+    }else if (gradeV.length()<1 || Integer.parseInt(gradeV)>100){
+      printErrorMessage("ERROR: Please enter a grade between 0 and 100.", width/2, height*5/12, color(255, 0, 0));
+    }
+  }
+
   if (mouseOverRect(width/2, height/2+100, 75, 30)) {
     submitButtonColor=color(30, 205, 151);
     submitTextColor=color(255, 255, 255);

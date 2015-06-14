@@ -14,16 +14,13 @@ void titleScreen() {
   stroke(buttonNotClicked);
   for (int i=1; i<=8; i++) {
     float x=width*i/9;
-    //float h=height/2 + (30*((i+3)/4));
     float y=height/2+50;
-    widths.add(x);//+25);
-    heights.add(y);//+23);
+    widths.add(x);
+    heights.add(y);
     rect(x, y, 50, 50, 10);
-    //rect(width/2 + (30*((i%4)-2.5)) - 10,height/2 + (30*((i+3)/4)) -10,20,20,10);
   }
   for (int i=1; i<=8; i++) {
     fill(255, 255, 255);
-    //text(""+i,width/2 + (30*(((i-1)%4)-2.5)), height/2 + (30*((i+3)/4)) );
     text(""+i, widths.get(i-1), heights.get(i-1));
   }
   noStroke();

@@ -137,12 +137,12 @@ void mouseClicked() {
     //save();
     System.exit(0);
   } else if (currScreen=="introScreen") {
-    if (mouseOverRect(width/2, height/2+92, 100, 30)) { //BEGIN
+    if (mouseOverRect(width/2, height/2+70, 100, 30)) { //BEGIN
       currScreen="titleScreen1";
     } else {
       beginButton=color(148, 114, 236);
     }
-    if (mouseOverRect(width/2,height/2+143,100,30)) { //LOAD
+    if (mouseOverRect(width/2,height/2+120,100,30)) { //LOAD
     currScreen="myClassroom";
  //   loadInfo();
     } else {

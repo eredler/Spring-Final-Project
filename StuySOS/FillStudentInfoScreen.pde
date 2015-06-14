@@ -1,9 +1,9 @@
-color submitButtonColor, submitTextColor, goBackColor, goBackTextColor, clearColor, clearTextColor; //initialized in setup
+color submitButtonColor, submitTextColor, goBackColor, goBackTextColor, clearColor, clearTextColor;
 boolean errorMessage;
+String typing = "";// Variable to store text currently being typed
 
 void fillStudentInfoScreen(int currR, int currC) {
   background(0, 102, 0);
-  //textCheck();
 
   stroke(0);
   fill(255);
@@ -37,7 +37,6 @@ void fillStudentInfoScreen(int currR, int currC) {
 
   if (myStudents[currStudentRow][currStudentCol].getName().equals("")) {
     mainButton(); //DO NOT DELETE -- CONTAINS MOUSEOVER BUTTON COLOR CHANGING FUNCTIONALITY
-
   }
   if (mouseOverRect(width/2, height/2+100, 75, 30)) {
     submitButtonColor=color(30, 205, 151);
@@ -81,14 +80,6 @@ void loadStudentInfo(int currR, int currC) {
   
   mainButton();
 }
-
-//HELP FROM: http://www.learningprocessing.com/examples/chapter-18/example-18-1/
-String typing = "";// Variable to store text currently being typed
-//void textCheck(){
-//  if (myStudents[currStudentRow][currStudentCol] != null){
-//    typing=myStudents[currStudentRow][currStudentCol].getName();
-//  }
-//}
 
 void printErrorMessage(String message, int x, int y, color c) {
   fill(c);

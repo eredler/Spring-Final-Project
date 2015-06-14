@@ -1,4 +1,4 @@
-public class Button{ //Should I make it abstract?
+public class Button{
   float buttonX,buttonY; //x and y coordinates of the button
   float buttonWidth,buttonHeight;
   String name; //IDK about this

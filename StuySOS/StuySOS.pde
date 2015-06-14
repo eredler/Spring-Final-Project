@@ -1,12 +1,10 @@
 Student[][] myStudents;
-Button[][] myButtons; //same as students
 private int numRows, numCols;
 
 import java.util.*;
 import java.lang.*;
 import java.io.*;
 
-PImage cursorImage;
 String currScreen;
 color buttonNotClicked, buttonClicked;
 float mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight;
@@ -18,19 +16,13 @@ PImage chalkboard;
 color beginButton=color(145, 114, 236), loadButton=color(145,114,236);
 int currStudentRow, currStudentCol, numStudentsSwitched;
 boolean attendance, switchSeats;
-//String gradeType; //for addGrade screens
-//float currTextX, currTextY; //for the addGrade screens, where you have two input boxes to deal with
 
 void setup() {
   size(1000, 750);
-  //size(displayWidth,displayHeight); //COOL FEATURE: resizes to screen size of computer program is running on :D
-  //check sketchFullScreen() method in processing wiki if automatically want to start full screen
   background(102, 178, 255);
   textAlign(CENTER, CENTER);
   rectMode(CENTER);
   cursor(CROSS); //COOL FEATURE: not necessary, but looks like a cool target practice thing with the mouse :)
-  cursorImage=loadImage("images/pencil-animated.gif");
-  //cursor(cursorImage);
 
   currScreen="introScreen";
   buttonNotClicked=color(0, 128, 255);
@@ -56,54 +48,7 @@ void setup() {
   errorMessage=false;
 }
 
-void loadInfo(){
-  try {
-    Scanner info = new Scanner(new File("studentInfo.txt"));
-    while (info.hasNextLine ()) {
-      String line = info.nextLine();
-      System.out.println(line);
-      String[] rowInfo = line.split("|"); //split rows
-      for (int g = 0; g < rowInfo.length; g++) {
-        String[] indivStudents = rowInfo[g].split(";"); // split individul students in form "name, latenesses, absences"
-        for (int i = 0; i < indivStudents.length; i++) {
-          String[] thisStudent = indivStudents[i].split(",");
-          Student s = new Student(thisStudent[0]);
-          s.setNumLate(Integer.parseInt(thisStudent[1]));
-          s.setNumAbsent(Integer.parseInt(thisStudent[2]));
-          myStudents[g][i] = s;
-        }
-      }
-    }
-  } catch (FileNotFoundException e) {
-    PrintWriter output = createWriter("studentInfo.txt");
-  }
-}
-
-/*
-void save() {
-  PrintWriter output;
-  try {
-  output = new PrintWriter(new BufferedWriter(new FileWriter(new File("studentInfo.txt"),true)));
-  } catch (Exception e){
-   output = createWriter("studentInfo.txt"); 
-  }
-  String thisRow = "";
-  try{
-  for (int i = 0; i < myStudents.length; i++){
-    thisRow = myStudents[i][0].getName() + "," + myStudents[i][0].getNumLate() + "," + myStudents[i][0].getNumAbsent();
-    for (int c = 1; c < myStudents[0].length; c++) {
-      thisRow += ";" + myStudents[i][c].getName() + "," + myStudents[i][c].getNumLate() + "," + myStudents[i][c].getNumAbsent();
-    }
-    thisRow+="|";
-  }
-  output.println(thisRow);
-  } catch (NullPointerException e){}
-  catch (ArrayIndexOutOfBoundsException e){}
-}
-*/
-
 void draw() {
-  //maybe add a main welcome page or something later
   if (currScreen=="introScreen") {
     introScreen();
   } else if (currScreen=="titleScreen1" || currScreen=="titleScreen2") {
@@ -130,7 +75,6 @@ void draw() {
 
 void mouseClicked() {
   if (mouseOverRect(mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight) && currScreen!="introScreen") {
-    //save();
     System.exit(0);
   }
   
@@ -143,7 +87,6 @@ void mouseClicked() {
     }
     if (mouseOverRect(width/2,height/2+120,100,30)) { //LOAD
     currScreen="myClassroom";
- //   loadInfo();
     } else {
      loadButton=color(148,114,236); 
     }
@@ -354,11 +297,10 @@ void mouseClicked() {
     } else if (mouseOverRect(width/2, height/2+200, 75, 30)) { //GO BACK
       typing="";
       errorMessage=false;
-      //currScreen="myClassroom";
       action=true;
     }
     if (action) {
-      currScreen="myClassroom"; //maybe next step of studentInfo?
+      currScreen="myClassroom";
       errorMessage=false;
     }
   }
@@ -407,7 +349,6 @@ boolean mouseOverCircle(float x, float y, float diameter) {
 }
 
 boolean mouseOverRect(float x, float y, float w, float h) {
-  //return (mouseX >= x-(w/2) && mouseX <= x+(w/2) && mouseY >= y-(h/2) && mouseY <= y+(h/2));
   return (w/2>=Math.abs(x-mouseX) && h/2>=Math.abs(y-mouseY));
 }
 
@@ -424,8 +365,4 @@ void mainButton() {
   } else {
     mainButtonColor=color(178, 102, 255);
   }
-}
-
-public void test() {
-  System.out.println(myStudents.toString());
 }

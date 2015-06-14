@@ -76,8 +76,18 @@ public class Student {
       gradeList.add(new Grade(type,name,scoreEarned));
    }
    
-   private String getGrades(){
-      return gradeList.toString(); 
+   private ArrayList<Grade> getGrades(){
+      return gradeList; 
+   }
+   
+   private double getGPA(){
+     double sumEarned=0;
+     double sumTotal=0;
+     for (int i=0;i<gradeList.size();i++){
+       sumEarned+=(double)gradeList.get(i).getScoreEarned();
+       sumTotal+=(double)gradeList.get(i).getScoreTotal();
+     }
+     return sumEarned/sumTotal*100;
    }
     
 }

@@ -115,17 +115,15 @@ void draw() {
     fillStudentInfoScreen(currStudentRow, currStudentCol);
   } else if (currScreen=="studentInfo") {
     studentInfoScreen(currStudentRow, currStudentCol, myStudents);
+  } else if(currScreen=="studentGrades"){
+    studentGradeScreen();
   } else if (currScreen=="addGradeHW") {
-    //gradeType="hw";
     addGradeScreen("Homework");
   } else if (currScreen=="addGradeParticipation") {
-    //gradeType="participation";
     addGradeScreen("Participation");
   } else if (currScreen=="addGradeTest") {
-    //gradeType="test";
     addGradeScreen("Test");
   } else if (currScreen=="addGradeOther") {
-    //gradeType="other";
     addGradeScreen("Other");
   }
 }
@@ -284,13 +282,15 @@ void mouseClicked() {
   
   //STUDENT INFORMATION Screen = looking at/editing a selected student's information 
   else if (currScreen=="studentInfo") {
-    if (mouseOverRect(width/2, height/2+100, 75, 30)) { //EDIT INFO
-      currScreen = "fillStudentInfo";
-      typing=myStudents[currStudentRow][currStudentCol].getName();
-    }
     if (mouseOverRect(mainButtonX, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) { //BACK Button
       currScreen="myClassroom";
-    } else if (mouseOverRect(width/2, height/2+150, 150, 30)) { //add homework
+    } 
+    if (mouseOverRect(width/2, height/2+50, 75, 30)) { //EDIT INFO
+      currScreen = "fillStudentInfo";
+      typing=myStudents[currStudentRow][currStudentCol].getName();
+    }else if(mouseOverRect(width/2,height/2+100, 150, 30)){
+      currScreen = "studentGrades";
+    }else if (mouseOverRect(width/2, height/2+150, 150, 30)) { //add homework
       currScreen = "addGradeHW";
     } else if (mouseOverRect(width/2, height/2+200, 150, 30)) { //add test
       currScreen = "addGradeTest";
@@ -300,6 +300,13 @@ void mouseClicked() {
       currScreen = "addGradeOther";
     }
   } 
+  
+  //VIEW GRADES screen= can view a student's grades and their GPA (out of 100)
+  else if (currScreen=="studentGrades"){
+    if (mouseOverRect(mainButtonX, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) { //BACK Button
+      currScreen="studentInfo";
+    }
+  }
   
   //ADD GRADE screen
   else if (currScreen.substring(0,8).equals("addGrade")){ //any of the addGrade screens (hw, participation, test, or other)

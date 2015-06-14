@@ -19,13 +19,14 @@ void introScreen() {
   textSize(20);
   text("Load", width/2, height/2+120);
 
-  if (mouseOverRect(width/2, height/2+92, 100, 30)) {
-    beginButton=color(158, 123, 255);
+  if (mouseOverRect(width/2, height/2+92, 100, 30)) { //BEGIN
+    //beginButton=color(158, 123, 255);
+    beginButton=color(153, 51, 255);
   } else {
     beginButton=color(148, 114, 236);
   }
   
-   if (mouseOverRect(width/2, height/2+143, 100, 30)) {
+  if (mouseOverRect(width/2, height/2+143, 100, 30)) { //LOAD
     loadButton=color(158, 123, 255);
   } else {
     loadButton=color(148, 114, 236);

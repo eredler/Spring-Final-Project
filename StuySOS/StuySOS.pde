@@ -133,7 +133,7 @@ void draw() {
 
 void mouseClicked() {
   //WELCOME Screen
-  if (mouseOverRect(mainButtonX, mainButtonY+15, mainButtonWidth, mainButtonHeight) && currScreen!="introScreen") {
+  if (mouseOverRect(mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight) && currScreen!="introScreen") {
     //save();
     System.exit(0);
   } else if (currScreen=="introScreen") {
@@ -414,7 +414,7 @@ void mainButton() {
   fill(255, 255, 255);
   text("Exit", mainButtonX, mainButtonY);
 
-  if (mouseOverRect(mainButtonX, mainButtonY+15, mainButtonWidth, mainButtonHeight)) {
+  if (mouseOverRect(mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight)) {
     mainButtonColor=color(153, 51, 255);
   } else {
     mainButtonColor=color(178, 102, 255);

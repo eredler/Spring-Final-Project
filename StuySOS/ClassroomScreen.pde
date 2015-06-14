@@ -17,7 +17,6 @@ void classroomScreen() {
       studentBoxY.add(y);
       stroke(0, 102, 204);
       fill(0, 75);
-      //rect((width*(c+1)/(numCols+1)), (height*(r+1)/(numRows+1)), studentBoxWidths, studentBoxHeights, 10);
       rect(x, y, studentBoxWidths, studentBoxHeights, 10);
       noStroke();
       fill(255);
@@ -26,7 +25,6 @@ void classroomScreen() {
       } else {
         textSize(16);
       }
-      //text(studentName, width*(c+1)/(numCols+1), height*(r+1)/(numRows+1));
       text(studentName, x, y);
       if (attendance){
         if (!myStudents[r][c].getName().equals("")){
@@ -62,21 +60,16 @@ void classroomScreen() {
     text("Submit",mainButtonX, mainButtonY+100);
   }
   
-  if (mouseOverRect(mainButtonX+60, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) {
-      AttButtonColor=color(153, 51, 255);
-    } else {
-      AttButtonColor=color(178, 102, 255);
-    }
-    //if (mouseOverRect(mainButtonX, mainButtonY+100, mainButtonWidth, mainButtonHeight)) {
-    //  AttSubButtonColor=color(153, 51, 255);
-    //} else {
-    //  AttSubButtonColor=color(178, 102, 255);
-    //}
-    if (mouseOverRect(mainButtonX+250, mainButtonY+50, mainButtonWidth+80, mainButtonHeight)) {
-      switchColor=color(153, 51, 255);
-    } else {
-      switchColor=color(178, 102, 255);
-    }
+  if (mouseOverRect(mainButtonX+60, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) { //Attendance
+    AttButtonColor=color(153, 51, 255);
+  } else {
+    AttButtonColor=color(178, 102, 255);
+  }
+  if (mouseOverRect(mainButtonX+250, mainButtonY+50, mainButtonWidth+80, mainButtonHeight)) { //Switch Seats
+    switchColor=color(153, 51, 255);
+  } else {
+    switchColor=color(178, 102, 255);
+  }
   
   mainButton();
 }

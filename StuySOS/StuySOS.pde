@@ -132,11 +132,13 @@ void draw() {
 }
 
 void mouseClicked() {
-  //WELCOME Screen
   if (mouseOverRect(mainButtonX, mainButtonY, mainButtonWidth, mainButtonHeight) && currScreen!="introScreen") {
     //save();
     System.exit(0);
-  } else if (currScreen=="introScreen") {
+  }
+  
+  //WELCOME Screen
+  else if (currScreen=="introScreen") {
     if (mouseOverRect(width/2, height/2+70, 100, 30)) { //BEGIN
       currScreen="titleScreen1";
     } else {
@@ -149,11 +151,11 @@ void mouseClicked() {
      loadButton=color(148,114,236); 
     }
   }
+  
   //TITLESCREEN1 = pick number of rows
   else if (currScreen=="titleScreen1") {
     for (int i=1; i<=8; i++) {
-      //if (25 >= Math.abs(widths.get(i-1) - mouseX) && 25 >= Math.abs(heights.get(i-1) - mouseY)) {
-        if (mouseOverRect(widths.get(i-1),heights.get(i-1),50,50)){
+      if (mouseOverRect(widths.get(i-1),heights.get(i-1),50,50)){
         numRows=i;
         break;
       }
@@ -170,24 +172,23 @@ void mouseClicked() {
         break;
       }
     } 
-    //assume that at this point, have some working/legit value for numRows and numCols
     myStudents=new Student[numRows][numCols];
     for (Student[] studentGroup : myStudents) {
       for (Student s : studentGroup) {
-        //s.setName("");
         s=new Student();
       }
     }
     if (numCols!=0) {
       currScreen="myClassroom";
     }
-  } 
+  }
+  
   //CLASSROOM Screen = shows all students currently enrolled in your class
   else if (currScreen=="myClassroom") {
     if (attendance == false && switchSeats==false) {
       if (mouseOverRect(mainButtonX+60, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) {
         attendance=true;
-      } else if (mouseOverRect(mainButtonX+250, mainButtonY+50, mainButtonWidth+100, mainButtonHeight)) {
+      } else if (mouseOverRect(mainButtonX+250, mainButtonY+50, mainButtonWidth+80, mainButtonHeight)) {
         switchSeats=true;
         numStudentsSwitched = 0;
       }
@@ -198,7 +199,6 @@ void mouseClicked() {
       for (int r=0; r<numRows; r++) {
         for (int c=0; c<numCols; c++) {
           if (studentBoxWidths >= Math.abs(studentBoxX.get(numCols*(r)+c)-mouseX) && studentBoxHeights >= Math.abs(studentBoxY.get(numCols*(r)+c)-mouseY)) {
-            //Math.abs(width*(c+1)/(numCols+1) - mouseX) && studentBoxHeights >= Math.abs(width*(r+1)/(numRows+1) - mouseY)){
             myStudents[r][c].numClicks++;
             currStudentRow=r;
             currStudentCol=c;
@@ -227,7 +227,6 @@ void mouseClicked() {
         for (int r=0; r<numRows; r++) {
           for (int c=0; c<numCols; c++) {
             if (studentBoxWidths >= Math.abs(studentBoxX.get(numCols*(r)+c)-mouseX) && studentBoxHeights >= Math.abs(studentBoxY.get(numCols*(r)+c)-mouseY)) {
-              //Math.abs(width*(c+1)/(numCols+1) - mouseX) && studentBoxHeights >= Math.abs(width*(r+1)/(numRows+1) - mouseY)){
               myStudents[r][c].switchMe = true;
               currStudentRow=r;
               currStudentCol=c;
@@ -271,7 +270,6 @@ void mouseClicked() {
       for (int r=0; r<numRows; r++) {
         for (int c=0; c<numCols; c++) {
           if (studentBoxWidths >= Math.abs(studentBoxX.get(numCols*(r)+c)-mouseX) && studentBoxHeights >= Math.abs(studentBoxY.get(numCols*(r)+c)-mouseY)) {
-            //currScreen="fillStudentInfo";
             currStudentRow=r;
             currStudentCol=c;
             if (myStudents[currStudentRow][currStudentCol].getName().equals("")) {
@@ -283,20 +281,8 @@ void mouseClicked() {
         }
       }
     }
-  }  
-  /*
-      for (int r=0; r<numRows; r++) {
-   for (int c=0; c<numCols; c++) {
-   if (studentBoxWidths >= Math.abs(studentBoxX.get(numCols*(r)+c)-mouseX) && studentBoxHeights >= Math.abs(studentBoxY.get(numCols*(r)+c)-mouseY)) {
-   //Math.abs(width*(c+1)/(numCols+1) - mouseX) && studentBoxHeights >= Math.abs(width*(r+1)/(numRows+1) - mouseY)){
-   currScreen="studentInfo";
-   currStudentRow=r;
-   currStudentCol=c;
-   }
-   }
-   }
-   */
-
+  }
+  
   //STUDENT INFORMATION Screen = looking at/editing a selected student's information 
   else if (currScreen=="studentInfo") {
     if (mouseOverRect(width/2, height/2+100, 75, 30)) { //EDIT INFO

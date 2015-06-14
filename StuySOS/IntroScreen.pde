@@ -12,11 +12,6 @@ void introScreen() {
   fill(255);
   textSize(20);
   text("Begin", width/2, height/2+67);
-  fill(loadButton);
-  rect(width/2, height/2+120, 100, 30, 10); //LOAD
-  fill(255);
-  textSize(20);
-  text("Load", width/2, height/2+120);
 
   if (mouseOverRect(width/2, height/2+70, 100, 30)) { //BEGIN
     //beginButton=color(158, 123, 255);

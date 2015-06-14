@@ -22,6 +22,10 @@ void studentInfoScreen(int currR, int currC, Student[][] myStudents) {
     text(numLate, width/2, height/3+50);
     text(numAbs, width/2, height/3+70);
   }
+  if (s.getGPA()>=0.0){
+      text("GPA: "+s.getGPA()+" %",width/2,height/3+100);
+    }
+  
   
   
   stroke(30, 205, 151);

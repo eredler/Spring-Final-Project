@@ -85,11 +85,6 @@ void mouseClicked() {
     } else {
       beginButton=color(148, 114, 236);
     }
-    if (mouseOverRect(width/2,height/2+120,100,30)) { //LOAD
-    currScreen="myClassroom";
-    } else {
-     loadButton=color(148,114,236); 
-    }
   }
   
   //TITLESCREEN1 = pick number of rows

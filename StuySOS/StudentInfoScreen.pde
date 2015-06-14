@@ -1,6 +1,5 @@
 void studentInfoScreen(int currR, int currC, Student[][] myStudents) {
   background(0, 102, 0);
-  //textCheck();
   mainButton();
   fill(backColor);
   rect(mainButtonX,mainButtonY+50,mainButtonWidth,mainButtonHeight,12);

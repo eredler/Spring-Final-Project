@@ -13,8 +13,7 @@ public class Student {
     this.name=name;
     numLate=0;
     numAbsent=0;
-    gradeList=new ArrayList<Grade>();
-    //set row and seats? 
+    gradeList=new ArrayList<Grade>(); 
   }
   public Student(){
     name="";
@@ -89,6 +88,6 @@ public class Student {
      }
      return sumEarned/sumTotal*100;
    }
-    
+   
 }
 

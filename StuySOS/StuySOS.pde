@@ -375,22 +375,22 @@ void keyPressed() {
         title+=key;
       }
     }
-   }
-   if (key == BACKSPACE){
-     if (currScreen=="fillStudentInfo"){
-       if (typing.length()>0){
-         typing=typing.substring(0,typing.length()-2);
-       }  
-     }else if (currTextMode=="title"){
-       if (title.length()>0){
-         title=title.substring(0,title.length()-2);
-       }
-     }else if (currTextMode=="gradeV"){
-       if (gradeV.length()>0){
-         gradeV=gradeV.substring(0,gradeV.length()-1);
-       }
-     }
-   }
+  }
+  if (key == BACKSPACE){
+    if (currScreen=="fillStudentInfo"){
+      if (typing.length()>0){
+        typing=typing.substring(0,typing.length()-2);
+      }  
+    }else if (currTextMode=="title"){
+      if (title.length()>0){
+        title=title.substring(0,title.length()-2);
+      }
+    }else if (currTextMode=="gradeV"){
+      if (gradeV.length()>0){
+        gradeV=gradeV.substring(0,gradeV.length()-1);
+      }
+    }
+  }
 }
 
 

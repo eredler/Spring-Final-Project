@@ -276,10 +276,8 @@ void mouseClicked() {
             currStudentCol=c;
             if (myStudents[currStudentRow][currStudentCol].getName().equals("")) {
               currScreen="fillStudentInfo";
-              //  studentInfoMode="newStudent";
             } else {
               currScreen="studentInfo";
-              //  studentInfoMode="currentStudent";
             }
           }
         }
@@ -418,47 +416,9 @@ void mainButton() {
     mainButtonColor=color(153, 51, 255);
   } else {
     mainButtonColor=color(178, 102, 255);
-  }/*
-  if (currScreen == "myClassroom") {
-   if (mouseOverRect(mainButtonX+60, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) {
-   AttButtonColor=color(153, 51, 255);
-   } else {
-   AttButtonColor=color(178, 102, 255);
-   }
-   if (mouseOverRect(mainButtonX, mainButtonY+100, mainButtonWidth, mainButtonHeight)) {
-   AttSubButtonColor=color(153, 51, 255);
-   } else {
-   AttSubButtonColor=color(178, 102, 255);
-   }
-   if (mouseOverRect(mainButtonX+250, mainButtonY+50, mainButtonWidth+80, mainButtonHeight)) {
-   switchColor=color(153, 51, 255);
-   } else {
-   switchColor=color(178, 102, 255);
-   }
-   }
-   if (currScreen=="studentInfo") {
-   if (mouseOverRect(mainButtonX, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) {
-   backColor=color(153, 51, 255);
-   } else {
-   backColor=color(178, 102, 255);
-   }
-   }*/
+  }
 }
 
 public void test() {
   System.out.println(myStudents.toString());
 }
-/*
-void currStudentLocation(boolean screenChange, String newScreen){
- for (int r=0; r<numRows; r++) {
- for (int c=0; c<numCols; c++) {
- if (studentBoxWidths >= Math.abs(studentBoxX.get(numCols*(r)+c)-mouseX) && studentBoxHeights >= Math.abs(studentBoxY.get(numCols*(r)+c)-mouseY)) {
- if (screenChange){
- currScreen=newScreen;  
- }
- currStudentRow=r;
- currStudentCol=c;
- }
- }
- }
- */

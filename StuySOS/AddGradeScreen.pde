@@ -1,10 +1,11 @@
 String title=""; //name of grade type
 String gradeV=""; //value of grade
+String currTextMode="";
 
 void addGradeScreen(String type) { //type = HW,PARTICIPATION,TEST,OTHER
   background(0, 102, 0);
   fill(255);
-  text("Click on the box you want to type in./nThen type a grade value or name in the respective box",width/2,height/2-100);
+  text("Click on the box you want to type in.\nThen type a grade value (<=100) or name in the respective box",width/2,height/2-100);
   
   stroke(0);
   fill(255);
@@ -24,8 +25,8 @@ void addGradeScreen(String type) { //type = HW,PARTICIPATION,TEST,OTHER
   text("Grade (out of 100): ", width/2-175, height/2);
   text(type + " name: ", width/2-175, height/2+50);
   fill(0);
- // text(gradeV, width/2, height/2);
- // text(title, width/2, height/2+50);
+  text(gradeV, width/2, height/2);
+  text(title, width/2, height/2+50);
   fill(255);
   text("Submit", width/2, height/2+100);
 
@@ -38,20 +39,3 @@ void addGradeScreen(String type) { //type = HW,PARTICIPATION,TEST,OTHER
   } 
   
 }
-/*
-void keyReleased() {
-  if (currScreen=="addGrade") {
-    if (title.length()<23) {
-      if (key >= 96 && key <= 105) {
-        gradeV+=key;
-      } else {
-        title+=key;
-      }
-    }
-  }
-  
-  if (key == BACKSPACE) {
-    title = title.substring(0, title.length()-2);
-  }
-}*/
-

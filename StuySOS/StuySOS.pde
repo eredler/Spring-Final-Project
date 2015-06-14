@@ -18,9 +18,8 @@ PImage chalkboard;
 color beginButton=color(145, 114, 236), loadButton=color(145,114,236);
 int currStudentRow, currStudentCol, numStudentsSwitched;
 boolean attendance, switchSeats;
-String gradeType; //for addGrade screens
-float currTextX, currTextY; //for the addGrade screens, where you have two input boxes to deal with
-
+//String gradeType; //for addGrade screens
+//float currTextX, currTextY; //for the addGrade screens, where you have two input boxes to deal with
 
 void setup() {
   size(1000, 750);
@@ -117,16 +116,16 @@ void draw() {
   } else if (currScreen=="studentInfo") {
     studentInfoScreen(currStudentRow, currStudentCol, myStudents);
   } else if (currScreen=="addGradeHW") {
-    gradeType="hw";
+    //gradeType="hw";
     addGradeScreen("Homework");
   } else if (currScreen=="addGradeParticipation") {
-    gradeType="participation";
+    //gradeType="participation";
     addGradeScreen("Participation");
   } else if (currScreen=="addGradeTest") {
-    gradeType="test";
+    //gradeType="test";
     addGradeScreen("Test");
   } else if (currScreen=="addGradeOther") {
-    gradeType="other";
+    //gradeType="other";
     addGradeScreen("Other");
   }
 }
@@ -289,7 +288,7 @@ void mouseClicked() {
       currScreen = "fillStudentInfo";
       typing=myStudents[currStudentRow][currStudentCol].getName();
     }
-    if (mouseOverRect(mainButtonX, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) {
+    if (mouseOverRect(mainButtonX, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) { //BACK Button
       currScreen="myClassroom";
     } else if (mouseOverRect(width/2, height/2+150, 150, 30)) { //add homework
       currScreen = "addGradeHW";
@@ -300,40 +299,34 @@ void mouseClicked() {
     } else if (mouseOverRect(width/2, height/2+300, 150, 30)) { //add other grade
       currScreen = "addGradeOther";
     }
-  } else if (currScreen=="addGradeHW") {
-    boolean action=false;
-
-    //if (myStudents[currStudentRow][currStudentCol].getName().equals("")){
-    //typing="";
-    //}
-    //if (mouseOverRect(width/2, height/2+100, 75, 30)) { //SUBMIT
-    /* if (name.length()<1) {
-     errorMessage=true;
-     } else {
-     myStudents[currStudentRow][currStudentCol].addGrade("Homework", title, Integer.parseInt(gradeV));
-     action=true;
-     //   }
-     } else if (mouseOverRect(width/2, height/2+150, 75, 30)) { //&& myStudents[currStudentRow][currStudentCol].getName().equals("")){ //CLEAR
-     // CLEAR
-     title="";
-     gradeV="";
-     errorMessage=false;
-     action=false; //JUST TO MAKE SURE
-     } else if (mouseOverRect(width/2, height/2+200, 75, 30)) { //GO BACK
-     title="";
-     gradeV="";
-     errorMessage=false;
-     currScreen="myClassroom";
-     action=true;
-     }
-     if (action) {
-     //currScreen= "WHATEVER NAME OF NEXT SCREEN IS";
-     currScreen="myClassroom"; //maybe next step of studentInfo?
-     }
-     } else if (currScreen=="addGradeTest") {
-     } else if (currScreen=="addGradeParticipation") {
-     } else if (currScreen=="addGradeOther") {*/
-  } else if (currScreen=="fillStudentInfo") {
+  } 
+  
+  //ADD GRADE screen
+  else if (currScreen.substring(0,8).equals("addGrade")){ //any of the addGrade screens (hw, participation, test, or other)
+    if (mouseOverRect(width/2, height/2, 150, 35)){ //Grade value box
+      currTextMode="gradeV";      
+    } if(mouseOverRect(width/2, height/2+50, 150, 35)){ //Grade type/name box
+      currTextMode="title";
+    } else if (mouseOverRect(width/2, height/2+100, 75, 30)) { //SUBMIT
+      if (title.length()<1 || gradeV.length()<1) { //will have to assume user inputs a numerical value for the grade
+        errorMessage=true;
+      } else {
+        myStudents[currStudentRow][currStudentCol].addGrade("Homework", title, Integer.parseInt(gradeV));
+      } 
+    } else if (mouseOverRect(width/2, height/2+150, 75, 30)) { //CLEAR
+      title="";
+      gradeV="";
+      errorMessage=false;
+    } else if (mouseOverRect(width/2, height/2+200, 75, 30)) { //GO BACK
+      title="";
+      gradeV="";
+      errorMessage=false;
+      currScreen="studentInfo";
+    }
+  } 
+  
+  //FILL STUDENT INFO screen= filling out info for new students
+  else if (currScreen=="fillStudentInfo") {
     boolean action=false;
     if (mouseOverRect(width/2, height/2+100, 75, 30)) { //SUBMIT
       if (typing.length()<1) {
@@ -366,18 +359,34 @@ void keyPressed() {
       typing+=key;
     }
   }
-  if (key == BACKSPACE) {
-    typing = typing.substring(0, typing.length()-2);
-  }
-  /* if (currScreen=="addGrade") {
-   if (title.length()<23) {
-   if (key >= 96 && key <= 105) {
-   gradeV+=key;
-   } else {
-   title+=key;
+  if (currScreen.substring(0,8).equals("addGrade")) {
+    if (currTextMode=="gradeV"){ //Digits 0-9 have ASCII code: 48-57
+      if (gradeV.length()<3){
+        if (key>=48 && key<=57){
+          gradeV+=key;
+        }
+      }
+    }else if(currTextMode=="title"){
+      if (title.length()<4){
+        title+=key;
+      }
+    }
    }
+   if (key == BACKSPACE){
+     if (currScreen=="fillStudentInfo"){
+       if (typing.length()>0){
+         typing=typing.substring(0,typing.length()-2);
+       }  
+     }else if (currTextMode=="title"){
+       if (title.length()>0){
+         title=title.substring(0,title.length()-1);
+       }
+     }else if (currTextMode=="gradeV"){
+       if (gradeV.length()>0){
+         gradeV=gradeV.substring(0,gradeV.length()-1);
+       }
+     }
    }
-   }*/
 }
 
 

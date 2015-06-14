@@ -287,6 +287,7 @@ void mouseClicked() {
   else if (currScreen=="studentInfo") {
     if (mouseOverRect(width/2, height/2+100, 75, 30)) { //EDIT INFO
       currScreen = "fillStudentInfo";
+      typing=myStudents[currStudentRow][currStudentCol].getName();
     }
     if (mouseOverRect(mainButtonX, mainButtonY+50, mainButtonWidth+120, mainButtonHeight)) {
       currScreen="myClassroom";

@@ -3,19 +3,11 @@ Final project for the spring semester of APCS.
 
 by Emily Redler & Tiffany Ming (Pd 7)
 
-<b>To use StuySOS, controlP5 is required. Download from <a href="http://www.sojamo.de/libraries/controlP5/">here</a> and extract into libraries folder of sketchbook. See website for specific installation instructions.</b>
+*Cool Processing Feature: While on Processing, press Ctrl+Shift+R and program will run at full screen (whatever size of desktop is)
 
 *How to Branch: https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
 Don't know if this'll help: https://gun.io/blog/how-to-github-fork-branch-and-pull-request/
 Hmm, maybe this: https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches
-
-Note for My Group:
-I got branching and merging to work by:
-*(commit changes)
-*git checkout [name of branch you want to merge with master]
-*git merge master
-(links above say to checkout to master then merge with branch, but that doesn't work for some reason :/)
-*DON'T FORGET TO PUSH CHANGES!!!
 
 *Temporary link to our project proposal: https://docs.google.com/document/d/17ByglHJLHBAoj3DL97m_u0XyDwzlYhNMD8CFSUc5mtM/edit?usp=sharing
 

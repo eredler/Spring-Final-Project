@@ -134,21 +134,25 @@ void mouseClicked() {
       for (int r=0; r<numRows; r++) {
         for (int c=0; c<numCols; c++) {
           if (studentBoxWidths >= Math.abs(studentBoxX.get(numCols*(r)+c)-mouseX) && studentBoxHeights >= Math.abs(studentBoxY.get(numCols*(r)+c)-mouseY)) {
-            myStudents[r][c].numClicks++;
-            currStudentRow=r;
-            currStudentCol=c;
+            if (!myStudents[r][c].getName().equals("")){
+              myStudents[r][c].numClicks++;
+              currStudentRow=r;
+              currStudentCol=c;
+            }
           }
         }
       }
       if (mouseOverRect(mainButtonX, mainButtonY+100, mainButtonWidth, mainButtonHeight)) { //mouse is over SUBMIT attendance button
         for (int r=0; r<numRows; r++) {
           for (int c=0; c<numCols; c++) {
-            if (myStudents[r][c].numClicks%3==1) {
-              myStudents[r][c].setNumLate(myStudents[r][c].getNumLate()+1);
-              myStudents[r][c].numClicks=0;
-            } else if (myStudents[r][c].numClicks%3==2) {
-              myStudents[r][c].setNumAbsent(myStudents[r][c].getNumAbsent()+1);
-              myStudents[r][c].numClicks=0;
+            if (!myStudents[r][c].getName().equals("")){
+              if (myStudents[r][c].numClicks%3==1) {
+                myStudents[r][c].setNumLate(myStudents[r][c].getNumLate()+1);
+                myStudents[r][c].numClicks=0;
+              } else if (myStudents[r][c].numClicks%3==2) {
+                myStudents[r][c].setNumAbsent(myStudents[r][c].getNumAbsent()+1);
+                myStudents[r][c].numClicks=0;
+              }
             }
           }
         }
